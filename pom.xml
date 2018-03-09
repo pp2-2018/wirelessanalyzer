@@ -17,12 +17,15 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- https://mvnrepository.com/artifact/org.pcap4j/pcap4j -->
         <dependency>
             <groupId>org.pcap4j</groupId>
-            <artifactId>pcap4j</artifactId>
-            <version>1.7.3</version>
-            <type>pom</type>
+            <artifactId>pcap4j-core</artifactId>
+            <version>[1.0, 2.0)</version>
+        </dependency>
+        <dependency>
+            <groupId>org.pcap4j</groupId>
+            <artifactId>pcap4j-packetfactory-static</artifactId>
+            <version>[1.0, 2.0)</version>
         </dependency>
 
         <dependency>
