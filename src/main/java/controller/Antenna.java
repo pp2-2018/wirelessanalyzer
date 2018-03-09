@@ -1,10 +1,12 @@
 package controller;
 
+import org.pcap4j.core.PcapNativeException;
+import org.pcap4j.core.PcapNetworkInterface;
+import org.pcap4j.core.Pcaps;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.OutputStream;
 import java.net.NetworkInterface;
-import java.net.SocketException;
 
 public class Antenna {
 
@@ -12,12 +14,12 @@ public class Antenna {
     private NetworkInterface networkInterface;
 
     public Antenna(OutputStream outputStream, String interfaceName) {
-        this.stream = outputStream;
         try {
-            networkInterface = NetworkInterface.getByName(interfaceName);
-        } catch (SocketException e) {
+            PcapNetworkInterface nif = Pcaps.getDevByName(interfaceName);
+        } catch (PcapNativeException e) {
             e.printStackTrace();
         }
+        this.stream = outputStream;
     }
 
     public void startListening(){
