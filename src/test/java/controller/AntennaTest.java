@@ -26,7 +26,10 @@ public class AntennaTest {
 
     @Test
     public void startListening() {
+        OutputStream compare = null; //Crear el output stream que se espera como salida
         antenna.startListening();
+
+
 
     }
 
