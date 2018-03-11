@@ -8,7 +8,7 @@ import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.net.NetworkInterface;
+
 
 public class Antenna {
 
@@ -33,6 +33,7 @@ public class Antenna {
     }
 
     public void startListening(){
+        \
         try {
             handle = nif.openLive(snapLen, mode, timeout);
         } catch (PcapNativeException e) {
@@ -46,9 +47,16 @@ public class Antenna {
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        throw new NotImplementedException();
     }
 
     public void stopListening(){
+        try {
+            this.stream.close(); //TODO: ES resposinsabilad de esta clase cerrar el output stream?s
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         handle.close();
     }
 
