@@ -1,8 +1,8 @@
-#Historia
+# Historia
 
 ### Descripción
 
-El sistema podrá identificar si un paquete escrito en hexadecimal fue escrito en un determinado intervalo de tiempo provisto.
+El sistema podrá identificar si un paquete escrito en hexadecimal fue escrito en un determinado intervalo de tiempo provisto. (6hs)
 
 ### Criterios de Aceptación
 
@@ -16,11 +16,13 @@ El sistema podrá identificar si un paquete escrito en hexadecimal fue escrito e
 
 #### Output
 
+
+
 ### Tareas
 
 | Número | Descripción | Horas | 
 | ------ | ------ | :------: |
 
-| 0 | Leer el byte de frame control del paquete provisto en hexa | 4 |
-| 1 | Comparar el byte obtenido con el byte perteneciente al frame control de beacon | 2 |
+| 0 | Identificar el [Global Header](https://wiki.wireshark.org/Development/LibpcapFileFormat#Global_Header) del paquete | 2 |
+| 1 | Parsear el Global Header y extraer el timestamp de cuando el paquete fue recibido | 4 |
 

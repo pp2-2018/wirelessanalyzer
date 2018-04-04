@@ -1,18 +1,28 @@
-# Historia 04
+# Historia 04 (3hs)
 
 ### Descripción
 
-Dar una lista de todos los Access Points ordenados por más concurrencias de Mac Addresses concurridos en un período de tiempo. (3hs)
+El sistema proverá de un diccionario de {AP MAC Address, numero de apariciones} de todos los primeros N Access Points ordenados por más concurrencias de Mac Addresses (Cantidad de paquetes recibidos, en terminos prácticos). Las concurrencias de las MAC Addresses serán contadas siempre que un paquete Probe Request o Beacon sea detectado. Si dos APs contienen el mismo número de apariciones, el sistema no garantiza ningún orden de presentación en la lista.
 
 ### Criterios de Aceptación
 
-####Input 
+Aclaración: todos los nombres de las MAC Addresses son ficticios. Encontrará sus respectivas referencias en el documento "Capturas de Prueba.txt"
 
+#### Input 
 
+1) 3
 
-####Output
+2) 100
 
+3) 0
 
+#### Output
+
+1) [{B, 5}, {E, 4}, {A, 2}]
+
+2)[{B, 5}, {E, 4}, {A, 2}, {C, 2}, {D,2}]
+
+3) []
 
 ### Tareas
 

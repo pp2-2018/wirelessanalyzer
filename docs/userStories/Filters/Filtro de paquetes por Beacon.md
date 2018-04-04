@@ -1,4 +1,4 @@
-#Historia
+# Historia
 
 ### Descripción
 
@@ -26,7 +26,6 @@ El sistema podrá identificar si un paquete escrito en hexadecimal es de tipo Be
 
 | Número | Descripción | Horas | 
 | ------ | ------ | :------: |
-
 | 0 | Leer el byte de frame control del paquete provisto en hexa | 6 |
 | 1 | Comparar el byte obtenido con el byte perteneciente al frame control de beacon | 2 |
 
