@@ -7,13 +7,25 @@ Dada una MAC address, devolver un listado de todos los AP que identificaron esa 
 ### Criterios de Aceptación
 
 Aclaración: todos los nombres de las MAC Addresses son ficticios. Encontrará sus respectivas referencias en el documento "Capturas de Prueba.txt"
+<<<<<<< HEAD
 
 #### Input
+
+1) addra
+=======
+
+####Input
 
 1) addra
 
 2) addre
 
+3) f1:a4:d7:74:4c:09
+>>>>>>> master
+
+2) addre
+
+<<<<<<< HEAD
 3) f1:a4:d7:74:4c:09
 
 #### Output
@@ -22,6 +34,12 @@ Aclaración: todos los nombres de las MAC Addresses son ficticios. Encontrará s
 
 2) [B, E]
 
+=======
+1) [A, B, C, E]
+
+2) [B, E]
+
+>>>>>>> master
 3) [] (Lista vacía)
 
 ### Tareas

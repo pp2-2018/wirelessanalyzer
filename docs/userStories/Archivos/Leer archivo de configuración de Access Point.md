@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # Historia
+=======
+#Historia
+>>>>>>> master
 
 ### Descripción
 

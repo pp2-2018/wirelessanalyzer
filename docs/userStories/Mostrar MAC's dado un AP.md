@@ -2,7 +2,11 @@
 
 ### Descripción
 
+<<<<<<< HEAD
 El sistema podrá mostrar un listado de las MAC Addresses detectadas por un access point específico sin repetirlos.
+=======
+El sistema podrá mostrar un listado de las MAC Addresses detectadas por un access point específico sin repetirlos. (6hs)
+>>>>>>> master
 
 ### Criterios de Aceptación
 
