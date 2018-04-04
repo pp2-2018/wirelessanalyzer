@@ -80,4 +80,22 @@ Paquete e - Tipo: Beacon
             Timestamp: 2018-04-04T21:15:51.120
 
 
+Referencias:
+
+Mac Addresses de los paquetes
+
+addra = 46:ca:5b:68:c5:ec 
+addrb = b2:f4:17:5c:c7:d8
+addrc = 4a:88:7f:41:12:47
+addrd = ce:44:08:ac:f6:1f
+addre = 9c:2f:fb:be:15:73
+
+
+Mac Addresses de los AP
+
+A = da:4f:b6:9e:f0:1c
+B = cc:df:93:fb:b9:d5
+C = ab:5e:86:e5:5d:b7
+D = 93:87:bd:28:30:80
+E = 2b:e4:ee:3d:7f:0c
 

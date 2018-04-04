@@ -13,7 +13,6 @@ El sistema podrá parsear informacion “raw” en paquetes de tipo Beacon. (17h
 
 2) Null
 
-
 #### Output
 
 1) Tipo de Paquete = Beacon

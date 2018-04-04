@@ -2,9 +2,30 @@
 
 ### Descripción
 
-Dada una MAC address, devolver un listado de todos los AP que identificaron esa MAC Address. (4hs)
+Dada una MAC address, devolver un listado de todos los AP que identificaron esa MAC Address en un tiempo específico provisto. (4hs)
 
 ### Criterios de Aceptación
+
+Aclaración: todos los nombres de las MAC Addresses son ficticios. Encontrará sus respectivas referencias en el documento "Capturas de Prueba.txt"
+
+####Input
+
+1) Intervalo de tiempo: Desde 2018-04-04T20:00:00.000 hasta 2018-04-04T23:00:00.00 
+MAC Address: addre 
+	
+2) Intervalo de tiempo: Desde 2018-04-02T19:27.500 hasta 2018-04-02T23:59:59.999 
+MAC Address: addra
+
+3) Intervalo de tiempo Desde 2018-04-03T15:12:12.123 hasta 2017-03-11T12:52:25.12
+MAC Address: f0:12:85:5b:4c:9c
+
+###Output
+
+1) [B, E] 
+
+2) [C]
+
+3) [] (Lista vacía)
 
 ### Tareas
 
