@@ -22,7 +22,7 @@ Aclaración: todos los nombres de las MAC Addresses son ficticios. Encontrará s
 
 ### Tareas
 
-| Número | Descripción | Horas | 
+| Número | Descripción | Horas |
 | ------ | ------ | :------: |
 | 0 | Asociar la MAC Address especificada con la localización de los Access Points por la cual fue registrada en el período de tiempo indicado | 1 |
 | 1 | Identificar la MAC Address fue registrada por dos Access Points al mismo tiempo* | 2 |
