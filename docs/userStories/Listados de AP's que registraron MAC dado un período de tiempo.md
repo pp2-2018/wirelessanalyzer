@@ -1,4 +1,4 @@
-# Historia 03 (10hs)
+# Historia (6hs)
 
 ### Descripción
 
@@ -32,6 +32,6 @@ MAC Address: f0:12:85:5b:4c:9c
 | Número | Descripción | Horas | 
 | ------ | ------ | :------: |
 | 0 | Parsear el intervalo de tiempo para obtener un objeto Intervalo | 2 |
-| 1 | Filtrar las capturas relizadas en el período de tiempo indicado | 4 |
-| 2 | Buscar en cuáles capturas la MAC Address especificada aparece | 4 |
+| 1 | Filtrar las capturas relizadas en el período de tiempo indicado | 2 |
+| 2 | Buscar en cuáles capturas la MAC Address especificada aparece | 2 |
 

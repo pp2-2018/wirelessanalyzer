@@ -1,6 +1,6 @@
 # Paquetes de prueba
 
-## Paquete 1 - Beacon Frame
+## Beacon Frame 1
 
 ``` hexa
 44 00 00 00 90 00 00 00 00 00 00 00 00 00 00 00

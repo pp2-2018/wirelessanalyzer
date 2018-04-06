@@ -1,4 +1,4 @@
-# Historia 01 (6h)
+# Historia 01 (4hs)
 
 ### Descripción
 
@@ -28,6 +28,6 @@ Aclaración: todos los nombres de las MAC Addresses son ficticios. Encontrará s
 
 | Número | Descripción | Horas | 
 | ------ | ------ | :------: |
-| 0 | Obtener todas las MAC Addresses de los paquetes contenidos en las capturas del access point espcifico | 4 |
+| 0 | Obtener todas las MAC Addresses de los paquetes contenidos en las capturas del access point espcifico | 2 |
 | 1 | Identificar todas las MAC Addresses diferentes | 2 |
 

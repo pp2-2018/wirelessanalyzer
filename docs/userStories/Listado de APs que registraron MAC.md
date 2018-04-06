@@ -1,4 +1,4 @@
-# Historia (6 hs)
+# Historia (4 hs)
 
 ### Descripción
 
@@ -26,8 +26,9 @@ Aclaración: todos los nombres de las MAC Addresses son ficticios. Encontrará s
 
 ### Tareas
 
-| Número | Descripción | Horas | 
+| Número | Descripción | Horas |
 | ------ | ------ | :------: |
-| 0 | Filtrar las capturas que contienen la MAC Address | 4 |
+| 0 | Identificar las capturas* que contienen la MAC Address especificada | 2 |
 | 1 | Listar los AP diferentes que capturaron la MAC Address | 2 |
 
+*Se utliza el termino capturas para identificar la relación entre Access Point y los paquetes capturados por este último.

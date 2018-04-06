@@ -85,19 +85,21 @@ Por otro lado, es importante resaltar que la frecuencia de emisión de los paque
 ## Referencias:
 
 ### Mac Addresses de los paquetes
-
-- addra = 46:ca:5b:68:c5:ec 
-- addrb = b2:f4:17:5c:c7:d8
-- addrc = 4a:88:7f:41:12:47
-- addrd = ce:44:08:ac:f6:1f
-- addre = 9c:2f:fb:be:15:73
+| ID | MAC Address |
+| ------ | ------  |
+| addra | 46:ca:5b:68:c5:ec |
+| addrb | b2:f4:17:5c:c7:d8 |
+| addrc | 4a:88:7f:41:12:47 |
+| addrd | ce:44:08:ac:f6:1f |
+| addre | 9c:2f:fb:be:15:73 |
 
 
 ## Mac Addresses de los AP
-
-- A = da:4f:b6:9e:f0:1c
-- B = cc:df:93:fb:b9:d5
-- C = ab:5e:86:e5:5d:b7
-- D = 93:87:bd:28:30:80
-- E = 2b:e4:ee:3d:7f:0c
+| ID | MAC Address | Latitud | Longitud | Radio (metros) | 
+| ------ | ------ | ------ | ------ | ------ |
+| A | da:4f:b6:9e:f0:1c | -34.541594 | -58.711231 | 5 |
+| B | cc:df:93:fb:b9:d5 | -34.542082 | -58.712092 | 20 |
+| C | ab:5e:86:e5:5d:b7 | -34.542205 | -58.711818 | 10 |
+| D | 93:87:bd:28:30:80 | -34.542813 | -58.711006 | 5 |
+| E | 2b:e4:ee:3d:7f:0c | -34.542001 | -58.711639 | 20 |
 

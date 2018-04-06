@@ -2,7 +2,7 @@
 
 ### Descripción
 
-El sistema podrá parsear informacion “raw” en paquetes de tipo Probe Request. (12hs)
+El sistema podrá parsear informacion “raw” en paquetes de tipo Probe Request. (8hs)
 
 ### Criterios de Aceptación
 
@@ -22,7 +22,7 @@ El sistema podrá parsear informacion “raw” en paquetes de tipo Probe Reques
 
 | Número | Descripción | Horas | 
 | ------ | ------ | :------: |
-| 0 | Identificar las posiciones de los bloques de información de la cadena hexadecimal | 8 |
+| 0 | Identificar las posiciones de los bloques de información de la cadena hexadecimal | 4 |
 | 1 | Extraer MacAddress de destino y timestamp  del paquete | 2 |
 | 2 | Convertir a información obtenida de Hexa a UTF-8 | 1 |
 | 3 | Crear un objeto en memoria que contenga la información recuperada | 1 | 

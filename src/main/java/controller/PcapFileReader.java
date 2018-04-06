@@ -28,6 +28,7 @@ public class PcapFileReader {
         try {
             while ((packet = pcapHandle.getNextPacket()) != null) {
                 outputStream.write(packet.getRawData());
+                System.out.println(packet);
             }
         } catch (NotOpenException e) {
             e.printStackTrace();
@@ -37,5 +38,6 @@ public class PcapFileReader {
 
         return outputStream;
     }
+
 
 }
