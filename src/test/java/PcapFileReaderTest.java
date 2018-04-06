@@ -4,7 +4,6 @@ import org.junit.Test;
 
 import java.io.OutputStream;
 
-import static org.junit.Assert.*;
 
 public class PcapFileReaderTest {
 
@@ -12,7 +11,7 @@ public class PcapFileReaderTest {
 
     @Before
     public void setup(){
-        String filename = "/home/lucas/Documentos/wireless.pcap";
+        String filename = "/home/lucas/Documentos/wireless-capture.pcap";
         reader = new PcapFileReader(filename);
     }
 
@@ -20,7 +19,9 @@ public class PcapFileReaderTest {
     public void readFile(){
         OutputStream stream = reader.read();
         System.out.println(stream.toString());
-
     }
+
+
+
 
 }

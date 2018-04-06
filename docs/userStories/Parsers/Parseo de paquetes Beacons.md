@@ -1,9 +1,8 @@
 # Historia 05
 
-### Descripción
+### Descripción (17hs)
 
-El sistema podrá parsear informacion “raw” en paquetes de tipo Beacon. (17hs)
-
+El sistema podrá parsear informacion “raw” en paquetes de tipo Beacon. 
 
 ### Criterios de Aceptación
 
@@ -23,10 +22,11 @@ El sistema podrá parsear informacion “raw” en paquetes de tipo Beacon. (17h
 
 ### Tareas
 
-| Número | Descripción | Horas | 
+| Número | Descripción | Horas |
 | ------ | ------ | :------: |
 | 0 | Identificar las posiciones de los bloques de información de la cadena hexadecimal | 8 |
-| 1 | Extraer MacAddress de destino y timestamp del paquete | 6 |
-| 2 | Convertir a información obtenida de Hexa a UTF-8 | 2 |
-| 3 | Crear un objeto en memoria que contenga la información recuperada | 1 | 
+| 1 | Extraer MacAddress de destino y timestamp del paquete | 4 |
+| 2 | Formatear a información obtenida de Hexa a UTF-8 | 2 |
+| 3 | Extraer el timestamp del paquete ubicado en el global header | 2 |
+| 3 | Crear un objeto en memoria que contenga la información recuperada | 1 |
  
