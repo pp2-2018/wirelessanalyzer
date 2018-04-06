@@ -14,7 +14,7 @@ public class PcapFileReaderTest {
     public void setup(){
         String filename = "/home/lucas/Documentos/wireless.pcap";
         reader = new PcapFileReader(filename);
-    }
+    }s
 
     @Test
     public void readFile(){
