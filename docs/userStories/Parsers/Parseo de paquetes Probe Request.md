@@ -14,7 +14,9 @@ El sistema podrá parsear informacion “raw” en paquetes de tipo Probe Reques
 
 #### Output
 
-1) 
+1) Tipo de Paquete = Probe Request
+   MAC Address source = 9c b7 0d 7e 6c 12
+   Timestamp = Dec, 31 1999 21:03:59.4119990000 -03
 
 2) Lanza excepción
 

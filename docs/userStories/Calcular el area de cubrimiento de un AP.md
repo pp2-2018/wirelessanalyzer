@@ -1,4 +1,4 @@
-# Historia (9hs)
+# Historia (3hs)
 
 ### Descripción
 
@@ -17,5 +17,4 @@ Aclaración: todos los nombres de las MAC Addresses son ficticios. Encontrará s
 
 | Número | Descripción | Horas | 
 | ------ | ------ | :------: |
-| 0 | 
-| 1 | 
+| 0 | Calcular el área de una esfera dado un punto y un radio | 3 |

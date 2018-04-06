@@ -15,8 +15,8 @@ El sistema podrá parsear informacion “raw” en paquetes de tipo Beacon.
 #### Output
 
 1) Tipo de Paquete = Beacon
-   MAC Address source= 00 23 9c 3b d0 20
-   Timestamp = Dec, 31 1999 21:03:59.4119990000 -03
+   MAC Address source = 00 23 9c 3b d0 20
+   Timestamp = Dec, 31 1999 21:03:53.18999900 -03
 
 2) Lanza excepción el programa
 
