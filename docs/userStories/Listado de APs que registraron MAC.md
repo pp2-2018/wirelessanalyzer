@@ -10,9 +10,9 @@ Aclaración: todos los nombres de las MAC Addresses son ficticios. Encontrará s
 
 #### Input
 
-1) addra
+1) [addra](https://github.com/pp2-2018/wirelessanalyzer/blob/development/docs/userStories/Capturas%20de%20Prueba.md#mac-addresses-de-los-paquetes)
 
-2) addre
+2) [addre](https://github.com/pp2-2018/wirelessanalyzer/blob/development/docs/userStories/Capturas%20de%20Prueba.md#mac-addresses-de-los-paquetes)
 
 3) f1:a4:d7:74:4c:09
 
