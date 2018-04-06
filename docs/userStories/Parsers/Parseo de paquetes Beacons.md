@@ -14,7 +14,7 @@ El sistema podrá parsear informacion “raw” en paquetes de tipo Beacon.
 
 #### Output
 
-1) Tipo de Paquete = Beacon
+1) Tipo de Paquete = Beaconu
    MAC Address source = 00 23 9c 3b d0 20
    Timestamp = Dec, 31 1999 21:03:53.18999900 -03
 
