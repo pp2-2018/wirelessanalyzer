@@ -1,7 +1,8 @@
-A continuación se detallarán los paquetes que se utilizarán para las pruebas
+# Paquetes de prueba
 
-Paquete 1 - Beacon Frame
+## Paquete 1 - Beacon Frame
 
+``` hexa
 44 00 00 00 90 00 00 00 00 00 00 00 00 00 00 00
 00 00 00 00 00 00 00 00 44 00 01 00 00 00 04 00
 00 00 00 00 44 00 02 00 00 00 04 00 00 00 00 00
@@ -17,8 +18,7 @@ Paquete 1 - Beacon Frame
 47 35 5f 62 61 73 69 63 01 08 82 84 8b 96 0c 18
 30 48 03 01 01 05 04 00 01 00 00 07 06 55 53 20
 01 0b 1b 2a 01 00 32 04 12 24 60 6c
+```
 
-Paquete 2 - Probe Request Frame
-
-
+## Paquete 2 - Probe Request Frame
 
