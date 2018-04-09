@@ -14,7 +14,7 @@ public class PcapFileReaderTest {
     @Before
     public void setup(){
         OutputStream outputStream = new ByteArrayOutputStream();
-        File file = new File("test-files" + File.separator + "wireless.pcap");
+        File file = new File("test-files" + File.separator + "beacon-frame.pcap");
         reader = new PcapFileReader(file.getAbsolutePath(), outputStream);
     }
     @Test
