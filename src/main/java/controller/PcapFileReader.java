@@ -14,8 +14,8 @@ public class PcapFileReader {
     private PcapHandle pcapHandle;
     private OutputStream outputStream;
 
-    public PcapFileReader(String fileName) {
-        outputStream = new ByteArrayOutputStream();
+    public PcapFileReader(String fileName, OutputStream outputStream) {
+        this.outputStream = outputStream;
         try {
             pcapHandle = Pcaps.openOffline(fileName);
         } catch (PcapNativeException e) {
