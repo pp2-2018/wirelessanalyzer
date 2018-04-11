@@ -11,7 +11,7 @@ public class ByteInOffsetExpressionTest {
 
     @Test
     public void interpret() {
-        byteInOffsetExpression = new ByteInOffsetExpression(0x3, 0x3f);
+        byteInOffsetExpression = new ByteInOffsetExpression((byte)0x3, (byte) 0x3f);
         String frame = "4400123fac";
 
         assertTrue(byteInOffsetExpression.interpret(frame));
@@ -19,7 +19,7 @@ public class ByteInOffsetExpressionTest {
 
     @Test
     public void interpretFalse() {
-        byteInOffsetExpression = new ByteInOffsetExpression(0x4, 0xaf);
+        byteInOffsetExpression = new ByteInOffsetExpression((byte)0x4,(byte)0xaf);
         String frame = "4400123fac";
 
         assertFalse(byteInOffsetExpression.interpret(frame));
@@ -27,7 +27,7 @@ public class ByteInOffsetExpressionTest {
 
     @Test(expected = RuntimeException.class)
     public void interpretOffsetOutOfBound() {
-        byteInOffsetExpression = new ByteInOffsetExpression(0xf, 0xaf);
+        byteInOffsetExpression = new ByteInOffsetExpression((byte)0xf, (byte)0xaf);
         String frame = "4400123fac";
 
         assertTrue(byteInOffsetExpression.interpret(frame));

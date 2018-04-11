@@ -1,4 +1,4 @@
-package controller;
+package FileReader;
 
 public class PcapInterpretter {
 }

@@ -1,4 +1,5 @@
-import controller.PcapFileReader;
+package FileReader;
+
 import org.junit.Before;
 import org.junit.Test;
 
