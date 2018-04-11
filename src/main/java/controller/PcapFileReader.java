@@ -6,16 +6,13 @@ import org.pcap4j.core.PcapNativeException;
 import org.pcap4j.core.Pcaps;
 import org.pcap4j.packet.Packet;
 
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 
 public class PcapFileReader {
     private PcapHandle pcapHandle;
-    private OutputStream outputStream;
 
-    public PcapFileReader(String fileName, OutputStream outputStream) {
-        this.outputStream = outputStream;
+    public PcapFileReader(String fileName) {
         try {
             pcapHandle = Pcaps.openOffline(fileName);
         } catch (PcapNativeException e) {
@@ -23,20 +20,21 @@ public class PcapFileReader {
         }
     }
 
-    public OutputStream read(){
+    public List<byte[]> read(){
         Packet packet;
+        List byteArray = new ArrayList<Byte[]>();
+
         try {
             while ((packet = pcapHandle.getNextPacket()) != null) {
-                outputStream.write(packet.getRawData());
+                byteArray.add(packet.getRawData());
             }
         } catch (NotOpenException e) {
             e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
 
-        return outputStream;
+        return byteArray;
     }
+
 
 
 }
