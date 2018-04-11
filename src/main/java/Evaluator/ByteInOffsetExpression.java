@@ -1,6 +1,6 @@
-package Interpreter;
+package Evaluator;
 
-public class ByteInOffsetExpression implements Expression {
+public class ByteInOffsetExpression extends Expression {
 
     private int  offset;
     private int byteToCompare;

@@ -1,7 +1,5 @@
-package Interpreter;
+package Evaluator;
 
-import Interpreter.ByteInOffsetExpression;
-import Interpreter.Expression;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

@@ -1,9 +1,9 @@
-package Interpreter;
+package Evaluator;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class OrExpression implements Expression {
+public class OrExpression extends Expression {
 
     List<Expression> expressionList;
 

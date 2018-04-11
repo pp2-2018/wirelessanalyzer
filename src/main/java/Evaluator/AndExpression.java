@@ -1,9 +1,9 @@
-package Interpreter;
+package Evaluator;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class AndExpression implements Expression {
+public class AndExpression extends Expression {
 
     List<Expression> expressionList;
 
