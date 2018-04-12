@@ -3,16 +3,16 @@ package Evaluator;
 import java.util.Arrays;
 import java.util.List;
 
-public class AndExpression extends Expression {
+public class AndExpression<T> extends Expression<T> {
 
-    List<Expression> expressionList;
+    List<Expression<T>> expressionList;
 
-    public AndExpression(Expression... expressions) {
+    public AndExpression(Expression<T>... expressions) {
         this.expressionList = Arrays.asList(expressions);
     }
 
     @Override
-    public boolean interpret(String context) {
+    public boolean interpret(T context) {
         boolean toRet = true;
         for (Expression e : expressionList)
             toRet &= e.interpret(context);

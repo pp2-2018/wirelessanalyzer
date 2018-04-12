@@ -2,24 +2,23 @@ package Evaluator;
 
 import FileReader.HexStringToByteArray;
 
-public class ByteInOffsetExpression extends Expression {
+public class ByteInOffsetExpression extends Expression<RawPackage> {
 
-    private byte  offset;
+    private int offset;
     private byte byteToCompare;
     private HexStringToByteArray converter;
 
-    public ByteInOffsetExpression(byte offset, byte byteToCompare) {
+    public ByteInOffsetExpression(int offset, byte byteToCompare) {
         this.offset = offset;
         this.byteToCompare = byteToCompare;
         this.converter = new HexStringToByteArray();
     }
 
     @Override
-    public boolean interpret(String context) {
-        byte[] hexa = converter.convert(context);
-        for (int i = 0; i < hexa.length; i++) ;
+    public boolean interpret(RawPackage context) {
 
-        return hexa[offset] == byteToCompare;
+        return context.getByteAt(this.offset) == this.byteToCompare;
+
     }
 
 

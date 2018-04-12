@@ -1,21 +1,22 @@
 package Evaluator;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
-public class OrExpression extends Expression {
+public class OrExpression<T> extends Expression<T> {
 
     List<Expression> expressionList;
 
-    public OrExpression(Expression... expressions) {
-        this.expressionList = new ArrayList<>();
+    public OrExpression(Expression<T>... expressions) {
+        this.expressionList = Arrays.asList(expressions);
 
     }
 
     @Override
-    public boolean interpret(String context) {
+    public boolean interpret(T context) {
         boolean toRet = false;
-        for (Expression e : expressionList)
+        for (Expression<T> e : expressionList)
             toRet|= e.interpret(context);
 
         return toRet;

@@ -1,5 +1,5 @@
 package Evaluator;
 
-public abstract class Expression {
-    public abstract boolean interpret(String context);
+public abstract class Expression<T> {
+    public abstract boolean interpret(T context);
 }
