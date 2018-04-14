@@ -10,7 +10,6 @@ import Evaluator.RawPackage;
 
 public class Parser {
 
-	String paquete = "3 3f";
 	
 	public Expression<RawPackage> parse(PackageRulesFile packageRulesFile){
 		

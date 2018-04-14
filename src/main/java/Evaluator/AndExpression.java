@@ -19,7 +19,7 @@ public class AndExpression<T> extends Expression<T> {
     @Override
     public boolean interpret(T context) {
         boolean toRet = true;
-        for (Expression e : expressionList)
+        for (Expression<T> e : expressionList)
             toRet &= e.interpret(context);
 
         return toRet;

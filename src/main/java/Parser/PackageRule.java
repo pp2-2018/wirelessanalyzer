@@ -2,13 +2,21 @@ package Parser;
 
 public class PackageRule {
 
+	int offset; 
+	byte byteToCompare;
+	
+	public PackageRule(int offset, byte byteToCompare){
+		this.offset = offset;
+		this.byteToCompare = byteToCompare;
+		
+	}
 	
 	public int getOffset(){
-		return 1;
+		return this.offset;
 	}
 	
 	public byte getByte(){
-		return 1;
+		return this.byteToCompare;
 	}
 	
 }
