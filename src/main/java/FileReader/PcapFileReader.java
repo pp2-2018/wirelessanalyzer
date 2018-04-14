@@ -3,7 +3,7 @@ package FileReader;
 import org.pcap4j.core.PcapHandle;
 import org.pcap4j.core.PcapNativeException;
 import org.pcap4j.core.Pcaps;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
+
 
 import java.util.List;
 
@@ -31,7 +31,7 @@ public class PcapFileReader {
 //        }
 //
 //        return byteArray;
-        throw new NotImplementedException();
+        throw new RuntimeException("Not Implemented");
     }
 
 
