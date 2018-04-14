@@ -1,37 +1,20 @@
 package FileReader;
 
-import org.pcap4j.core.PcapHandle;
-import org.pcap4j.core.PcapNativeException;
-import org.pcap4j.core.Pcaps;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
-
-import java.util.List;
+import java.io.File;
+import java.io.OutputStream;
 
 public class PcapFileReader {
-    private PcapHandle pcapHandle;
 
-    public PcapFileReader(String fileName) {
-        try {
-            pcapHandle = Pcaps.openOffline(fileName);
-        } catch (PcapNativeException e) {
-            e.printStackTrace();
-        }
+    OutputStream buffer;
+
+
+    public PcapFileReader(File file, OutputStream outputStream) {
+        this.buffer = outputStream;
+
     }
 
-    public List<byte[]> read(){
-//        Packet packet;
-//        List byteArray = new ArrayList<Byte[]>();
-//
-//        try {
-//            while ((packet = pcapHandle.getNextPacket()) != null) {
-//                byteArray.add(packet.getRawData());
-//            }
-//        } catch (NotOpenException e) {
-//            e.printStackTrace();
-//        }
-//
-//        return byteArray;
-        throw new NotImplementedException();
+    public void read(){
+        
     }
 
 
