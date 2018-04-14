@@ -7,6 +7,7 @@ import FileReader.FileLineReader;
 public class PackageRulesFile implements Iterable<PackageRule>, Iterator<PackageRule>{
 
 	FileLineReader lineReader;
+	String line = "";
 	
 	public PackageRulesFile(FileLineReader lineReader){
 	
@@ -15,16 +16,14 @@ public class PackageRulesFile implements Iterable<PackageRule>, Iterator<Package
 
 	@Override
 	public boolean hasNext() {
-		
-		return !this.lineReader.ifEof();
+		line = this.lineReader.readLine();
+		return line != null;
 	}
 
 
 	@Override
 	public PackageRule next() {
-		
-		String line = this.lineReader.readLine();
-		
+		System.out.println(line);
 		try{
 			String[] rawRule = line.split(" ");
 

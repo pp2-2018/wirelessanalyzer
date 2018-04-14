@@ -6,24 +6,24 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.Reader;
 
 public class FileLineReader {
 	
 	private BufferedReader fileStream;
+	private boolean isEof;
 	
-	public FileLineReader(File file) {
+	public FileLineReader(Reader reader) {
 		
-		try {
-			fileStream = new BufferedReader(new FileReader(file));
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-		}
-		
+		fileStream = new BufferedReader(reader);
 	}
 	
 	public String readLine(){
 		try {
-			return fileStream.readLine();
+			String line = fileStream.readLine();
+			this.isEof = line == null;
+			return line;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -31,12 +31,7 @@ public class FileLineReader {
 	}
 	
 	public boolean ifEof(){
-		try {
-			return fileStream.readLine() == null;
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return true;
+		return this.isEof;
 	}
 	
 }
