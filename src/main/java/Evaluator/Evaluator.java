@@ -2,9 +2,9 @@ package Evaluator;
 
 public abstract class Evaluator<E> {
 
-    protected Expression expressions;
+    protected Expression<E> expressions;
 
-    public Evaluator(Expression expressions) {
+    public Evaluator(Expression<E> expressions) {
 
         this.expressions = expressions;
 

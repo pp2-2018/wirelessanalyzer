@@ -1,6 +1,7 @@
 package Evaluator;
 
 import FileReader.HexStringToByteArray;
+import Model.RawPackage;
 
 public class ByteInOffsetExpression extends Expression<RawPackage> {
 

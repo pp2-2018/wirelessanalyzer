@@ -1,6 +1,6 @@
 package Evaluator;
 
-import org.junit.Before;
+import Model.RawPackage;
 import org.junit.Test;
 
 import static org.junit.Assert.*;

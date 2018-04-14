@@ -1,4 +1,4 @@
-package Evaluator;
+package Model;
 
 public class RawPackage {
 
@@ -12,8 +12,9 @@ public class RawPackage {
 
     public byte getByteAt(int offset){
 
-        if(offset > data.length);
-            //TODO tirar excepcion
+        if(offset > data.length)
+            throw new IndexOutOfBoundsException("Offset exceed packet lengh. Packet lengh = " +
+            data.length + ", offset = " + offset);
 
         return data[offset];
 

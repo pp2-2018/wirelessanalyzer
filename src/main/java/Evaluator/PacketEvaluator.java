@@ -1,13 +1,16 @@
 package Evaluator;
 
-public class PacketEvaluator extends Evaluator<String> {
+import Model.RawPackage;
+
+public class PacketEvaluator extends Evaluator<RawPackage>{
+
 
     public PacketEvaluator(Expression expressions) {
         super(expressions);
     }
 
     @Override
-    public boolean evaluate(String s) {
-        return super.expressions.interpret(s);
+    public boolean evaluate(RawPackage rawPackage) {
+        return super.expressions.interpret(rawPackage);
     }
 }
