@@ -23,7 +23,6 @@ public class PackageRulesFile implements Iterable<PackageRule>, Iterator<Package
 
 	@Override
 	public PackageRule next() {
-		System.out.println(line);
 		try{
 			String[] rawRule = line.split(" ");
 

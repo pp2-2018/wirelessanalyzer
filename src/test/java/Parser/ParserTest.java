@@ -11,8 +11,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import Evaluator.Expression;
-import Evaluator.RawPackage;
 import FileReader.FileLineReader;
+import Model.RawPackage;
 
 public class ParserTest {
 	

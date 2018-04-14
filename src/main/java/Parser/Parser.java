@@ -6,7 +6,7 @@ import java.util.List;
 import Evaluator.AndExpression;
 import Evaluator.ByteInOffsetExpression;
 import Evaluator.Expression;
-import Evaluator.RawPackage;
+import Model.RawPackage;
 
 public class Parser {
 
@@ -16,7 +16,6 @@ public class Parser {
 		List<Expression<RawPackage>> expressions = new  ArrayList<>();
 		
 		for (PackageRule r: packageRulesFile){
-			System.out.println(r.getOffset() + " " + r.getByte());
 			expressions.add(new ByteInOffsetExpression(r.getOffset(), r.getByte()));
 		}
 		
