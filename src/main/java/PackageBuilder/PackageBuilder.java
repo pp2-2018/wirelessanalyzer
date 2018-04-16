@@ -1,35 +1,29 @@
 package PackageBuilder;
 
-import Evaluator.Expression;
+import java.nio.ByteBuffer;
+
+import Model.Package;
 import Model.RawPackage;
+import Model.TimeStamp;
 
 public class PackageBuilder {
 
-	private PackageBuilder next;
-	private Expression<RawPackage> filter;
+	//TODO pasar a una clase PackageBuildingConfiguration
+	public ByteSegment timeStampSegment;
 	
 	
-	public PackageBuilder() {
-		
+	public PackageBuilder(ByteSegment timeStampSegment) {
+		this.timeStampSegment = timeStampSegment;
 	}
 	
-	public void setNext(PackageBuilder next){
-		if(next == null);
-			//TODO throw
-		this.next = next;
-	}
-	
-	public Package buildPackage(RawPackage rawPackage){
+	public Package build(RawPackage rawPackage) {
 		
-		if(filter.interpret(rawPackage)){
-			/*
-			 * return configurationBasedBuilder.build(rawPackage);
-			 * 
-			 */
-		}
-		if(next == null);
-			//throw
-		return next.buildPackage(rawPackage);
+		ByteBuffer byteBuffer = ByteBuffer.wrap(rawPackage.getSegment(timeStampSegment));
+		long unixTime = byteBuffer.getLong();
+		TimeStamp timeStamp = new TimeStamp(unixTime);
+		
+		
+		return new Package(timeStamp);
 		
 	}
 	

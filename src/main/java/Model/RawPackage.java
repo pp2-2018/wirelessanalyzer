@@ -1,5 +1,9 @@
 package Model;
 
+import java.util.Arrays;
+
+import PackageBuilder.ByteSegment;
+
 public class RawPackage {
 
     private byte[] data;
@@ -19,5 +23,14 @@ public class RawPackage {
         return data[offset];
 
     }
+
+	public byte[] getSegment(ByteSegment segment) {
+		
+        if(segment.getPosition() + segment.getLength() > data.length)
+            throw new IndexOutOfBoundsException();
+
+        return Arrays.copyOfRange(data, segment.getPosition(), segment.getPosition() + segment.getLength());
+		
+	}
 
 }
