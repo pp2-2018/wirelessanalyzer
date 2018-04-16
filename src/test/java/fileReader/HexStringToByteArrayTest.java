@@ -1,4 +1,4 @@
-package FileReader;
+package fileReader;
 
 import org.junit.Test;
 

@@ -1,12 +1,12 @@
-package Parser;
+package parser;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import Evaluator.AndExpression;
-import Evaluator.ByteInOffsetExpression;
-import Evaluator.Expression;
-import Model.RawPackage;
+import evaluator.AndExpression;
+import evaluator.ByteInOffsetExpression;
+import evaluator.Expression;
+import model.RawPackage;
 
 public class Parser {
 

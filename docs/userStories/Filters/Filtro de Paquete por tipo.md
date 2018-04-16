@@ -35,7 +35,7 @@ Dígito: 0x0004
 | Número | Descripción | Horas |
 | ------ | ------ | :------: |
 | 0 | Configurar el filtro según las configuraciones provistas| 2 |
-| 1 | Implementar patron *Evaluator* para leer las configuraciones| 6 |
+| 1 | Implementar patron *evaluator* para leer las configuraciones| 6 |
 | 2 | Leer el byte de correspondiente al offset y decidir que tipo de paquete es| 4 |
 | 3 | Comparar el byte obtenido con el dígito indicado y crear la clase *Paquete* correspondiente| 3 |
 

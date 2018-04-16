@@ -1,8 +1,8 @@
-package Parser;
+package parser;
 
 import java.util.Iterator;
 
-import FileReader.FileLineReader;
+import fileReader.FileLineReader;
 
 public class PackageRulesFile implements Iterable<PackageRule>, Iterator<PackageRule>{
 

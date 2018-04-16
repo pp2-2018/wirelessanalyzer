@@ -1,6 +1,5 @@
-package Parser;
+package parser;
 
-import java.io.CharArrayReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -10,9 +9,9 @@ import java.io.StringReader;
 import org.junit.Assert;
 import org.junit.Test;
 
-import Evaluator.Expression;
-import FileReader.FileLineReader;
-import Model.RawPackage;
+import evaluator.Expression;
+import fileReader.FileLineReader;
+import model.RawPackage;
 
 public class ParserTest {
 	

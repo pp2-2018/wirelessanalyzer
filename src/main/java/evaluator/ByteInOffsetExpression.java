@@ -1,7 +1,7 @@
-package Evaluator;
+package evaluator;
 
-import FileReader.HexStringToByteArray;
-import Model.RawPackage;
+import fileReader.HexStringToByteArray;
+import model.RawPackage;
 
 public class ByteInOffsetExpression extends Expression<RawPackage> {
 

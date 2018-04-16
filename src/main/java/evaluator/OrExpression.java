@@ -1,6 +1,5 @@
-package Evaluator;
+package evaluator;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

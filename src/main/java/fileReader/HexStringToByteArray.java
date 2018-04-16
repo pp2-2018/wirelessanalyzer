@@ -1,4 +1,4 @@
-package FileReader;
+package fileReader;
 
 public class HexStringToByteArray {
 

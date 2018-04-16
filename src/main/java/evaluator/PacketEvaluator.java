@@ -1,6 +1,6 @@
-package Evaluator;
+package evaluator;
 
-import Model.RawPackage;
+import model.RawPackage;
 
 public class PacketEvaluator extends Evaluator<RawPackage>{
 

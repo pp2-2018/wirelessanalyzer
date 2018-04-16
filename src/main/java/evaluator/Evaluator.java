@@ -1,4 +1,4 @@
-package Evaluator;
+package evaluator;
 
 public abstract class Evaluator<E> {
 

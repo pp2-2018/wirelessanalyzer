@@ -1,10 +1,8 @@
-package FileReader;
+package fileReader;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.*;
