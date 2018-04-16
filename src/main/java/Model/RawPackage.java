@@ -28,7 +28,9 @@ public class RawPackage {
 		
         if(segment.getPosition() + segment.getLength() > data.length)
             throw new IndexOutOfBoundsException();
-
+        
+        byte[] a = Arrays.copyOfRange(data, segment.getPosition(), segment.getPosition() + segment.getLength());
+        
         return Arrays.copyOfRange(data, segment.getPosition(), segment.getPosition() + segment.getLength());
 		
 	}

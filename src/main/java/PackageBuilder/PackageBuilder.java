@@ -19,6 +19,7 @@ public class PackageBuilder {
 	public Package build(RawPackage rawPackage) {
 		
 		ByteBuffer byteBuffer = ByteBuffer.wrap(rawPackage.getSegment(timeStampSegment));
+		
 		long unixTime = byteBuffer.getLong();
 		TimeStamp timeStamp = new TimeStamp(unixTime);
 		
