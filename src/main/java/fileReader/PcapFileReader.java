@@ -1,22 +1,29 @@
 package fileReader;
 
-import java.io.File;
-import java.io.OutputStream;
+import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
-public class PcapFileReader {
+public class PcapFileReader{
 
-    OutputStream buffer;
+    private FileLineReader fileLineReader;
 
-
-    public PcapFileReader(File file, OutputStream outputStream) {
-        this.buffer = outputStream;
-
+    public PcapFileReader(File file) {
+        try {
+            fileLineReader = new FileLineReader(new FileReader(file.getAbsoluteFile()));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void read(){
-        
+
+    public String read(){
+        List<Character> characterList = new ArrayList<>();
+        String line = "";
+        while(!fileLineReader.ifEof())
+            line += fileLineReader.readLine().replaceAll(" ", "");
+
+        return line;
     }
-
-
 
 }
