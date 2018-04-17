@@ -1,3 +1,5 @@
+package model;
+
 import com.cedarsoftware.util.io.JsonReader;
 import com.cedarsoftware.util.io.JsonWriter;
 
