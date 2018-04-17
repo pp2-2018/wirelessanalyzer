@@ -1,15 +1,12 @@
 package model.device;
 
 import model.Coordinates;
-import model.device.MacAddress;
 import model.device.roles.Role;
-
-import java.io.Serializable;
 import java.time.Instant;
 import java.util.HashMap;
 
-public class InstantMap implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class InstantMap {
+
     HashMap<Role, Coordinates> locations;
     Instant instantOfMap;
 

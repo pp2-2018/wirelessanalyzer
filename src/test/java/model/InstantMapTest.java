@@ -37,6 +37,7 @@ public class InstantMapTest {
 
     }
 
+
     @Test
     public void addDevice(){
         instantMap.register(ap0,coords0);

@@ -1,8 +1,10 @@
-package model;
+package parser;
 
 import com.cedarsoftware.util.io.JsonReader;
 import com.cedarsoftware.util.io.JsonWriter;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.UnknownFormatConversionException;
 
 
@@ -21,8 +23,10 @@ public class JsonUtils <T> {
        return parsed;
     }
     public String toJson(Object javaObject){
+        Map<String,Object> args = new HashMap<>();
+        args.put(JsonWriter.PRETTY_PRINT,true);
 
-        return JsonWriter.objectToJson(javaObject);
+        return JsonWriter.objectToJson(javaObject,args);
 
     }
 
