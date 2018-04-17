@@ -2,6 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
+import model.device.roles.Sniffer;
 import org.pcap4j.util.MacAddress;
 
 public class CapturasService {
@@ -13,12 +14,12 @@ public class CapturasService {
 		this.capturas=capturas;
 	}
 	
-	public ArrayList<MacAddress> getMacAddressesDetectedBy(AccessPoint ap){
+	public ArrayList<MacAddress> getMacAddressesDetectedBy(Sniffer sniffer){
 		
 		ArrayList<MacAddress> macAddresses = new ArrayList<MacAddress>();
 		
 		for (Captura c : capturas){
-			if(c.getAccessPoint().equals(ap)){	
+			if(c.getSniffer().equals(sniffer)){	
 				for(Package p : c.getPaquetes()){
 //					macAddresses.add(p.getMacAddress());   falta mergear el objeto package y MacAddress a development
 				}
@@ -30,9 +31,9 @@ public class CapturasService {
 	}
 	
 	
-	public ArrayList<AccessPoint> getAPsQueDetectaron( MacAddress macAddress){
+	public ArrayList<Sniffer> getAPsQueDetectaron( MacAddress macAddress){
 		
-		ArrayList<AccessPoint> aps = new ArrayList<AccessPoint>();
+		ArrayList<Sniffer> aps = new ArrayList<Sniffer>();
 			
 			for (Captura c : capturas){
 				
@@ -40,7 +41,7 @@ public class CapturasService {
 					
 //					if (p.getMacAddress.equals(macAddress)){
 						
-//						aps.add(c.getAccessPoint());
+//						aps.add(c.getSniffer());
 						
 //					}
 				}

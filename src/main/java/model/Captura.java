@@ -1,18 +1,20 @@
 package model;
 
+import model.device.roles.Sniffer;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 public class Captura {
 	
-	private AccessPoint accessPoint;
+	private Sniffer Sniffer;
 	private LocalDateTime inicio;
 	private LocalDateTime fin;
 	private ArrayList<Package> paquetes;
 	
-	public Captura( AccessPoint accessPoint, LocalDateTime inicio, LocalDateTime fin){
+	public Captura(Sniffer Sniffer, LocalDateTime inicio, LocalDateTime fin){
 		
-		this.setAccessPoint(accessPoint);
+		this.setSniffer(Sniffer);
 		this.setInicio(inicio);
 		this.setFin(fin);
 		this.paquetes = new ArrayList<Package>();
@@ -27,12 +29,12 @@ public class Captura {
 		return this.paquetes;
 	}
 
-	public AccessPoint getAccessPoint() {
-		return accessPoint;
+	public Sniffer getSniffer() {
+		return Sniffer;
 	}
 
-	public void setAccessPoint(AccessPoint accessPoint) {
-		this.accessPoint = accessPoint;
+	public void setSniffer(Sniffer Sniffer) {
+		this.Sniffer = Sniffer;
 	}
 
 	public LocalDateTime getInicio() {
