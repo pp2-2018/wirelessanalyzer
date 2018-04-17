@@ -15,11 +15,16 @@ public class Captura {
 		this.setAccessPoint(accessPoint);
 		this.setInicio(inicio);
 		this.setFin(fin);
+		this.paquetes = new ArrayList<Package>();
 	}
 	
 	private void addPackages(Package paquete){
 		paquetes.add(paquete);
 		return;
+	}
+	
+	public ArrayList<Package> getPaquetes(){
+		return this.paquetes;
 	}
 
 	public AccessPoint getAccessPoint() {
