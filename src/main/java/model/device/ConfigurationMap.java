@@ -11,6 +11,7 @@ public class ConfigurationMap {
         HashMap<Sniffer, Coordinates> locations;
 
 
+
     public ConfigurationMap(){
             locations = new HashMap<>();
 
