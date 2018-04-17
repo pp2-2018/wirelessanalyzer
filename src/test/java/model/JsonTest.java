@@ -8,8 +8,13 @@ import model.device.roles.Sniffer;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import parser.JsonParser;
+import parser.JsonConverter;
+
+import java.io.ByteArrayInputStream;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
 
 public class JsonTest {
 
@@ -39,10 +44,13 @@ public class JsonTest {
     @Test
     public void generateAndParse() throws IOException {
         //Generate Json
-        JsonParser<ConfigurationMap> jsonUtils = new JsonParser<>();
-        String json=jsonUtils.toJson(map1);
+        JsonConverter<ConfigurationMap> jsonConverter = new JsonConverter<>();
+
+        InputStream json=jsonConverter.to(map1);
+
         //Parse Json
-        ConfigurationMap parsed = jsonUtils.fromJson(json);
+        ConfigurationMap parsed = jsonConverter.from(json);
+
         //Test
         Assert.assertEquals(map1,parsed);
         Assert.assertEquals(coords0,parsed.getCoordinates(sniff0));
