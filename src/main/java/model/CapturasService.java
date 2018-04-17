@@ -20,12 +20,32 @@ public class CapturasService {
 		for (Captura c : capturas){
 			if(c.getAccessPoint().equals(ap)){	
 				for(Package p : c.getPaquetes()){
-//					macAddresses.add(p.getMacAddress());   falta mergear el objeto package a development
+//					macAddresses.add(p.getMacAddress());   falta mergear el objeto package y MacAddress a development
 				}
 			}
 		}
 		
 		return macAddresses;
+		
+	}
+	
+	
+	public ArrayList<AccessPoint> getAPsQueDetectaron( MacAddress macAddress){
+		
+		ArrayList<AccessPoint> aps = new ArrayList<AccessPoint>();
+			
+			for (Captura c : capturas){
+				
+				for (Package p : c.getPaquetes()){
+					
+//					if (p.getMacAddress.equals(macAddress)){
+						
+//						aps.add(c.getAccessPoint());
+						
+//					}
+				}
+			}
+		return aps;
 		
 	}
 }
