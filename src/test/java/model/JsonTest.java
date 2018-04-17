@@ -2,14 +2,14 @@ package model;
 
 
 import model.device.Device;
+import model.device.InstantMap;
 import model.device.MacAddress;
-import model.device.Map;
 import model.device.roles.AccessPoint;
 import model.device.roles.Role;
 import org.junit.Before;
 import org.junit.Test;
 import java.util.HashMap;
-import model.JsonUtils;
+import java.util.Map;
 
 public class JsonTest {
 
@@ -21,7 +21,7 @@ public class JsonTest {
     Coordinates coords0 = new Coordinates(8.20609, 172.71046);
     Role role;
     Role role2;
-    Map map;
+    InstantMap instantMap;
     HashMap<String, Coordinates> map1;
 
     @Before
@@ -30,19 +30,22 @@ public class JsonTest {
         dev1 = new Device(new MacAddress(macdev1));
         role = new AccessPoint(dev0,"Wi-Fi Gratis");
         role2 = new AccessPoint(dev1,"CAMPUS");
-        map = new Map();
+    /*    instantMap = new InstantMap();
         map1 = new HashMap<String, Coordinates>();
-        map.register(dev0.getMac(), coords0);
-        map.register(dev1.getMac(), coords1);
+        instantMap.register(dev0.getMac(), coords0);
+        instantMap.register(dev1.getMac(), coords1);
         map1.put(dev0.getMac().toString(), coords0);
-        map1.put(dev1.getMac().toString(), coords1);
+        map1.put(dev1.getMac().toString(), coords1);*/
     }
 
     @Test
     public void persist() {
 
         JsonUtils<Map> jsonUtils = new JsonUtils<>();
-        String json=jsonUtils.toJson(map);
+        String json=jsonUtils.toJson(instantMap);
+        Map parsed =jsonUtils.fromJson(json);
+        HashMap<String,Coordinates> hasmap = (HashMap<String,Coordinates>) parsed;
+
       /*  HashMap<String,Coordinates> parsed =jsonUtils.fromJson(json);
         for (Coordinates coords:parsed.values()
              ) {
@@ -53,7 +56,7 @@ public class JsonTest {
 
 
         //generarJSON("test.json", map1);
-       // java.util.Map<String, Coordinates> persistido = leerJSON("test.json");
+       // java.util.InstantMap<String, Coordinates> persistido = leerJSON("test.json");
       //  Assert.assertEquals(coords0.toString(),persistido.get(dev0.getMac().toString()).toString());
     }
 
@@ -69,15 +72,15 @@ public class JsonTest {
         }
     }
 
-    java.util.Map<String, Coordinates> leerJSON(String archivo) {
+    java.util.InstantMap<String, Coordinates> leerJSON(String archivo) {
 
         try {
             Gson gson = new Gson();
             BufferedReader br = new BufferedReader(new FileReader("test.json"));
-            Type type = new TypeToken<java.util.Map<String, Coordinates>>() {
+            Type type = new TypeToken<java.util.InstantMap<String, Coordinates>>() {
             }.getType();
-            java.util.Map<String, Coordinates> map = gson.fromJson(br, type);
-            return map;
+            java.util.InstantMap<String, Coordinates> instantMap = gson.fromJson(br, type);
+            return instantMap;
 
         } catch (Exception e) {
             e.printStackTrace();
