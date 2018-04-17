@@ -38,7 +38,7 @@ public class CapturasService {
 				
 				for (Package p : c.getPaquetes()){
 					
-//					if (p.getMacAddress.equals(macAddress)){
+//					if (p.getMacAddress.equals(macAddress)){     //lo mismo que arriba
 						
 //						aps.add(c.getAccessPoint());
 						
