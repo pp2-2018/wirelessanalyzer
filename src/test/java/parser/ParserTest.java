@@ -9,11 +9,11 @@ import java.io.StringReader;
 import org.junit.Assert;
 import org.junit.Ignore;
 import org.junit.Test;
-
 import evaluator.Expression;
+import parser.Parser;
+import parser.PackageRulesFile;
 import fileReader.FileLineReader;
 import model.RawPackage;
-
 public class ParserTest {
 	
 	

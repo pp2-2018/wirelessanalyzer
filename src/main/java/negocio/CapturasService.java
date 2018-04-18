@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import model.Captura;
 import model.device.roles.Sniffer;
+import model.Package;
 import org.pcap4j.util.MacAddress;
 
 public class CapturasService {
