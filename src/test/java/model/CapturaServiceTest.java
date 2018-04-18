@@ -16,10 +16,13 @@ import negocio.CapturasService;
 public class CapturaServiceTest {
 	
 	ArrayList<Captura> capturas;
+	ArrayList<Captura> capturas2;
 	
 	Sniffer a;
 	Sniffer b;
+	Sniffer c;
 	Sniffer d;
+	Sniffer e;
 	
 	MacAddress addra;
 	MacAddress addrc;
@@ -59,6 +62,16 @@ public class CapturaServiceTest {
     	Device dev3 = new Device(m3);
     	d = new Sniffer(dev3, 00000);
     	
+    	byte d4[] = {  0x4d, 0xa, 0x57, 0x4c, 0x4c, 0x05 };	
+    	MacAddress m4 = new MacAddress(d4);
+    	Device dev4 = new Device(m4);
+    	e = new Sniffer(dev4, 00000);
+    	
+    	byte d5[] = {  0x4d, 0xa, 0x57, 0x4c, 0x4c, 0x06 };	
+    	MacAddress m5 = new MacAddress(d5);
+    	Device dev5 = new Device(m5);
+    	c = new Sniffer(dev5, 00000);
+    	
  
     	Package packageA = new Package(null);			//paquetes
     	packageA.setMacAddress(addra);
@@ -76,13 +89,35 @@ public class CapturaServiceTest {
     	capB.addPackages(packageA);
     	capB.addPackages(packageC);
     	capB.addPackages(packageE);
-    	
     	capD.addPackages(packageD);
     	
     	capturas.add(capA);
     	capturas.add(capB);
     	capturas.add(capD);
     	
+    	
+    	//////////////////////////////////////
+    	
+    	
+    	capturas2 = new ArrayList<Captura>();
+    	
+    	Captura cap1 = new Captura(a, null, null);
+    	Captura cap2 = new Captura(b, null, null);
+    	Captura cap3 = new Captura(c, null, null);
+    	Captura cap4 = new Captura(e, null, null);
+    	
+    	cap1.addPackages(packageA);
+    	cap2.addPackages(packageA);
+    	cap3.addPackages(packageA);
+    	cap4.addPackages(packageA);
+    	
+    	cap2.addPackages(packageC);
+    	cap4.addPackages(packageC);
+    	
+    	capturas2.add(cap1);
+    	capturas2.add(cap2);
+    	capturas2.add(cap3);
+    	capturas2.add(cap4);
     }
 
 	@Test
@@ -102,6 +137,22 @@ public class CapturaServiceTest {
 		Assert.assertTrue(capturasTest.getMacAddressesDetectedBy(a).equals(arrayA));
 //		System.out.println("Access Point A: " + capturasTest.getMacAddressesDetectedBy(a));
 	
+	}
+	
+	@Test
+	public void getAPsQueDetectaron(){
+		
+		CapturasService capturasTest2 = new CapturasService(capturas2);
+		
+		List<Sniffer> array1 = Arrays.asList(a, b, c, e);
+		Assert.assertTrue(capturasTest2.getAPsQueDetectaron(addra).equals(array1));
+		
+		List<Sniffer> array2 = Arrays.asList(b, e);
+		Assert.assertTrue(capturasTest2.getAPsQueDetectaron(addrc).equals(array2));
+		
+		List<Sniffer> array3 = new ArrayList<Sniffer>();
+		Assert.assertTrue(capturasTest2.getAPsQueDetectaron(addrd).equals(array3));
+		
 	}
 	
 	
