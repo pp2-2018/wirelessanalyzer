@@ -10,6 +10,7 @@ import org.mockito.Mock;
 
 import evaluator.ByteInOffsetExpression;
 import evaluator.Expression;
+import exceptions.RawPackageNotHandled;
 import model.Package;
 import model.RawPackage;
 import model.TimeStamp;
@@ -18,7 +19,24 @@ public class PackageHandlerTest {
 	
 	
 	@Test
-	public void test() {
+	public void oneHandlerTest() {
+		RawPackage packageType1 = new RawPackage(new byte[] {0x00, 0x00, 0x00, (byte) 0xDC, 0x6B, 0x74, 0x77, (byte) 0x80, 0x00, 0x00, (byte) 0xff, (byte) 0xff, (byte) 0xfa});
+		
+		PackageBuilder builder1 = mock(PackageBuilder.class);
+		when(builder1.build(packageType1)).thenReturn(new Package(new TimeStamp(0)));
+		
+		Expression<RawPackage> expression1 = mock(ByteInOffsetExpression.class);
+		when(expression1.interpret(packageType1)).thenReturn(true);
+		
+		PackageHandler handler1 = new PackageHandler(expression1, builder1);
+		
+		Package package1 = handler1.handlePackage(packageType1);
+		
+		Assert.assertEquals(package1.getTimeStamp().getUnixTime(), 0);
+	}
+	
+	@Test
+	public void twoHandlerTest() {
 		
 		RawPackage packageType1 = new RawPackage(new byte[] {0x00, 0x00, 0x00, (byte) 0xDC, 0x6B, 0x74, 0x77, (byte) 0x80, 0x00, 0x00, (byte) 0xff, (byte) 0xff, (byte) 0xfa});
 		RawPackage packageType2 = new RawPackage(new byte[] {0x00, 0x00, (byte) 0xff, 0x00, 0x00, 0x00, (byte) 0xDC, 0x6B, 0x74, 0x77, (byte) 0x80,(byte) 0xff, (byte) 0xfa});
@@ -47,7 +65,46 @@ public class PackageHandlerTest {
 		Assert.assertEquals(package1.getTimeStamp().getUnixTime(), 0);
 		Assert.assertEquals(package2.getTimeStamp().getUnixTime(), 1);
 		
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void nullHandlerTest() {
+		RawPackage packageType1 = new RawPackage(new byte[] {0x00, 0x00, 0x00, (byte) 0xDC, 0x6B, 0x74, 0x77, (byte) 0x80, 0x00, 0x00, (byte) 0xff, (byte) 0xff, (byte) 0xfa});
 		
+		PackageBuilder builder1 = mock(PackageBuilder.class);
+		when(builder1.build(packageType1)).thenReturn(new Package(new TimeStamp(0)));
+		
+		//expression1 returns false for everything
+		Expression<RawPackage> expression1 = mock(ByteInOffsetExpression.class);
+		
+		PackageHandler handler1 = new PackageHandler(expression1, builder1);
+		PackageHandler handler2 = null;
+		
+		handler1.setNext(handler2);
+		
+		Package package1 = handler1.handlePackage(packageType1);
+		
+		Assert.assertEquals(package1.getTimeStamp().getUnixTime(), 0);
+	}
+	
+	@Test(expected=RawPackageNotHandled.class)
+	public void rawPackageNotHandlerTest() {
+		RawPackage packageType1 = new RawPackage(new byte[] {0x00, 0x00, 0x00, (byte) 0xDC, 0x6B, 0x74, 0x77, (byte) 0x80, 0x00, 0x00, (byte) 0xff, (byte) 0xff, (byte) 0xfa});
+		
+		PackageBuilder builder1 = mock(PackageBuilder.class);
+		when(builder1.build(packageType1)).thenReturn(new Package(new TimeStamp(0)));
+		
+		//expression1 returns false for everything
+		Expression<RawPackage> expression1 = mock(ByteInOffsetExpression.class);
+		
+		PackageHandler handler1 = new PackageHandler(expression1, builder1);
+		PackageHandler handler2 = new PackageHandler(expression1, builder1);;
+		
+		handler1.setNext(handler2);
+		
+		Package package1 = handler1.handlePackage(packageType1);
+		
+		Assert.assertEquals(package1.getTimeStamp().getUnixTime(), 0);
 	}
 
 }
