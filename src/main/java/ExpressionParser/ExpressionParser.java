@@ -1,4 +1,4 @@
-package Parser;
+package ExpressionParser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +8,7 @@ import Evaluator.ByteInOffsetExpression;
 import Evaluator.Expression;
 import Model.RawPackage;
 
-public class Parser {
+public class ExpressionParser {
 
 	
 	public Expression<RawPackage> parse(PackageRulesFile packageRulesFile){

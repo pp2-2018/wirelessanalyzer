@@ -11,6 +11,8 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import Evaluator.Expression;
+import ExpressionParser.ExpressionParser;
+import ExpressionParser.PackageRulesFile;
 import FileReader.FileLineReader;
 import Model.RawPackage;
 
@@ -21,7 +23,7 @@ public class ParserTest {
 	public void parseAffirmativeTest(){
 		Reader reader = new StringReader("00 08\n01 09");
 		RawPackage frame = new RawPackage(new byte[]{0x08, 0x09});
-		Parser parser = new Parser();
+		ExpressionParser parser = new ExpressionParser();
 		
 		PackageRulesFile packageRulesFile = new PackageRulesFile(new FileLineReader(reader));
 		
@@ -36,7 +38,7 @@ public class ParserTest {
 	public void parseNegativeTest(){
 		Reader reader = new StringReader("00 08\n01 09");
 		RawPackage frame = new RawPackage(new byte[]{0x07, 0x09});
-		Parser parser = new Parser();
+		ExpressionParser parser = new ExpressionParser();
 		
 		PackageRulesFile packageRulesFile = new PackageRulesFile(new FileLineReader(reader));
 		
@@ -51,7 +53,7 @@ public class ParserTest {
 	public void parseWithRealFileTest(){
 		File file = new File("test-files" + File.separator + "toParseFile.txt");
 		RawPackage frame = new RawPackage(new byte[]{0x07, 0x09});
-		Parser parser = new Parser();
+		ExpressionParser parser = new ExpressionParser();
 		
 		PackageRulesFile packageRulesFile = null;
 		try {

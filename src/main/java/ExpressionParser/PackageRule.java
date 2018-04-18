@@ -1,4 +1,4 @@
-package Parser;
+package ExpressionParser;
 
 public class PackageRule {
 
