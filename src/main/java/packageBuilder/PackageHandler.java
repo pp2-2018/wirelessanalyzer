@@ -1,4 +1,4 @@
-package PackageBuilder;
+package packageBuilder;
 
 import evaluator.Expression;
 import model.Package;

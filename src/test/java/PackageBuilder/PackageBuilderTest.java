@@ -5,6 +5,7 @@ import org.junit.Test;
 
 import model.Package;
 import model.RawPackage;
+import packageBuilder.ByteSegment;
 
 public class PackageBuilderTest {
 
