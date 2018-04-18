@@ -23,8 +23,8 @@ public class PackageRulesFile implements Iterable<PackageRule>, Iterator<Package
 
     @Override
     public PackageRule next() {
+        String[] rawRule = line.split(" ");
         try{
-            String[] rawRule = line.split(" ");
 
             int offset = Integer.parseInt(rawRule[0]);
             byte byteToCompare= Byte.parseByte(rawRule[1]);
@@ -32,7 +32,7 @@ public class PackageRulesFile implements Iterable<PackageRule>, Iterator<Package
             return new PackageRule(offset, byteToCompare);
             
         }catch(NumberFormatException e){
-            throw new RuntimeException("FileFormat");
+            throw new RuntimeException("FileFormat"+ rawRule[0] + " "+ rawRule[1] + " must be numbers.");
         
         }
         

@@ -17,7 +17,8 @@ public class FileLineReader {
 	public String readLine(){
 		try {
 			String line = fileStream.readLine();
-			return (this.isEof = line == null) ? "" : line;
+			this.isEof = line == null;
+			return line;
 
 		} catch (IOException e) {
 			e.printStackTrace();

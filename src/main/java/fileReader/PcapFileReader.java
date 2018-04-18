@@ -20,8 +20,9 @@ public class PcapFileReader{
     public String read(){
         List<Character> characterList = new ArrayList<>();
         String line = "";
-        while(!fileLineReader.ifEof())
-            line += fileLineReader.readLine().replaceAll(" ", "");
+        String ln = "";
+        while((ln= fileLineReader.readLine()) != null)
+            line += ln.replaceAll(" ", "");
 
         return line;
     }
