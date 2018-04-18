@@ -10,11 +10,8 @@ import org.junit.Before;
 import org.junit.Test;
 import parser.JsonConverter;
 
-import java.io.ByteArrayInputStream;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.nio.charset.StandardCharsets;
+
+import java.io.*;
 
 public class JsonTest {
 
@@ -29,6 +26,10 @@ public class JsonTest {
 
     ConfigurationMap map1;
 
+
+
+
+
     @Before
     public void setUp() {
         dev0 = new Device(new MacAddress(macdev0));
@@ -38,11 +39,13 @@ public class JsonTest {
         map1 = new ConfigurationMap();
         map1.register(sniff0, coords0);
         map1.register(sniff1, coords1);
+
     }
 
 
     @Test
     public void generateAndParse() throws IOException {
+
         //Generate Json
         JsonConverter<ConfigurationMap> jsonConverter = new JsonConverter<>();
 
@@ -51,10 +54,13 @@ public class JsonTest {
         //Parse Json
         ConfigurationMap parsed = jsonConverter.from(json);
 
+
         //Test
+
         Assert.assertEquals(map1,parsed);
         Assert.assertEquals(coords0,parsed.getCoordinates(sniff0));
         Assert.assertEquals(coords1,parsed.getCoordinates(sniff1));
+
     }
 
 

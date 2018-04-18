@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.util.ArrayList;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.pcap4j.util.MacAddress;
 
@@ -26,7 +27,7 @@ public class CapturaServiceTest {
 //    	ma1 = new MacAdddress(f1:a4:d7:74:4c:09);	
     }
 
-	@Test
+	@Ignore
 	public void test() {
 		fail("Not yet implemented");
 	}

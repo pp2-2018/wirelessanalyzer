@@ -26,6 +26,7 @@ public class JsonConverter<T> implements Converter<T> {
             T parsed = null;
         String result = new BufferedReader(new InputStreamReader(JsonString)).lines()
                 .parallel().collect(Collectors.joining("\n"));
+
         try{
             parsed = (T) JsonReader.jsonToJava(result);
         }
