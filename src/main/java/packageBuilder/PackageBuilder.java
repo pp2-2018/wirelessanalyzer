@@ -1,6 +1,7 @@
 package packageBuilder;
 
 import java.nio.ByteBuffer;
+import java.util.List;
 
 import model.Package;
 import model.RawPackage;
@@ -8,24 +9,26 @@ import model.TimeStamp;
 
 public class PackageBuilder {
 
-	//TODO pasar a una clase PackageBuildingConfiguration
-	public ByteSegment timeStampSegment;
+	List<ConfigurationBuilder> configuration;
+	public TimeStamp timestamp;
 	
 	
-	public PackageBuilder(ByteSegment timeStampSegment) {
-		this.timeStampSegment = timeStampSegment;
+	public PackageBuilder(List<ConfigurationBuilder> configuration) {
+		this.configuration = configuration;
 	}
 	
 	public Package build(RawPackage rawPackage) {
 		
-		ByteBuffer byteBuffer = ByteBuffer.wrap(rawPackage.getSegment(timeStampSegment));
+		configuration.stream()
+		.map(c -> c.build(rawPackage))
+		.forEach(c -> c.configure(this));
 		
-		long unixTime = byteBuffer.getLong();
-		TimeStamp timeStamp = new TimeStamp(unixTime);
+		return new Package(timestamp);
 		
-		
-		return new Package(timeStamp);
-		
+	}
+	
+	public void configure(TimeStampConfiguration c) {
+		this.timestamp = c.getTimestamp();
 	}
 	
 }
