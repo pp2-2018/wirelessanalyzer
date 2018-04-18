@@ -7,12 +7,13 @@ public class Device {
     public Device(MacAddress mac){
         this.mac=mac;
     }
+
     public MacAddress getMac() {
         return mac;
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(Object o) { //TODO Hay que ver hasta que punto tiene sentido esta igualdad
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Device device = (Device) o;
@@ -20,7 +21,7 @@ public class Device {
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode() { //TODO Lo mismo con esto
 
         return Objects.hash(mac);
     }

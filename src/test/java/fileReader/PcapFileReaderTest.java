@@ -9,11 +9,10 @@ import static org.junit.Assert.assertTrue;
 
 
 public class PcapFileReaderTest {
-    PcapFileReader pcapFileReader;
+    private PcapFileReader pcapFileReader;
 
     @Before
     public void setup(){
-        OutputStream outputStream = new ByteArrayOutputStream();
         File file = new File("test-files" + File.separator + "test-capture.pcap");
         pcapFileReader = new PcapFileReader(file);
     }
@@ -33,7 +32,7 @@ public class PcapFileReaderTest {
                         "6400210400124a756e697065725f5353"+
                         "47355f6261736963010882848b960c18"+
                         "30480301010504000100000706555320"+
-                        "010b1b2a010032041224606c";
+                        "010b1b2a010032041224606c"; //TODO Este string deberia leerse de un archivo
 
         assertTrue(toCompare.equals(pcapFileReader.read()));
     }
