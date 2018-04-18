@@ -2,24 +2,24 @@ package model;
 
 
 import model.device.Device;
-import model.device.InstantMap;
+import model.device.ConfigurationMap;
 import model.device.MacAddress;
 import model.device.roles.AccessPoint;
 import model.device.roles.Role;
+import model.device.roles.Sniffer;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.time.Instant;
 
-public class InstantMapTest {
+public class ConfigurationMapTest {
     Coordinates coords0 ;
     Coordinates coords1 ;
     Device dev0;
     Device dev1;
-    Role ap0;
-    Role ap1;
-    InstantMap instantMap;
+    Sniffer ap0;
+    Sniffer ap1;
+    ConfigurationMap ConfigurationMap;
 
 
     @Before
@@ -30,9 +30,9 @@ public class InstantMapTest {
         coords0 = new Coordinates(8.20609,172.71046);
         dev0 = new Device(new MacAddress(macdev0));
         dev1 = new Device(new MacAddress(macdev1));
-        instantMap = new InstantMap(Instant.now());
-        ap0 = new AccessPoint(dev0, "Wifi Ungs");
-        ap1 = new AccessPoint(dev1, "Campus");
+        ConfigurationMap = new ConfigurationMap();
+        ap0 = new Sniffer(dev0,100);
+        ap1 = new Sniffer(dev1,150);
 
 
     }
@@ -40,15 +40,15 @@ public class InstantMapTest {
 
     @Test
     public void addDevice(){
-        instantMap.register(ap0,coords0);
-        Assert.assertEquals(instantMap.getCoordinates(ap0), coords0);
+        ConfigurationMap.register(ap0,coords0);
+        Assert.assertEquals(ConfigurationMap.getCoordinates(ap0), coords0);
     }
 
     @Test
     public void removeDevice(){
-        instantMap.register(ap1,coords1);
-        instantMap.unregister(ap1);
-        Assert.assertNull(instantMap.getCoordinates(ap1));
+        ConfigurationMap.register(ap1,coords1);
+        ConfigurationMap.unregister(ap1);
+        Assert.assertNull(ConfigurationMap.getCoordinates(ap1));
 
 
     }
