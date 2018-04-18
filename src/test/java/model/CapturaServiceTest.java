@@ -7,7 +7,10 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
-import org.pcap4j.util.MacAddress;
+
+import model.device.Device;
+import model.device.MacAddress;
+import model.device.roles.AccessPoint;
 
 public class CapturaServiceTest {
 	
@@ -22,9 +25,26 @@ public class CapturaServiceTest {
     	
     	ArrayList<Captura> capturas;
     	
-//    	ma1 = new MacAdddress(4a:88:7f:41:12:47);
-//    	ma1 = new MacAdddress(46:ca:5b:68:c5:ec);
-//    	ma1 = new MacAdddress(f1:a4:d7:74:4c:09);	
+    	byte addra[] = {  0x4a, 0x08, 0x7f, 0x41, 0x12, 0x47 };
+    	byte addrc[] = {  0x46, 0xa, 0x5b, 0x68, 0x15, 0x4c };
+    	byte addre[] = {  0x4d, 0xa, 0x57, 0x4c, 0x4c, 0x09 };
+    	byte addrd[] = {  0x4d, 0xa, 0x57, 0x4c, 0x4c, 0x09 };
+
+    	
+    	byte d1[] = {  0x4d, 0xa, 0x57, 0x4c, 0x4c, 0x09 };     	 //access point a
+    	MacAddress ma1 = new MacAddress(d1);
+    	Device dev1 = new Device(ma1);
+    	AccessPoint a = new AccessPoint(dev1, "");
+    	
+    	byte d2[] = {  0x4d, 0xa, 0x57, 0x4c, 0x4c, 0x09 };			//access point b
+    	MacAddress ma2 = new MacAddress(d2);
+    	Device dev2 = new Device(ma2);
+    	AccessPoint b = new AccessPoint(dev2, "");
+    	
+    	byte d3[] = {  0x4d, 0xa, 0x57, 0x4c, 0x4c, 0x09 };			// access point d
+    	MacAddress ma3 = new MacAddress(d3);
+    	Device dev3 = new Device(ma3);
+    	AccessPoint d = new AccessPoint(dev3, "");
     }
 
 	@Ignore
