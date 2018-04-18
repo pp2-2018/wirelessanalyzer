@@ -1,4 +1,4 @@
-package PackageBuilder;
+package packageBuilder;
 
 import java.nio.ByteBuffer;
 

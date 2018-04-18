@@ -2,7 +2,7 @@ package model;
 
 import java.util.Arrays;
 
-import PackageBuilder.ByteSegment;
+import packageBuilder.ByteSegment;
 
 public class RawPackage {
 

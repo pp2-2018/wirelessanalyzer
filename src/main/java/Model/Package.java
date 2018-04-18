@@ -4,6 +4,7 @@ public class Package {
 
 	private TimeStamp timeStamp;
 	
+	
 	public Package(TimeStamp timeStamp) {
 	
 		this.timeStamp = timeStamp;
@@ -13,7 +14,5 @@ public class Package {
 	public TimeStamp getTimeStamp() {
 		return timeStamp;
 	}
-	
-	
 	
 }

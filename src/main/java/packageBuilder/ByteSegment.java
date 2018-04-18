@@ -1,4 +1,4 @@
-package PackageBuilder;
+package packageBuilder;
 
 public class ByteSegment {
 
