@@ -3,7 +3,7 @@ package model.device.roles;
 
 import model.device.Device;
 
-public class AccessPoint extends Role {
+public class AccessPoint extends Role { //TODO Un Access Point puede tener mas de una interfaz de red
 
     private String SSID;
 

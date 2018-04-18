@@ -1,22 +1,25 @@
 package negocio;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import model.Captura;
 import model.device.MacAddress;
 import model.device.roles.Sniffer;
 import model.Package;
 
-public class CapturasService {
+public class CapturasService { /*TODO Esta clase me parece que no está bien. Habría que ver una forma de poder
+    recuperar todas las cosas que tenemos propuestas en las Users Stories. Podríamos llamarlos criterios de
+    búsqueda?? Lo dudo por el hecho de que estamos buscando distintas cosas.*/
 	
-	ArrayList<Captura> capturas;	//esto está mal pero ehm
+	private List<Captura> capturas; //esto está mal pero ehm
 	
 	public CapturasService(ArrayList<Captura> capturas){
 		
 		this.capturas=capturas;
 	}
 	
-	public ArrayList<MacAddress> getMacAddressesDetectedBy(Sniffer sniffer){
+	public List<MacAddress> getMacAddressesDetectedBy(Sniffer sniffer){
 		
 		ArrayList<MacAddress> macAddresses = new ArrayList<MacAddress>();
 		
@@ -34,9 +37,8 @@ public class CapturasService {
 		return macAddresses;
 		
 	}
-	
-	
-	public ArrayList<Sniffer> getAPsQueDetectaron( MacAddress macAddress){
+
+	public List<Sniffer> getAPsQueDetectaron( MacAddress macAddress){
 		
 		ArrayList<Sniffer> aps = new ArrayList<Sniffer>();
 			
