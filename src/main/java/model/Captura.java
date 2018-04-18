@@ -20,7 +20,7 @@ public class Captura {
 		this.paquetes = new ArrayList<Package>();
 	}
 	
-	private void addPackages(Package paquete){
+	public void addPackages(Package paquete){
 		paquetes.add(paquete);
 		return;
 	}
