@@ -17,10 +17,6 @@ import java.util.stream.Collectors;
 public class JsonConverter<T> implements Converter<T> {
 
 
-    public T from(String JsonString){
-        InputStream stream = new ByteArrayInputStream(JsonString.getBytes(StandardCharsets.UTF_8));
-        return from(stream);
-    }
 
     public T from(InputStream JsonString){
             T parsed = null;
@@ -31,7 +27,7 @@ public class JsonConverter<T> implements Converter<T> {
             parsed = (T) JsonReader.jsonToJava(result);
         }
         catch (Exception e){
-            throw new UnknownFormatConversionException("The message that was attempted to parse" +
+            throw new UnknownFormatConversionException("The message that was attempted to be parsed" +
                     " appears to be corrupted or an incorrect class was specified");
         }
         return parsed;
@@ -46,6 +42,11 @@ public class JsonConverter<T> implements Converter<T> {
 
        return stream;
     }
+
+      /*  public T from(String JsonString){
+        InputStream stream = new ByteArrayInputStream(JsonString.getBytes(StandardCharsets.UTF_8));
+        return from(stream);
+    }*/
 
 }
 
