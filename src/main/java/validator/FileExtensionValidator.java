@@ -1,5 +1,7 @@
 package validator;
 
+import fileReader.WrongExtensionException;
+
 import java.io.File;
 
 public class FileExtensionValidator {//TODO Esto tiene que extender de alguna cosa que lea un archivo de configuracion
@@ -12,12 +14,16 @@ public class FileExtensionValidator {//TODO Esto tiene que extender de alguna co
         pattern = ".*\\.{0,1}" + extension;
     }
 
-    public boolean validateExtension(File file){
-        return this.validateExtension(file.getAbsoluteFile());
+    public boolean isValidExtension(File file) throws WrongExtensionException {
+        return this.isValidExtension(file.getAbsolutePath());
     }
 
-    public boolean validateExtension(String fileName){
+    public boolean isValidExtension(String fileName) throws WrongExtensionException{
+        boolean validation = fileName.matches(pattern);
 
-        return fileName.matches(pattern);
+        if(!validation)
+            throw new WrongExtensionException(extension);
+
+        return validation;
     }
 }

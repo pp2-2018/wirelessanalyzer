@@ -16,13 +16,13 @@ public class FileExtensionValidatorTest {
 
     @Test
     public void validatePcapExtension(){
-        assertTrue(validator.validateExtension("/home/test/.pcapwireless.pcap"));
+        assertTrue(validator.isValidExtension("/home/test/.pcapwireless.pcap"));
 
     }
 
     @Test
     public void validateWrongPcapExtension(){
-        assertFalse(validator.validateExtension("/home/test/.pcapwireless.pcap."));
+        assertFalse(validator.isValidExtension("/home/test/.pcapwireless.pcap."));
     }
 
 }
