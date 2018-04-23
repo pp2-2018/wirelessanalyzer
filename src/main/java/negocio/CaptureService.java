@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.Capture;
+import model.HistoriaMacAddress;
 import model.TimeFrame;
 import model.device.MacAddress;
 import model.device.roles.Sniffer;
@@ -53,12 +54,42 @@ public class CaptureService { /*TODO Esta clase me parece que no está bien. Hab
 						sniffers.add(c.getSniffer());
 
 
-
-
-
 		return sniffers;
 
 	}
+	
+	public List<HistoriaMacAddress> getRegistroDeCapturas (MacAddress macAddress, TimeFrame timeFrame){
+		
+		ArrayList<HistoriaMacAddress> historico = new ArrayList<HistoriaMacAddress>();
+		
+		for (Capture c : captures){
+			
+			for(Package p : c.getPackages()){
+				
+				if(timeFrame.contains(p.getTimeStamp()) && (p.getMacAddress().equals(macAddress))){
+					
+					for (HistoriaMacAddress h : historico){
+							
+						if(h.getFechaHora().equals(p.getTimeStamp())){		//parsear?
+								
+							h.addSniffer(c.getSniffer());
+						}
+						
+						else{
+							
+							HistoriaMacAddress historia = new HistoriaMacAddress();
+//							historia.setFechaHora(p.getTimeStamp().getUnixTime()); 		//parsear
+							historia.addSniffer(c.getSniffer());
+							historico.add(historia);
+						}
+					}
+				}	
+			}
+		}
+		
+	return historico;
+}
+
 
 	public List<Sniffer> getSniffersThatDetectedThis(MacAddress macAddress){
 		
