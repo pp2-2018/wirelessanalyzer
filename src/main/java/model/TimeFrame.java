@@ -36,7 +36,6 @@ public class TimeFrame {
 	}
 	public boolean contains(TimeStamp timeStamp){
 		Instant instant= Instant.ofEpochMilli(timeStamp.getUnixTime());
-		System.out.println(instant);
 		LocalDateTime dateTime = LocalDateTime.ofInstant(instant,ZoneId.systemDefault());
 
 		return contains(dateTime);

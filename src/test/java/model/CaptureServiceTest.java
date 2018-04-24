@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.Assert;
@@ -31,6 +32,9 @@ public class CaptureServiceTest {
 	MacAddress addrc;
 	MacAddress addre;
 	MacAddress addrd;
+
+	LocalDateTime start = LocalDateTime.of(2000, Month.JANUARY, 2, 13, 30, 0);
+	LocalDateTime end = LocalDateTime.of(2000, Month.MARCH, 1, 13, 30, 00);
 	
 	@Before
     public void setUp(){
@@ -123,27 +127,31 @@ public class CaptureServiceTest {
     	capturas2.add(cap4);
     	
     	///////////////////
-    	
+
     	capturas3 = new ArrayList<Capture>();				//array de capturas 3
+
+
     	
-    	Capture capUno = new Capture(a, LocalDateTime.of(2000, Month.JANUARY, 2, 13, 30, 00), LocalDateTime.of(2000, Month.MARCH, 1, 13, 30, 00));
+    	Capture capUno = new Capture(a, start, end);
     	
-    	Package packageUno = new Package(new TimeStamp(946771199));		//timestamp = 01/01/2000 23:59:59
+    	Package packageUno = new Package(new TimeStamp(start.plusDays(7)));		//timestamp = 01/01/2000 23:59:59
     	packageUno.setMacAddress(addra);
     	
-    	Package packageDos = new Package(new TimeStamp(951955201));		//timestamp = 02/03/2000 00:00:01
+    	Package packageDos = new Package(new TimeStamp(start.plusDays(14)));		//timestamp = 02/03/2000 00:00:01
     	packageDos.setMacAddress(addrc);
     	
-    	Package packageTres = new Package(new TimeStamp(946819860));	//timestamp = 02/01/2000 13:31:00
+    	Package packageTres = new Package(new TimeStamp(start.plusDays(20)));	//timestamp = 02/01/2000 13:31:00
     	packageTres.setMacAddress(addre);
     	
-    	Package packageCuatro = new Package(new TimeStamp(951917340));	//timestamp = 01/03/2000 13:29:00
+    	Package packageCuatro = new Package(new TimeStamp(start.plusDays(25)));	//timestamp = 01/03/2000 13:29:00
     	packageCuatro.setMacAddress(addrd);
     	
     	capUno.addPackages(packageUno);
     	capUno.addPackages(packageDos);
     	capUno.addPackages(packageTres);
     	capUno.addPackages(packageCuatro);
+
+    	capturas3.add(capUno);
     	
     	
     }
@@ -182,23 +190,21 @@ public class CaptureServiceTest {
 		Assert.assertTrue(capturasTest2.getSniffersThatDetectedThis(addrd).equals(array3));
 		
 	}
-	
+
 	@Test
 	public void getSniffersDetectedByThisTimeFrame(){
-		
-		TimeFrame timeframe = new TimeFrame(LocalDateTime.of(2000, Month.JANUARY, 2, 13, 30, 00), 
-				LocalDateTime.of(2000, Month.MARCH, 1, 13, 30, 00));
-		
-		CaptureService capturasTest3 = new CaptureService(capturas3);
-		
-		List<Sniffer> arrayVacio = new ArrayList<Sniffer>();
-		Assert.assertTrue(capturasTest3.getSniffersThatDetectedThisOnTimeFrame(addra, timeframe).equals(arrayVacio));
-		Assert.assertTrue(capturasTest3.getSniffersThatDetectedThisOnTimeFrame(addrc, timeframe).equals(arrayVacio));
-		
-		List<model.device.roles.Sniffer> arrayLleno = Arrays.asList(a);
-		
-//		Assert.assertTrue(capturasTest3.getSniffersThatDetectedThisOnTimeFrame(addre, timeframe).equals(arrayLleno));
-//		Assert.assertTrue(capturasTest3.getSniffersThatDetectedThisOnTimeFrame(addrd, timeframe).equals(arrayLleno));
+		TimeFrame timeframe = new TimeFrame(start,end);
+		CaptureService service = new CaptureService(capturas3);
+		ArrayList<Sniffer> sniffersThatDetected = new ArrayList<Sniffer>(service.getSniffersThatDetectedThisOnTimeFrame(addra,timeframe));
+		Assert.assertEquals(sniffersThatDetected,Collections.singletonList(a));
+
+		TimeFrame timeframe2 = new TimeFrame(start.plusYears(1),end.plusYears(1));
+		ArrayList<Sniffer> sniffersThatDetected2 = new ArrayList<Sniffer>(service.getSniffersThatDetectedThisOnTimeFrame(addra,timeframe2));
+
+		Assert.assertNotEquals(sniffersThatDetected2,Collections.singletonList(a));
+
 	}
+
+
 
 }

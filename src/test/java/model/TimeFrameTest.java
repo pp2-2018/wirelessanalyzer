@@ -1,7 +1,6 @@
 package model;
 
-import java.time.LocalDateTime;
-import java.time.Month;
+import java.time.*;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -38,7 +37,7 @@ public class TimeFrameTest {
 
 
 	@Test
-	public void estaEnIntervalo() {
+	public void estaEnIntervaloLocalDateTime() {
 		
 		Assert.assertFalse(timeFrame.contains(antesDeFechaInicio));
 		Assert.assertFalse(timeFrame.contains(despuesDeFechaInicio));
@@ -50,5 +49,24 @@ public class TimeFrameTest {
 		Assert.assertTrue(timeFrame.contains(fin));
 		
 	}
+
+	@Test
+	public void estaEnIntervaloTimeStamp() {
+		Instant instant = Instant.now(); //can be LocalDateTime
+		ZoneId systemZone = ZoneId.systemDefault(); // my timezone
+		ZoneOffset currentOffsetForMyZone = systemZone.getRules().getOffset(instant);
+
+		Assert.assertFalse(timeFrame.contains(new TimeStamp(antesDeFechaInicio.toInstant(currentOffsetForMyZone))));
+
+		Assert.assertFalse(timeFrame.contains(new TimeStamp(despuesDeFechaInicio.toInstant(currentOffsetForMyZone))));
+
+		Assert.assertFalse(timeFrame.contains(new TimeStamp(unMsAntes.toInstant(currentOffsetForMyZone))));
+		Assert.assertFalse(timeFrame.contains(new TimeStamp(unMsDespues.toInstant(currentOffsetForMyZone))));
+
+		Assert.assertTrue(timeFrame.contains(new TimeStamp(inicio.toInstant(currentOffsetForMyZone))));
+		Assert.assertTrue(timeFrame.contains(new TimeStamp(fin.toInstant(currentOffsetForMyZone))));
+
+	}
+
 
 }
