@@ -1,5 +1,6 @@
 package validator;
 
+import fileReader.WrongExtensionException;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -16,13 +17,21 @@ public class FileExtensionValidatorTest {
 
     @Test
     public void validatePcapExtension(){
-        assertTrue(validator.isValidExtension("/home/test/.pcapwireless.pcap"));
+        try {
+            assertTrue(validator.isValidExtension("/home/test/.pcapwireless.pcap"));
+        } catch (WrongExtensionException e) {
+            e.printStackTrace();
+        }
 
     }
 
     @Test
     public void validateWrongPcapExtension(){
-        assertFalse(validator.isValidExtension("/home/test/.pcapwireless.pcap."));
+        try {
+            assertFalse(validator.isValidExtension("/home/test/.pcapwireless.pcap."));
+        } catch (WrongExtensionException e) {
+            e.printStackTrace();
+        }
     }
 
 }
