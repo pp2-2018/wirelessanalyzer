@@ -3,6 +3,7 @@ package pipeAndFilter.impl;
 import java.util.LinkedList;
 import java.util.Queue;
 
+import exceptions.PipeClosedException;
 import pipeAndFilter.Pipe;
 
 public class QueuePipe<T> implements Pipe<T>{
@@ -23,7 +24,7 @@ public class QueuePipe<T> implements Pipe<T>{
     public void accept(T t){
         
         if (this.isClosed)
-            throw new RuntimeException("Pipe closed.");
+            throw new PipeClosedException();
             
         this.queue.add(t);
         
@@ -32,12 +33,15 @@ public class QueuePipe<T> implements Pipe<T>{
     
     public T retireve(){
         
+    	if (!this.canRetrieve())
+            throw new PipeClosedException();
+    	
         return this.queue.poll();
         
     }
     
     public boolean canRetrieve(){
-        if(this.isClosed && this.queue.element() == null)
+        if(this.isClosed && this.queue.isEmpty())
             return false;
         return true;
     }
