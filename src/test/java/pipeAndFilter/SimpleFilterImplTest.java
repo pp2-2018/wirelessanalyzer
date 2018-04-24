@@ -2,8 +2,11 @@ package pipeAndFilter;
 
 import static org.mockito.Mockito.*;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 
+import pipeAndFilter.impl.QueuePipe;
 import pipeAndFilter.impl.SimpleFilterImpl;
 
 public class SimpleFilterImplTest {
@@ -11,12 +14,14 @@ public class SimpleFilterImplTest {
 	@Test
 	public void test() {
 		
+		Pipe<String> input = new QueuePipe<>();
+		Pipe<Integer> output = new QueuePipe<>();
+		
 		SimpleFilterImpl<String, Integer> filter = mock(SimpleFilterImpl.class);
-		when(filter.transform(anyString())).thenReturn(2);
 		
-		filter.transform("2");
+		filter.transform(input, output);
 		
-		verify(filter, times(1)).transform(anyString());
+		verify(filter, times(1)).transform(input, output);
 		
 	}
 	

@@ -1,5 +1,7 @@
 package pipeAndFilter.impl;
 
+import java.util.List;
+
 import pipeAndFilter.Pipe;
 import pipeAndFilter.SimpleFilter;
 
@@ -14,17 +16,12 @@ public abstract class SimpleFilterImpl<I, O> implements SimpleFilter<I, O>{
         this.outputPipe = outputPipe;
         
     }
-    
-    
-    public abstract O transform(I input);
 
     public void process(){
         
         if(this.inputPipe.canRetrieve()){
         
-            O output = transform(this.inputPipe.retireve());
-        
-            this.outputPipe.accept(output);
+            this.transform(inputPipe, outputPipe);
         }
         
         else{

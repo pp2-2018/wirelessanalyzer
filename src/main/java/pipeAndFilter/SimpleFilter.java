@@ -1,9 +1,9 @@
 package pipeAndFilter;
 
-public interface SimpleFilter<I,O> {
+import java.util.List;
 
-    public O transform(I input);
+public interface SimpleFilter<I,O> extends Processable {
 
-    void process();
+    public void transform(Pipe<I> input, Pipe<O> output);
 
 }
