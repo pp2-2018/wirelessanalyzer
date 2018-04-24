@@ -25,5 +25,12 @@ public class Package {
 	public void setMacAddress(MacAddress macAddress) {
 		this.macAddress = macAddress;
 	}
-	
+
+	@Override
+	public String toString() {
+		return "Package{" +
+				"timeStamp=" + timeStamp +
+				", macAddress=" + macAddress +
+				'}';
+	}
 }

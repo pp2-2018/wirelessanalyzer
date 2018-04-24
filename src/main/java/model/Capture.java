@@ -53,4 +53,11 @@ public class Capture {
 		this.end = end;
 	}
 
+	@Override
+	public String toString() {
+		return "Capture{" +
+				"Sniffer=" + Sniffer +
+				", packages=" + packages +
+				'}'+"\n";
+	}
 }

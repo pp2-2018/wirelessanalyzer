@@ -2,11 +2,10 @@ package model;
 
 import java.time.LocalDateTime;
 import java.time.Month;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
+
+import javafx.util.Pair;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -155,10 +154,32 @@ public class CaptureServiceTest {
     	
     	
     }
+	@Test
+	public void amountOfDetectionsPerSniffer() {
+	    ArrayList<Capture> test = new ArrayList<>(capturas2);
+	    test.addAll(capturas3);
+		CaptureService service = new CaptureService(test);
+
+        ArrayList<Pair<Sniffer,Integer>> expected = new ArrayList<>();
+        expected.add(new Pair<>(a,3));
+        expected.add(new Pair<>(b,2));
+        expected.add(new Pair<>(e,2));
+        expected.add(new Pair<>(c,1));
+
+        ArrayList<Pair<Sniffer,Integer>> result = service.amountOfDetectionsPerSniffer();
+        Assert.assertEquals(expected,result);
+        
+
+
+	}
+
+
+
+
 
 	@Test
 	public void getMacAddressesDetectedBy() {
-		
+
 		CaptureService capturasTest = new CaptureService(captures);
 		
 		List<MacAddress> arrayb = Arrays.asList(addra, addrc, addre);

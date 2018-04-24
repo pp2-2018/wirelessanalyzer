@@ -25,4 +25,9 @@ public class Device {
 
         return Objects.hash(mac);
     }
+
+    @Override
+    public String toString() {
+        return mac.toString();
+    }
 }

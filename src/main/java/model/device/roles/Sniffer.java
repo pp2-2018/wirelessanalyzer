@@ -17,10 +17,7 @@ public class Sniffer extends Role {
 
     @Override
     public String toString() {
-        return "Sniffer{" +
-                "rangeInMeters=" + rangeInMeters +
-                ", device=" + device +
-                '}';
+        return "Sniffer: "+device.toString();
     }
 
 
