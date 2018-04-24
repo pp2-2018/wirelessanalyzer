@@ -38,6 +38,16 @@ public class QueuePipeTest {
         Assert.assertFalse(pipe.canRetrieve());
     }
     
+    @Test
+    public void isClosedTest() {
+    	QueuePipe<String> pipe = new QueuePipe<>();
+        
+    	Assert.assertFalse(pipe.isClosed());
+        pipe.closeForWritting();
+    	Assert.assertTrue(pipe.isClosed());
+        
+    }
+    
     @Test(expected=PipeClosedException.class)
     public void retrieveWhenCantTest() {
     	QueuePipe<String> pipe = new QueuePipe<>();
@@ -61,6 +71,5 @@ public class QueuePipeTest {
 
         pipe.accept("Element3");
     }
-    
     
 }
