@@ -38,8 +38,12 @@ public class QueuePipe<T> implements Pipe<T>{
     
     public boolean canRetrieve(){
         if(this.isClosed && this.queue.element() == null)
-            return true;
-        return false
+            return false;
+        return true;
+    }
+    
+    public boolean isClosed(){
+        return this.isClosed;
     }
     
 }

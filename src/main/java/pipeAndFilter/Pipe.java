@@ -9,5 +9,7 @@ public interface Pipe<T> {
     public void closeForWritting();
     
     public boolean canRetrieve();
+    
+    public boolean isClosed();
 
 }
