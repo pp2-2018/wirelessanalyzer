@@ -4,6 +4,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+//import sun.invoke.WrapperInstance;
 import validator.FileExtensionValidator;
 
 import java.io.File;
@@ -28,7 +29,7 @@ public class PcapFileLoaderTest {
     }
 
     @Ignore //FIXME No funciona
-    @Test(expected = WrongExtensionException.class)
+   //@Test(expected = WrongExtensionException.class)
     public void wrongExceptionTest(){
         File file = new File("test-files" + File.separator + "test-capture.txt");
         String extension = "pcap";
