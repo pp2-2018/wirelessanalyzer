@@ -11,5 +11,7 @@ public interface Pipe<T> {
     public boolean canRetrieve();
     
     public boolean isClosed();
+    
+    public boolean isEmpty();
 
 }

@@ -21,12 +21,12 @@ public class PcapFileReaderGenerator extends GeneratorImpl<String>{
 	}
 	
 	@Override
-	public String generate() {
+	public void put(Pipe<String> output) {
 		
 		PcapFileReader fileReader = new PcapFileReader(files.get(index));
 		index++;
 		
-		return fileReader.read();
+		output.accept(fileReader.read());
 		
 	}
 

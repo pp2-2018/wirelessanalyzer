@@ -10,15 +10,13 @@ public abstract class GeneratorImpl<O> implements Generator<O>{
 	public GeneratorImpl(Pipe<O> outputPipe) {
 		this.outputPipe = outputPipe;
 	}
-
 	
 	@Override
 	public void process() {
 		if(this.canGenerate()){
 	        
-            O output = generate();
-        
-            this.outputPipe.accept(output);
+			put(outputPipe);
+            
         }
         
         else{

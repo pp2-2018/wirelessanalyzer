@@ -49,5 +49,10 @@ public class QueuePipe<T> implements Pipe<T>{
     public boolean isClosed(){
         return this.isClosed;
     }
+
+	@Override
+	public boolean isEmpty() {
+		return this.queue.isEmpty();
+	}
     
 }
