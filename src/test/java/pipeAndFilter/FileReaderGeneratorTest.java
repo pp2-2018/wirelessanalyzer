@@ -33,7 +33,8 @@ public class FileReaderGeneratorTest {
 		
 		List<Processable> procesabbles = new ArrayList<>();
 		
-		PcapFileReaderGenerator generator = new PcapFileReaderGenerator(pipe1, Arrays.asList(new File[]{new File(".\\test-files\\three-32bytes-pacages.pcap")}));
+		PcapFileReaderGenerator generator = new PcapFileReaderGenerator(pipe1, Arrays.asList(
+				new File[]{new File(".#test-files#three-32bytes-pacages.pcap".replaceAll("\\#", "\\" + File.separator))}));
 		StringToHexFilter filter1 = new StringToHexFilter(pipe1, pipe2);
 		RawPackage32BytesFilter filter2 = new RawPackage32BytesFilter(pipe2, pipe3);
 		
