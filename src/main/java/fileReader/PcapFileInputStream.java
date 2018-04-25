@@ -37,9 +37,13 @@ public class PcapFileInputStream extends FileInputStream{
 
         String line = "";
 
-        while(!fileLineReader.ifEof())
-                line += fileLineReader.readLine();
-        System.out.println(line);
+        while(!fileLineReader.ifEof()) {
+        		String ln = fileLineReader.readLine();
+
+            	line += ln == null? "" : ln;
+            
+        	}
+        
         byte[] temp = hexToByte.convert(line);
 
         copyElements(temp, b);

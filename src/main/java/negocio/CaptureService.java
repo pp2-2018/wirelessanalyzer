@@ -3,14 +3,13 @@ package negocio;
 import java.util.*;
 import java.util.stream.Stream;
 
-
-import javafx.util.Pair;
 import model.Capture;
 import model.HistoriaMacAddress;
 import model.TimeFrame;
 import model.device.MacAddress;
 import model.device.roles.Sniffer;
 import model.Package;
+import model.Pair;
 
 
 
