@@ -8,10 +8,9 @@ import java.util.List;
 import org.junit.Test;
 
 import model.RawPackage;
-import pipeAndFilter.filters.fileReader.PcapFileReaderGenerator;
+import pipeAndFilter.filters.fileReader.PcapFileInputStreamGenerator;
 import pipeAndFilter.filters.printSink.PrintSink;
 import pipeAndFilter.filters.rawPackageFilter.RawPackage32BytesFilter;
-import pipeAndFilter.filters.stringToHexFilter.StringToHexFilter;
 import pipeAndFilter.impl.PipeSystem;
 import pipeAndFilter.impl.QueuePipe;
 
@@ -23,26 +22,22 @@ public class FileReaderGeneratorTest {
 		
 		PipeSystem pipeSystem = new PipeSystem();
 		
-		Pipe<String> pipe1 = new QueuePipe<>();
-		Pipe<byte[]> pipe2 = new QueuePipe<>();
-		Pipe<RawPackage> pipe3 = new QueuePipe<>();
+		Pipe<byte[]> pipe1 = new QueuePipe<>();
+		Pipe<RawPackage> pipe2 = new QueuePipe<>();
 		
 		pipeSystem.addPipe(pipe1);
 		pipeSystem.addPipe(pipe2);
-		pipeSystem.addPipe(pipe3);
 		
 		List<Processable> procesabbles = new ArrayList<>();
 		
-		PcapFileReaderGenerator generator = new PcapFileReaderGenerator(pipe1, Arrays.asList(
+		PcapFileInputStreamGenerator generator = new PcapFileInputStreamGenerator(pipe1, Arrays.asList(
 				new File[]{new File(".#test-files#three-32bytes-pacages.pcap".replaceAll("\\#", "\\" + File.separator))}));
-		StringToHexFilter filter1 = new StringToHexFilter(pipe1, pipe2);
-		RawPackage32BytesFilter filter2 = new RawPackage32BytesFilter(pipe2, pipe3);
+		RawPackage32BytesFilter filter1 = new RawPackage32BytesFilter(pipe1, pipe2);
 		
-		PrintSink<RawPackage> sink = new PrintSink<RawPackage>(pipe3, p -> p.toString());
+		PrintSink<RawPackage> sink = new PrintSink<RawPackage>(pipe2, p -> p.toString());
 
 		procesabbles.add(generator);
 		procesabbles.add(filter1);
-		procesabbles.add(filter2);
 		procesabbles.add(sink);
 		
 		while(pipeSystem.canRetrieveForSomeone()) {
