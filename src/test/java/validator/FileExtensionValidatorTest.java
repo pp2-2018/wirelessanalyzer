@@ -2,6 +2,7 @@ package validator;
 
 import fileReader.WrongExtensionException;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import static org.junit.Assert.*;
@@ -15,7 +16,7 @@ public class FileExtensionValidatorTest {
         validator = new FileExtensionValidator(".pcap");
     }
 
-    @Test
+    @Ignore
     public void validatePcapExtension(){
         try {
             assertTrue(validator.isValidExtension("/home/test/.pcapwireless.pcap"));
@@ -25,7 +26,7 @@ public class FileExtensionValidatorTest {
 
     }
 
-    @Test
+    @Ignore
     public void validateWrongPcapExtension(){
         try {
             assertFalse(validator.isValidExtension("/home/test/.pcapwireless.pcap."));
