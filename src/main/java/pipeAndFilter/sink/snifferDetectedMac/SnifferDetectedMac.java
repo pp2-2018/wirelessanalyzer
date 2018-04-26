@@ -2,23 +2,23 @@ package pipeAndFilter.sink.snifferDetectedMac;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Observable;
-import java.util.Observer;
 
 import model.Capture;
 import model.Package;
 import model.device.MacAddress;
 import model.device.roles.Sniffer;
 import negocio.AnalyticsObserver;
+import negocio.iface.Obserbable;
+import negocio.iface.Observer;
 import pipeAndFilter.Pipe;
 import pipeAndFilter.impl.SinkImpl;
 
-public class SnifferDetectedMac extends SinkImpl<Capture>{
+public class SnifferDetectedMac extends SinkImpl<Capture> implements Obserbable<negocio.iface.AnalyticsObserver>{
 
 	private List<Capture> buffer;
 	private List<Sniffer> sniffer;
 	private MacAddress macAddress;
-	private Observable observableComposite;
+	private List<negocio.iface.AnalyticsObserver> observers;
 	
 	public SnifferDetectedMac(Pipe<Capture> inputPipe, MacAddress macAddress) {
 		super(inputPipe);
@@ -26,8 +26,7 @@ public class SnifferDetectedMac extends SinkImpl<Capture>{
 		buffer = new ArrayList<>();
 		this.macAddress = macAddress;
 		this.sniffer = new ArrayList<Sniffer>();
-		this.observableComposite = new Observable();
-		
+		this.observers = new ArrayList<>();
 	}
 
 	@Override
@@ -43,33 +42,36 @@ public class SnifferDetectedMac extends SinkImpl<Capture>{
 	}
 	
 	private void createSnifferList() {
-		
 		for (Capture c : buffer){
 			
 			for (Package p : c.getPackages()){
-				
 				if (p.getMacAddress().equals(macAddress)){
-					
 					sniffer.add(c.getSniffer());
 					
 				}
 			}
 		}
 		
-		this.observableComposite.notifyObservers();
-	}
-	
-	public void addObserver(Observer o) {
-		this.observableComposite.addObserver(o);
+		this.notifyAllObservers();
 	}
 
 	public List<Sniffer> getSniffers() {
 		return sniffer;
 	}
-	
-	public void retrieveData(AnalyticsObserver observer) {
+
+	@Override
+	public void addObserver(negocio.iface.AnalyticsObserver o) {
 		
-		observer.putData(this.getSniffers());
+		this.observers.add(o);
+		
+	}
+
+	@Override
+	public void notifyAllObservers() {
+		
+		for (negocio.iface.AnalyticsObserver o : observers) {
+			o.update(this);
+		}
 		
 	}
 
