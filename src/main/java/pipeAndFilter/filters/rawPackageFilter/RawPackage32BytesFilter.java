@@ -9,13 +9,13 @@ import pipeAndFilter.Pipe;
 import pipeAndFilter.impl.SimpleFilterImpl;
 import rawPacageFactory.RawPacageFactory;
 
-public class RawPackage32BytesFilter extends SimpleFilterImpl<byte[], RawPackage>{
+public class RawPackage32BytesFilter extends SimpleFilterImpl<Byte, RawPackage>{
 
 	private List<Byte> byteBuffer;
 	private int byteQuantity;
 	private RawPacageFactory rawPacageFactory;
 	
-	public RawPackage32BytesFilter(Pipe<byte[]> inputPipe, Pipe<RawPackage> outputPipe) {
+	public RawPackage32BytesFilter(Pipe<Byte> inputPipe, Pipe<RawPackage> outputPipe) {
 		super(inputPipe, outputPipe);
 
 		this.byteQuantity = 32;
@@ -25,25 +25,23 @@ public class RawPackage32BytesFilter extends SimpleFilterImpl<byte[], RawPackage
 	}
 
 	@Override
-	public void transform(Pipe<byte[]> input, Pipe<RawPackage> output) {
+	public void transform(Pipe<Byte> input, Pipe<RawPackage> output) {
 		
-		while(!input.isEmpty()) {
 			
-			byte[] inputArray = input.retireve();
+		Byte inputByte = input.retireve();
+		
+		if(inputByte.byteValue() == (byte)0xcc) {
+			RawPackage rawPackage = rawPacageFactory.getFromList(byteBuffer);
+			output.accept(rawPackage);
 			
-			for(byte b : inputArray) {
-				byteBuffer.add(b);
-				
-				if(byteBuffer.size() == byteQuantity) {
-					RawPackage rawPackage = rawPacageFactory.getFromList(byteBuffer);
-					output.accept(rawPackage);
-					
-					byteBuffer.clear();
-					
-				}
-			}
+			byteBuffer.clear();
+			
 		}
-		
+		else {
+
+			byteBuffer.add(inputByte);
+		}
+
 	}
 
 }

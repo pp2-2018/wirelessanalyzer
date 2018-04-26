@@ -13,6 +13,13 @@ public class Package {
 		this.timeStamp = timeStamp;
 		
 	}
+	
+	public Package(TimeStamp timeStamp, MacAddress mac) {
+		
+		this.timeStamp = timeStamp;
+		this.macAddress = mac;
+		
+	}
 
 	public TimeStamp getTimeStamp() {
 		return timeStamp;

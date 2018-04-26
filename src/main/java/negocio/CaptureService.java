@@ -177,7 +177,6 @@ public class CaptureService { /*TODO Esta clase me parece que no está bien. Hab
 	return historico;
 }
 
-
 	public List<Sniffer> getSniffersThatDetectedThis(MacAddress macAddress){
 		
 		ArrayList<Sniffer> aps = new ArrayList<Sniffer>();

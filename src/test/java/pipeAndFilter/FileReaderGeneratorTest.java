@@ -22,7 +22,7 @@ public class FileReaderGeneratorTest {
 		
 		PipeSystem pipeSystem = new PipeSystem();
 		
-		Pipe<byte[]> pipe1 = new QueuePipe<>();
+		Pipe<Byte> pipe1 = new QueuePipe<>();
 		Pipe<RawPackage> pipe2 = new QueuePipe<>();
 		
 		pipeSystem.addPipe(pipe1);
@@ -34,7 +34,7 @@ public class FileReaderGeneratorTest {
 				new File[]{new File(".#test-files#three-32bytes-pacages.pcap".replaceAll("\\#", "\\" + File.separator))}));
 		RawPackage32BytesFilter filter1 = new RawPackage32BytesFilter(pipe1, pipe2);
 		
-		PrintSink<RawPackage> sink = new PrintSink<RawPackage>(pipe2, p -> p.toString());
+		PrintSink<RawPackage> sink = new PrintSink<RawPackage>(pipe2, p -> p.getByteAt(0) + "");
 
 		procesabbles.add(generator);
 		procesabbles.add(filter1);
