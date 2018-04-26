@@ -34,7 +34,7 @@ public class PcapFileInputStreamGenerator extends GeneratorImpl<Byte>{
 			
 			int filebyte = fileReader.read();
 			
-			if(fileReader.available() > 0) {
+			if(fileReader.available() >= 0) {
 
 				Byte b = Byte.valueOf((byte)filebyte);
 				output.accept(b);

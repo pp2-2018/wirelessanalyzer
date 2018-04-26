@@ -17,8 +17,10 @@ public abstract class SinkImpl<I> implements Sink<I>{
 	@Override
 	public void process() {
 		
-	        
-		take(inputPipe);
+		if(!inputPipe.isEmpty()) {
+			take(inputPipe);
+			
+		}
 		
 	}
 

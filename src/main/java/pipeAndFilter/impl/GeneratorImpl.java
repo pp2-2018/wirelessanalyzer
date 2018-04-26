@@ -14,7 +14,6 @@ public abstract class GeneratorImpl<O> implements Generator<O>{
 	@Override
 	public void process() {
 		if(this.canGenerate()){
-	        
 			put(outputPipe);
             
         }
