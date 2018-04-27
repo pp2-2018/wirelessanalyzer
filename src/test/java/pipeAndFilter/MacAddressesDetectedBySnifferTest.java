@@ -20,7 +20,7 @@ import pipeAndFilter.impl.PipeSystem;
 import pipeAndFilter.impl.QueuePipe;
 import pipeAndFilter.sink.MacAddressesDetectedBySniffer.MacAddressesDetectedBySniffer;
 
-public class MacAddressesDetectedBySnifferTes {
+public class MacAddressesDetectedBySnifferTest {
 	
 	TimeFrame timeFrame;
 	Package package1;
