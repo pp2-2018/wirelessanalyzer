@@ -31,6 +31,18 @@ public class PcapFileInputStream extends FileInputStream{
         fileLineReader = new FileLineReader(reader);
         hexToByte = new HexStringToByteArray();
     }
+    
+    
+    @Override
+    public int read() throws IOException {
+    	 
+    	int b1 = super.read();
+    	int b2 = super.read();
+    	
+    	System.out.println(((char)b1 + "" + (char)b2));
+    	
+        return Integer.parseInt(((char)b1 + "" + (char)b2), 16);
+    }
 
     @Override
     public int read(byte[] b){
