@@ -6,6 +6,7 @@ import java.time.ZoneOffset;
 import java.util.*;
 
 
+import negocio.AnalyticsObserver;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -22,6 +23,8 @@ import pipeAndFilter.filters.rawPackageFilter.PackageByTimeFrameFilter;
 import pipeAndFilter.filters.rawPackageFilter.PackageToSnifferFilter;
 import pipeAndFilter.impl.PipeSystem;
 import pipeAndFilter.impl.QueuePipe;
+import pipeAndFilter.impl.SinkImpl;
+import pipeAndFilter.sink.Test.TestSink;
 
 public class CaptureServiceTest {
 	
@@ -305,10 +308,20 @@ public class CaptureServiceTest {
 		PackageToSnifferFilter packageToSnifferFilter = new PackageToSnifferFilter
 				(pipe4,pipe5);
 
+
+		TestSink<Sniffer> testSink = new TestSink<>(pipe5,s -> s.equals(a));
+		testSink.addObserver(new negocio.iface.AnalyticsObserver() {
+			@Override
+			public void update(SinkImpl observable) {
+				Assert.assertTrue(testSink.isResult());  //ASSERT
+			}
+		});
+
 		procesabbles.add(captureToPackageFilter);
 		procesabbles.add(packageByTimeFrameFilter);
 		procesabbles.add(packageByMacAddressFilter);
 		procesabbles.add(packageToSnifferFilter);
+		procesabbles.add(testSink);
 
 
 		for (Capture cap :
@@ -316,17 +329,13 @@ public class CaptureServiceTest {
 			pipe1.accept(cap);
 
 		}
-		for (int i = 0; i <capturas3.size() ; i++) {
-			captureToPackageFilter.process();
+		pipe1.closeForWritting();
+		while(pipeSystem.canRetrieveForSomeone()) {
+			for (Processable processable : procesabbles) {
+				processable.process();
+			}
 		}
-		packageByTimeFrameFilter.process();
-		packageByMacAddressFilter.process();
-		packageToSnifferFilter.process();
 
-		ArrayList<Sniffer> ret = new ArrayList<>();
-		ret.add(pipe5.retireve());
-
-		Assert.assertEquals(Collections.singletonList(a),ret);
 
 	}
 
