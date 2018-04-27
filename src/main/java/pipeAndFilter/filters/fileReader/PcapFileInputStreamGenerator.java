@@ -5,6 +5,7 @@ import java.io.FileDescriptor;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import fileReader.PcapFileInputStream;
@@ -27,15 +28,21 @@ public class PcapFileInputStreamGenerator extends GeneratorImpl<Byte>{
 		
 	}
 	
+	public PcapFileInputStreamGenerator(Pipe<Byte> outputPipe, File file) {
+		
+		this(outputPipe, Arrays.asList( new File[] {file}));
+		
+	}
+	
 	@Override
 	public void put(Pipe<Byte> output) {
 		
 		try {
 			
-			int filebyte = fileReader.read();
 			
-			if(fileReader.available() >= 0) {
+			if(fileReader.available() > 0) {
 
+				int filebyte = fileReader.read();
 				Byte b = Byte.valueOf((byte)filebyte);
 				output.accept(b);
 				}
@@ -55,7 +62,7 @@ public class PcapFileInputStreamGenerator extends GeneratorImpl<Byte>{
 	@Override
 	public boolean canGenerate() {
 		try {
-			return this.index <= files.size() && fileReader.available() > 0;
+			return this.index < files.size() || fileReader.available() > 0;
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

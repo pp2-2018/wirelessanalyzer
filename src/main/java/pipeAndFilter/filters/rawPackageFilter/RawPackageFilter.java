@@ -9,17 +9,15 @@ import pipeAndFilter.Pipe;
 import pipeAndFilter.impl.SimpleFilterImpl;
 import rawPacageFactory.RawPacageFactory;
 
-public class RawPackage32BytesFilter extends SimpleFilterImpl<Byte, RawPackage>{
+public class RawPackageFilter extends SimpleFilterImpl<Byte, RawPackage>{
 
 	private List<Byte> byteBuffer;
-	private int byteQuantity;
 	private RawPacageFactory rawPacageFactory;
 	
-	public RawPackage32BytesFilter(Pipe<Byte> inputPipe, Pipe<RawPackage> outputPipe) {
+	public RawPackageFilter(Pipe<Byte> inputPipe, Pipe<RawPackage> outputPipe) {
 		super(inputPipe, outputPipe);
 
-		this.byteQuantity = 32;
-		this.byteBuffer = new ArrayList<Byte>(byteQuantity);
+		this.byteBuffer = new ArrayList<Byte>(32);
 		
 		this.rawPacageFactory = new RawPacageFactory();
 	}
