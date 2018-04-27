@@ -15,6 +15,7 @@ public class PairTest {
 		Pair<Integer, String> p4= new Pair<Integer, String>(1, "a");
 		Pair<Integer, String> p5= new Pair<Integer, String>(null, null);
 		
+		assertEquals(p1, p1);
 		assertEquals(p1, p4);
 		assertNotEquals(p2, p1);
 		assertNotEquals(p3, p1);
