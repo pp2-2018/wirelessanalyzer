@@ -6,14 +6,15 @@ import java.util.function.Function;
 
 import negocio.iface.AnalyticsObserver;
 import negocio.iface.Obserbable;
+import negocio.iface.TestObserver;
 import pipeAndFilter.Pipe;
 import pipeAndFilter.Sink;
 import pipeAndFilter.impl.SinkImpl;
 
-public class TestSink<T> extends SinkImpl<T> implements Obserbable<AnalyticsObserver> {
+public class TestSink<T> extends SinkImpl<T> implements Obserbable<TestObserver>{
 
     private Function<T, Boolean> toStringFunction;
-    private List<AnalyticsObserver> observers;
+    private List<TestObserver> observers;
     boolean result = false;
 
     public TestSink(Pipe<T> inputPipe, Function<T, Boolean> toStringFunction) {
@@ -38,16 +39,17 @@ public class TestSink<T> extends SinkImpl<T> implements Obserbable<AnalyticsObse
 
 
     @Override
-    public void addObserver(AnalyticsObserver o) {
+    public void addObserver(TestObserver o) {
         this.observers.add(o);
     }
 
     @Override
     public void notifyAllObservers() {
 
-        for (negocio.iface.AnalyticsObserver o : observers) {
+        for (TestObserver o : observers) {
             o.update(this);
         }
 
     }
+
 }

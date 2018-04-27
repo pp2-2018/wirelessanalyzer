@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 
 public class AndExpressionTest {
 
-    private Expression<RawPackage> andExpression;
+    private AndExpression<RawPackage> andExpression;
     private RawPackage expression = new RawPackage(new byte[]{0x40, (byte)0xa3, 0x15, (byte)0x9c, (byte)0x80});
 
     @Test
@@ -38,6 +38,17 @@ public class AndExpressionTest {
 
         assertFalse(andExpression.interpret(expression));
 
+    }
+    
+    @Test 
+    public void addExpressionTest() {
+        Expression<RawPackage> expression1 = new ByteInOffsetExpression((byte)0x0, (byte)0x4);
+        Expression<RawPackage> expression2 = new ByteInOffsetExpression((byte)0x4, (byte)0x10);
+        andExpression = new AndExpression<RawPackage>(expression1);
+
+        andExpression = andExpression.addExpresion(expression2);
+        
+        assertFalse(andExpression.interpret(expression));
     }
 
 }
