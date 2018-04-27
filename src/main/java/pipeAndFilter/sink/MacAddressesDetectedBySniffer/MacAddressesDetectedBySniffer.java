@@ -51,7 +51,7 @@ public class MacAddressesDetectedBySniffer extends SinkImpl<Capture> implements 
 			}
 		}
 		
-		this.notifyAllObservers();
+		//this.notifyAllObservers();
 	}
 	
 	public List<MacAddress> getMacs() {
@@ -61,16 +61,14 @@ public class MacAddressesDetectedBySniffer extends SinkImpl<Capture> implements 
 	@Override
 	public void notifyAllObservers() {
 		
-		for (negocio.iface.AnalyticsObserver o : observers) {
-//			o.update(this);
-		}
+		//throw new RuntimeException("NOT IMPLMENTED");
 		
 	}
 
 	@Override
 	public void addObserver(negocio.iface.AnalyticsObserver o) {
 		
-		this.observers.add(o);
+		//this.observers.add(o);
 		
 	}
 
