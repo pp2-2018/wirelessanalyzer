@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import exceptions.CannotReadFileException;
 import fileReader.PcapFileInputStream;
 import pipeAndFilter.Pipe;
 import pipeAndFilter.impl.GeneratorImpl;
@@ -54,7 +55,7 @@ public class PcapFileInputStreamGenerator extends GeneratorImpl<Byte>{
 			
 		} catch (IOException e1) {
 
-			e1.printStackTrace();
+			throw new CannotReadFileException(files.get(index).getAbsolutePath());
 		}
 
 	}
@@ -74,7 +75,8 @@ public class PcapFileInputStreamGenerator extends GeneratorImpl<Byte>{
 		try {
 			fileReader = new PcapFileInputStream(files.get(index));
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+
+			throw new CannotReadFileException(files.get(index).getAbsolutePath());
 		}
 		index++;
 	}

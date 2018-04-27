@@ -12,6 +12,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import exceptions.CannotReadFileException;
 import pipeAndFilter.filters.fileReader.PcapFileInputStreamGenerator;
 import pipeAndFilter.impl.QueuePipe;
 
@@ -97,6 +98,13 @@ public class FileReaderGeneratorTest {
 				f1,
 				f2
 		});
+	}
+	
+	@Test(expected=CannotReadFileException.class)
+	public void inexistentFileTest() {
+		
+		PcapFileInputStreamGenerator gen = new PcapFileInputStreamGenerator(new QueuePipe<>(), new File("NotExistentFile"));
+		
 	}
 	
 }
