@@ -37,7 +37,16 @@
             <artifactId>junit</artifactId>
             <version>RELEASE</version>
         </dependency>
-    </dependencies>
+            <dependency>
+                <groupId>com.cedarsoftware</groupId>
+                <artifactId>json-io</artifactId>
+                <version>4.10.0</version>
+            </dependency>
+
+
+
+
+        </dependencies>
     
     <build>
 		<plugins>
@@ -62,8 +71,16 @@
 			<configuration>
 			<repoToken>crMdo5IrMav9a8wysVyNpcSE0qDjpx3ID</repoToken>
 			</configuration>
-			</plugin>	
-		</plugins>
+			</plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <source>1.8</source>
+                    <target>1.8</target>
+                </configuration>
+            </plugin>
+        </plugins>
 			
       </build>	
 

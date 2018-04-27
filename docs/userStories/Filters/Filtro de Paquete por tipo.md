@@ -1,4 +1,4 @@
-# Historia (6hs)
+# Historia (15hs)
 
 ### Descripción
 
@@ -34,7 +34,8 @@ Dígito: 0x0004
 
 | Número | Descripción | Horas |
 | ------ | ------ | :------: |
-| 0 | Configurar el filtro según las configuraciones provistas | 2 |
-| 0 | Leer el byte de correspondiente al offset | 3 |
-| 1 | Comparar el byte obtenido con el dígito indicado | 1 |
+| 0 | Configurar el filtro según las configuraciones provistas| 2 |
+| 1 | Implementar patron *evaluator* para leer las configuraciones| 6 |
+| 2 | Leer el byte de correspondiente al offset y decidir que tipo de paquete es| 4 |
+| 3 | Comparar el byte obtenido con el dígito indicado y crear la clase *Paquete* correspondiente| 3 |
 

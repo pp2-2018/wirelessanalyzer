@@ -1,0 +1,51 @@
+package validator;
+
+import fileReader.WrongExtensionException;
+import org.junit.Before;
+import org.junit.Ignore;
+import org.junit.Test;
+
+import static org.junit.Assert.*;
+
+import java.io.File;
+
+public class FileExtensionValidatorTest {
+
+    FileExtensionValidator validator;
+
+    @Before
+    public void setUp(){
+        validator = new FileExtensionValidator(".pcap");
+    }
+
+    @Test
+    public void validatePcapExtension(){
+        try {
+            assertTrue(validator.isValidExtension("/home/test/.pcapwireless.pcap"));
+        } catch (WrongExtensionException e) {
+            e.printStackTrace();
+        }
+
+    }    
+    
+    @Test
+    public void validatePcapExtensionWithFile(){
+        try {
+            assertTrue(validator.isValidExtension(new File("/home/test/.pcapwireless.pcap")));
+        } catch (WrongExtensionException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    @Test
+    public void validateWrongPcapExtension(){
+            try {
+				validator.isValidExtension("/home/test/.pcapwireless.pcap.");
+			} catch (WrongExtensionException e) {
+				
+				assertTrue(true);
+			}
+    }
+
+}
