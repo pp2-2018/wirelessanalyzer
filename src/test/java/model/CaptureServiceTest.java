@@ -17,6 +17,7 @@ import model.device.roles.Sniffer;
 import negocio.CaptureService;
 import pipeAndFilter.Pipe;
 import pipeAndFilter.Processable;
+import pipeAndFilter.TestObserver;
 import pipeAndFilter.filters.rawPackageFilter.CaptureToPackageFilter;
 import pipeAndFilter.filters.rawPackageFilter.PackageByMacAddressFilter;
 import pipeAndFilter.filters.rawPackageFilter.PackageByTimeFrameFilter;
@@ -25,6 +26,7 @@ import pipeAndFilter.impl.PipeSystem;
 import pipeAndFilter.impl.QueuePipe;
 import pipeAndFilter.impl.SinkImpl;
 import pipeAndFilter.sink.Test.TestSink;
+import pipeAndFilter.sink.snifferDetectedMac.SnifferDetectedMac;
 
 public class CaptureServiceTest {
 	
@@ -310,12 +312,7 @@ public class CaptureServiceTest {
 
 
 		TestSink<Sniffer> testSink = new TestSink<>(pipe5,s -> s.equals(a));
-		testSink.addObserver(new negocio.iface.AnalyticsObserver() {
-			@Override
-			public void update(SinkImpl observable) {
-				Assert.assertTrue(testSink.isResult());  //ASSERT
-			}
-		});
+		testSink.addObserver(new TestObserver());
 
 		procesabbles.add(captureToPackageFilter);
 		procesabbles.add(packageByTimeFrameFilter);

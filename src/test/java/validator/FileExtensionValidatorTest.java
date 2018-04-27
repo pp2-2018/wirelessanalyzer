@@ -7,6 +7,8 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+import java.io.File;
+
 public class FileExtensionValidatorTest {
 
     FileExtensionValidator validator;
@@ -20,6 +22,16 @@ public class FileExtensionValidatorTest {
     public void validatePcapExtension(){
         try {
             assertTrue(validator.isValidExtension("/home/test/.pcapwireless.pcap"));
+        } catch (WrongExtensionException e) {
+            e.printStackTrace();
+        }
+
+    }    
+    
+    @Test
+    public void validatePcapExtensionWithFile(){
+        try {
+            assertTrue(validator.isValidExtension(new File("/home/test/.pcapwireless.pcap")));
         } catch (WrongExtensionException e) {
             e.printStackTrace();
         }

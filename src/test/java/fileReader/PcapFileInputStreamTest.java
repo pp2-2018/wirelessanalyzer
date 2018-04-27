@@ -1,5 +1,6 @@
 package fileReader;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -55,12 +56,6 @@ public class PcapFileInputStreamTest { //TODO Agregaer más test prvenientes de 
     }
 
     @Test
-    public void readPcapFileException(){
-
-    }
-
-
-    @Test
     public void otherTest(){
         byte[] allFile = new byte[10000];
 
@@ -69,6 +64,20 @@ public class PcapFileInputStreamTest { //TODO Agregaer más test prvenientes de 
         for(int i = 0; i < allFile.length; i++)
             System.out.print(String.format("%02X", allFile[i]));
 
+    }
+    
+    @Test
+    public void fromStringTest() {
+    	
+    	try {
+			PcapFileInputStream pcap = new PcapFileInputStream("test-files" + File.separator + "test-capture.pcap");
+			
+			Assert.assertEquals(fileInputStream.read(), pcap.read());
+		} catch ( IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+    	
     }
 
 }
