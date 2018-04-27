@@ -17,7 +17,7 @@ import model.RawPackage;
 public class ParserTest {
 
 
-	@Ignore
+	@Test
 	public void parseAffirmativeTest(){
 		Reader reader = new StringReader("00 08\n01 09");
 		RawPackage frame = new RawPackage(new byte[]{0x08, 0x09});
@@ -31,7 +31,7 @@ public class ParserTest {
 		
 	}
 
-	@Ignore
+	@Test
 	public void parseNegativeTest(){
 		Reader reader = new StringReader("00 08\n01 09");
 		RawPackage frame = new RawPackage(new byte[]{0x07, 0x09});
@@ -45,7 +45,7 @@ public class ParserTest {
 		
 	}
 
-	@Ignore
+	@Test
 	public void parseWithRealFileTest(){
 		File file = new File("test-files" + File.separator + "toParseFile.txt");
 		RawPackage frame = new RawPackage(new byte[]{0x07, 0x09});

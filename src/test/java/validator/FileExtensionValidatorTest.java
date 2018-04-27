@@ -16,7 +16,7 @@ public class FileExtensionValidatorTest {
         validator = new FileExtensionValidator(".pcap");
     }
 
-    @Ignore
+    @Test
     public void validatePcapExtension(){
         try {
             assertTrue(validator.isValidExtension("/home/test/.pcapwireless.pcap"));
@@ -26,13 +26,14 @@ public class FileExtensionValidatorTest {
 
     }
 
-    @Ignore
+    @Test
     public void validateWrongPcapExtension(){
-        try {
-            assertFalse(validator.isValidExtension("/home/test/.pcapwireless.pcap."));
-        } catch (WrongExtensionException e) {
-            e.printStackTrace();
-        }
+            try {
+				validator.isValidExtension("/home/test/.pcapwireless.pcap.");
+			} catch (WrongExtensionException e) {
+				
+				assertTrue(true);
+			}
     }
 
 }
