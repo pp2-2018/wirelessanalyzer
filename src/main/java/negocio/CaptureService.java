@@ -12,7 +12,15 @@ import model.device.MacAddress;
 import model.device.roles.Sniffer;
 import model.Package;
 import model.Pair;
-
+import org.junit.Assert;
+import pipeAndFilter.Pipe;
+import pipeAndFilter.Processable;
+import pipeAndFilter.filters.rawPackageFilter.CaptureToPackageFilter;
+import pipeAndFilter.filters.rawPackageFilter.PackageByMacAddressFilter;
+import pipeAndFilter.filters.rawPackageFilter.PackageByTimeFrameFilter;
+import pipeAndFilter.filters.rawPackageFilter.PackageToSnifferFilter;
+import pipeAndFilter.impl.PipeSystem;
+import pipeAndFilter.impl.QueuePipe;
 
 
 public class CaptureService { /*TODO Esta clase me parece que no está bien. Habría que ver una forma de poder
@@ -129,7 +137,13 @@ public class CaptureService { /*TODO Esta clase me parece que no está bien. Hab
 		
 	}
 
+
+
 	public List<Sniffer>  getSniffersThatDetectedThisOnTimeFrame(MacAddress macAddress, TimeFrame timeFrame){
+
+
+
+
 		ArrayList<Sniffer> sniffers = new ArrayList<Sniffer>();
 
 		for (Capture c : captures)
@@ -192,7 +206,7 @@ public class CaptureService { /*TODO Esta clase me parece que no está bien. Hab
 		return historico;
 	}
 	
-
+	@Deprecated
 	public List<Sniffer> getSniffersThatDetectedThis(MacAddress macAddress){
 		
 		ArrayList<Sniffer> aps = new ArrayList<Sniffer>();

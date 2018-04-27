@@ -14,6 +14,14 @@ import model.device.Device;
 import model.device.MacAddress;
 import model.device.roles.Sniffer;
 import negocio.CaptureService;
+import pipeAndFilter.Pipe;
+import pipeAndFilter.Processable;
+import pipeAndFilter.filters.rawPackageFilter.CaptureToPackageFilter;
+import pipeAndFilter.filters.rawPackageFilter.PackageByMacAddressFilter;
+import pipeAndFilter.filters.rawPackageFilter.PackageByTimeFrameFilter;
+import pipeAndFilter.filters.rawPackageFilter.PackageToSnifferFilter;
+import pipeAndFilter.impl.PipeSystem;
+import pipeAndFilter.impl.QueuePipe;
 
 public class CaptureServiceTest {
 	
@@ -262,9 +270,71 @@ public class CaptureServiceTest {
 		Assert.assertTrue(capturasTest2.getSniffersThatDetectedThis(addrd).equals(array3));
 		
 	}
+	@Test
+	public void  getSniffersThatDetectedThisOnTimeFramePiped(){
+
+
+		TimeFrame timeFrame = new TimeFrame(start,end);
+
+
+
+		PipeSystem pipeSystem = new PipeSystem();
+
+		Pipe<Capture> pipe1 = new QueuePipe<>();
+		Pipe<Package> pipe2 = new QueuePipe<>();
+		Pipe<Package> pipe3 = new QueuePipe<>();
+		Pipe<Package> pipe4 = new QueuePipe<>();
+		Pipe<Sniffer> pipe5 = new QueuePipe<>();
+
+		pipeSystem.addPipe(pipe1);
+		pipeSystem.addPipe(pipe2);
+		pipeSystem.addPipe(pipe3);
+		pipeSystem.addPipe(pipe4);
+		pipeSystem.addPipe(pipe5);
+
+		List<Processable> procesabbles = new ArrayList<>();
+
+		CaptureToPackageFilter captureToPackageFilter = new CaptureToPackageFilter(pipe1,pipe2);
+
+		PackageByTimeFrameFilter packageByTimeFrameFilter = new PackageByTimeFrameFilter
+				(pipe2,pipe3,timeFrame);
+
+		PackageByMacAddressFilter packageByMacAddressFilter = new PackageByMacAddressFilter
+				(pipe3,pipe4,addra);
+
+		PackageToSnifferFilter packageToSnifferFilter = new PackageToSnifferFilter
+				(pipe4,pipe5);
+
+		procesabbles.add(captureToPackageFilter);
+		procesabbles.add(packageByTimeFrameFilter);
+		procesabbles.add(packageByMacAddressFilter);
+		procesabbles.add(packageToSnifferFilter);
+
+
+		for (Capture cap :
+				capturas3) {
+			pipe1.accept(cap);
+
+		}
+		for (int i = 0; i <capturas3.size() ; i++) {
+			captureToPackageFilter.process();
+		}
+		packageByTimeFrameFilter.process();
+		packageByMacAddressFilter.process();
+		packageToSnifferFilter.process();
+
+		ArrayList<Sniffer> ret = new ArrayList<>();
+		ret.add(pipe5.retireve());
+
+		Assert.assertEquals(Collections.singletonList(a),ret);
+
+	}
+
 
 	@Test
 	public void getSniffersDetectedByThisTimeFrame(){
+
+
 		TimeFrame timeframe = new TimeFrame(start,end);
 		CaptureService service = new CaptureService(capturas3);
 		ArrayList<Sniffer> sniffersThatDetected = new ArrayList<Sniffer>(service.getSniffersThatDetectedThisOnTimeFrame(addra,timeframe));

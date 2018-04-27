@@ -1,30 +1,22 @@
 package pipeAndFilter;
 
 import model.Package;
-import model.RawPackage;
 import model.TimeFrame;
 import model.TimeStamp;
 import model.device.MacAddress;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import pipeAndFilter.filters.fileReader.PcapFileInputStreamGenerator;
-import pipeAndFilter.filters.printSink.PrintSink;
-import pipeAndFilter.filters.rawPackageFilter.RawPackage32BytesFilter;
-import pipeAndFilter.filters.rawPackageFilter.TimeFrameFilter;
+import pipeAndFilter.filters.rawPackageFilter.PackageByTimeFrameFilter;
 import pipeAndFilter.impl.PipeSystem;
 import pipeAndFilter.impl.QueuePipe;
 
-import java.io.File;
 import java.time.LocalDateTime;
 import java.time.Month;
-import java.time.ZoneId;
-import java.time.ZoneOffset;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-public class TimeFrameFilterTest {
+public class PackageByTimeFrameFilterTest {
 
     TimeFrame timeFrame;
     LocalDateTime inicio;
@@ -59,13 +51,13 @@ public class TimeFrameFilterTest {
         List<Processable> procesabbles = new ArrayList<>();
 
 
-        TimeFrameFilter timeFrameFilter = new TimeFrameFilter
+        PackageByTimeFrameFilter packageByTimeFrameFilter = new PackageByTimeFrameFilter
                 (pipe1,pipe2,timeFrame);
 
 
-        procesabbles.add(timeFrameFilter);
+        procesabbles.add(packageByTimeFrameFilter);
         pipe1.accept(packageA);
-        timeFrameFilter.process();
+        packageByTimeFrameFilter.process();
         Assert.assertEquals(packageA,pipe2.retireve());
 
 

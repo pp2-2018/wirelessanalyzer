@@ -9,22 +9,22 @@ import java.util.List;
 import model.Package;
 import model.TimeFrame;
 import model.TimeStamp;
+import model.device.MacAddress;
 import packageBuilder.PackageBuilder;
 import pipeAndFilter.Pipe;
 import pipeAndFilter.impl.SimpleFilterImpl;
 
-public class TimeFrameFilter extends SimpleFilterImpl<Package,Package> {
-
-    private List<Package> rawPackages;
-    private TimeFrame timeFrame;
+public class PackageByMacAddressFilter extends SimpleFilterImpl<Package,Package> {
 
 
-    public TimeFrameFilter(Pipe<Package> inputPipe, Pipe<Package> outputPipe, TimeFrame timeFrame) {
+    private MacAddress macAddress;
+
+
+    public PackageByMacAddressFilter(Pipe<Package> inputPipe, Pipe<Package> outputPipe, MacAddress macAddress) {
         super(inputPipe, outputPipe);
+        this.macAddress = macAddress;
 
-        this.rawPackages = new ArrayList<>();
-        this.timeFrame=timeFrame;
-}
+    }
 
 
 
@@ -32,12 +32,10 @@ public class TimeFrameFilter extends SimpleFilterImpl<Package,Package> {
     public void transform(Pipe<Package> input, Pipe<Package> output) {
 
         Package pack = input.retireve();
-        System.out.println(pack);
-        if(pack!=null) {
-
-            if (timeFrame.contains(pack.getTimeStamp()))
+        if(pack!=null)
+            if (pack.getMacAddress().equals(macAddress))
                 output.accept(pack);
-        }
+
 
     }
 
