@@ -1,5 +1,7 @@
 package negocio;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.*;
 import java.util.stream.Stream;
 
@@ -150,32 +152,46 @@ public class CaptureService { /*TODO Esta clase me parece que no está bien. Hab
 		ArrayList<HistoriaMacAddress> historico = new ArrayList<HistoriaMacAddress>();
 		
 		for (Capture c : captures){
-			
+
 			for(Package p : c.getPackages()){
 				
-				if(timeFrame.contains(p.getTimeStamp()) && (p.getMacAddress().equals(macAddress))){
+				if((timeFrame.contains(p.getTimeStamp())) && (p.getMacAddress().equals(macAddress))){
 					
-					for (HistoriaMacAddress h : historico){
+					if (!historico.isEmpty()){
+						boolean flag = false;
+						for(HistoriaMacAddress h : historico){
 							
-						if(h.getFechaHora().equals(p.getTimeStamp())){		//parsear?
-								
-							h.addSniffer(c.getSniffer());
+							LocalDateTime dt1 = LocalDateTime.ofInstant(p.getTimeStamp().toInstant(), ZoneOffset.UTC);
+							
+							if(h.getFechaHora().equals(dt1)){
+								h.addSniffer(c.getSniffer());
+								flag = true;
+							}	
 						}
 						
-						else{
-							
+						if(!flag){
+							LocalDateTime dt = LocalDateTime.ofInstant(p.getTimeStamp().toInstant(), ZoneOffset.UTC);
 							HistoriaMacAddress historia = new HistoriaMacAddress();
-//							historia.setFechaHora(p.getTimeStamp().getUnixTime()); 		//parsear
+							historia.setFechaHora(dt);
 							historia.addSniffer(c.getSniffer());
 							historico.add(historia);
 						}
 					}
-				}	
+					
+					else{				//borrar 
+						LocalDateTime dt = LocalDateTime.ofInstant(p.getTimeStamp().toInstant(), ZoneOffset.UTC); 
+						HistoriaMacAddress historia = new HistoriaMacAddress();
+						historia.setFechaHora(dt);
+						historia.addSniffer(c.getSniffer());
+						historico.add(historia);
+					}
+				}
 			}
 		}
 		
-	return historico;
-}
+		return historico;
+	}
+	
 
 	public List<Sniffer> getSniffersThatDetectedThis(MacAddress macAddress){
 		

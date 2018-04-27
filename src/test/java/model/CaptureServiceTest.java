@@ -2,6 +2,7 @@ package model;
 
 import java.time.LocalDateTime;
 import java.time.Month;
+import java.time.ZoneOffset;
 import java.util.*;
 
 
@@ -19,6 +20,7 @@ public class CaptureServiceTest {
 	ArrayList<Capture> captures;
 	ArrayList<Capture> capturas2;
 	ArrayList<Capture> capturas3;
+	ArrayList<Capture> capturas4;
 	
 	Sniffer a;
 	Sniffer b;
@@ -152,7 +154,63 @@ public class CaptureServiceTest {
     	capturas3.add(capUno);
     	
     	
+    	////////////////////////
+    	
+    	capturas4 = new ArrayList<Capture>();
+    	
+    	Capture cap0 = new Capture(a, start, end);
+    	
+    	Package package00 = new Package(new TimeStamp(start.plusDays(7)));
+    	package00.setMacAddress(addra);
+    	
+    	Package package01 = new Package(new TimeStamp(start.plusDays(14)));
+    	package01.setMacAddress(addrc);
+    	
+    	cap0.addPackages(package00);
+    	cap0.addPackages(package01);
+    	
+    	Capture cap00 = new Capture (b, start, end);
+    	
+    	Package package02 = new Package(new TimeStamp(start.plusDays(7)));
+    	package02.setMacAddress(addra);
+    	
+    	Package package03 = new Package(new TimeStamp(start.plusDays(8)));
+    	package03.setMacAddress(addra);
+    	
+    	cap00.addPackages(package02);
+    	cap00.addPackages(package03);
+    	
+    	capturas4.add(cap0);
+    	capturas4.add(cap00);
+
     }
+	
+	@Test
+	public void getRegistroDeCapturas(){
+		
+		CaptureService capturas = new CaptureService(capturas4);
+ 		
+		HistoriaMacAddress h1 = new HistoriaMacAddress();
+		h1.addSniffer(a);
+		h1.addSniffer(b);
+		h1.setFechaHora(LocalDateTime.ofInstant(new TimeStamp(start.plusDays(7)).toInstant(), ZoneOffset.UTC));
+		
+		HistoriaMacAddress h3 = new HistoriaMacAddress();
+		h3.addSniffer(b);
+		h3.setFechaHora(LocalDateTime.ofInstant(new TimeStamp(start.plusDays(8)).toInstant(), ZoneOffset.UTC));
+		
+		ArrayList<HistoriaMacAddress> historico = new ArrayList<HistoriaMacAddress>();
+		historico.add(h1);
+		historico.add(h3);
+		
+//		System.out.println("historico de test " + historico );
+//		System.out.println("metodo " + capturas.getRegistroDeCapturas(addra, new TimeFrame(start, end)));
+		
+		
+		Assert.assertEquals(historico, capturas.getRegistroDeCapturas(addra, new TimeFrame(start, end)));
+	}
+	
+	
 	@Test
 	public void amountOfDetectionsPerSniffer() {
 	    ArrayList<Capture> test = new ArrayList<>(capturas2);
@@ -168,13 +226,7 @@ public class CaptureServiceTest {
         ArrayList<Pair<Sniffer,Integer>> result = service.amountOfDetectionsPerSniffer();
         Assert.assertEquals(expected,result);
         
-
-
 	}
-
-
-
-
 
 	@Test
 	public void getMacAddressesDetectedBy() {
@@ -224,7 +276,5 @@ public class CaptureServiceTest {
 		Assert.assertNotEquals(sniffersThatDetected2,Collections.singletonList(a));
 
 	}
-
-
-
+	
 }
