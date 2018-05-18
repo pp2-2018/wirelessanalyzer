@@ -35,6 +35,12 @@ public class PcapFileInputStreamGenerator extends GeneratorImpl<Byte>{
 		
 	}
 	
+	public PcapFileInputStreamGenerator(Pipe<Byte> outputPipe, String pathStr) {
+		
+		this(outputPipe, Arrays.asList( new File[] {new File(pathStr)}));
+		
+	}
+	
 	@Override
 	public void put(Pipe<Byte> output) {
 		
