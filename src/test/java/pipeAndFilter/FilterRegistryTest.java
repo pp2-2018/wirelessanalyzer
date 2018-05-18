@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import pipeAndFilter.filters.PackageBuilderFilter.PackageBuilderNormalizer;
 import pipeAndFilter.filters.fileReader.PcapFileInputStreamGenerator;
 import pipeAndFilter.registry.FilterRegistry;
 
@@ -29,7 +30,10 @@ public class FilterRegistryTest {
 	
 	@Test
 	public void getFilterTest() {
-		
+	
+		Processable filter = registry.get("packetBuilder");
+		System.out.println(filter);
+		Assert.assertEquals(filter.getClass(), PackageBuilderNormalizer.class);
 		
 	}
 	

@@ -39,21 +39,56 @@ public class FilterRegistry {
 	public Processable get(String string) {
 		
 		String[] descompose = string.split(":");
-		
-		Class<?> clazz;
+
+		System.out.println(descompose.length);
 		String classname = this.classMapsProps.getProperty(descompose[0]);
+		if(descompose.length == 1)
+			return internalGet(classname);
+		if(descompose.length == 2)
+			return internalGet(classname, descompose[1]);
+		
+		return null;
+	}
+	
+	private Processable internalGet(String classname, String arg) {
+		
+	
 		try {
-			clazz = Class.forName(classname);
+			Class<?> clazz = Class.forName(classname);
 
 			Constructor<?> constructor = clazz.getConstructor(Pipe.class, String.class);
 			
-			return (Generator<?>) constructor.newInstance(new QueuePipe<>(), descompose[1]);
+			return (Processable) constructor.newInstance(new QueuePipe<>(), arg);
 			
 		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
 		return null;
+
+		
 	}
+	
+	private Processable internalGet(String classname) {
+
+		try {
+			Class<?> clazz = Class.forName(classname);
+
+			Constructor<?> constructor = clazz.getConstructor(Pipe.class, Pipe.class);
+			
+			return (Processable) constructor.newInstance(new QueuePipe<>(), new QueuePipe<>());
+			
+		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		return null;
+
+		
+	
+	}
+
 
 }
