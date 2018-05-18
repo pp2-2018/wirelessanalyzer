@@ -28,7 +28,7 @@ public class FilterRegistryTest {
 	}
 	
 	@Test
-	public void getFiletTest() {
+	public void getFilterTest() {
 		
 		
 	}
