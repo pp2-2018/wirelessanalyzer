@@ -42,6 +42,13 @@
                 <artifactId>json-io</artifactId>
                 <version>4.10.0</version>
             </dependency>
+            <dependency>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.1.0</version>
+            </dependency>
+
+
 
 
 
@@ -50,6 +57,21 @@
     
     <build>
 		<plugins>
+            <plugin>
+                <!-- Build an executable JAR -->
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.1.0</version>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <mainClass>WirelessAnalyzer</mainClass>
+                        </manifest>
+                    </archive>
+                </configuration>
+            </plugin>
 			<plugin>
 			<groupId>org.jacoco</groupId>
 			<artifactId>jacoco-maven-plugin</artifactId>
