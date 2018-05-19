@@ -1,4 +1,5 @@
 package model.device.roles;
+import model.Coordinates;
 import model.device.Device;
 
 import java.util.Objects;
@@ -6,8 +7,21 @@ import java.util.Objects;
 
 public class Sniffer extends Role {
     long rangeInMeters;
+    Coordinates coord;				//después lo borro
 
-    public Sniffer(Device device,long rangeInMeters){
+    public long getRangeInMeters() {
+		return rangeInMeters;
+	}
+	public void setRangeInMeters(long rangeInMeters) {
+		this.rangeInMeters = rangeInMeters;
+	}
+	public Coordinates getCoord() {
+		return coord;
+	}
+	public void setCoord(Coordinates coord) {
+		this.coord = coord;
+	}
+	public Sniffer(Device device,long rangeInMeters){
         this.rangeInMeters = Math.abs(rangeInMeters);
         this.device = device;
     }

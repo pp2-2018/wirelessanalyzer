@@ -6,6 +6,7 @@ import java.util.*;
 import java.util.stream.Stream;
 
 import model.Capture;
+import model.Coordinates;
 import model.HistoriaMacAddress;
 import model.TimeFrame;
 import model.device.MacAddress;
@@ -225,4 +226,59 @@ public class CaptureService { /*TODO Esta clase me parece que no está bien. Hab
 		return aps;
 		
 	}
+	
+	public List<Coordinates> getLocalizaciones(List<HistoriaMacAddress> historias){  //esto obviamente tiene que ser cortado y pegado en el filtro
+		
+		ArrayList<Coordinates> coordenadas = new ArrayList<Coordinates>();		//está así nomás, no lo miren tiene bugs Dx
+
+		for (HistoriaMacAddress h : historias){
+			
+			if(h.getSniffers().size() == 1){
+				coordenadas.add(h.getSniffers().get(0).getCoord());
+			}
+			
+			else{
+				
+				Sniffer sa = h.getSniffers().get(0);
+				Sniffer sb = h.getSniffers().get(1);
+
+				Coordinates a = h.getSniffers().get(0).getCoord();
+				System.out.println("coord a " + a);
+				
+				Coordinates b = h.getSniffers().get(1).getCoord();
+				System.out.println("coord b " + b);
+				
+//				si la distancia entre a y b es mayor a la suma de lso radios de a y b
+				
+				Double nuevaX;
+				Double nuevaY;
+		
+				if (a.getLat()<=b.getLat()){
+					double rango = (sa.getRangeInMeters() - sb.getRangeInMeters())/2;
+					nuevaX = a.getLat() + sa.getRangeInMeters() + rango;
+				}
+				else{
+					double rango = (sb.getRangeInMeters() - sa.getRangeInMeters())/2;
+					nuevaX = b.getLat() + sb.getRangeInMeters() + rango;
+				}
+				
+				if (a.getLng()<=b.getLng()){
+					double rango = (sa.getRangeInMeters() - sb.getRangeInMeters())/2;
+					nuevaY = a.getLng() + sa.getRangeInMeters() + rango;
+				}
+				else{
+					double rango = (sb.getRangeInMeters() - sa.getRangeInMeters())/2;
+					nuevaY = b.getLng() + sb.getRangeInMeters() + rango;
+				}
+				
+				coordenadas.add(new Coordinates(nuevaX, nuevaY));
+					
+//				double distancia = Math.sqrt(Math.pow((b.getLat() - a.getLat()), 2) + Math.pow((b.getLng() - a.getLng()), 2));			
+			}	
+		}
+
+		return coordenadas;		
+	}
+	
+	
 }
