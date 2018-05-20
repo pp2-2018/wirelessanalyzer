@@ -6,11 +6,11 @@ import org.junit.Before;
 import org.junit.Test;
 import pipeAndFilter.Pipe;
 import pipeAndFilter.filters.PackageBuilderFilter.PackageBuilderNormalizer;
+import pipeAndFilter.filters.rawPackageFilter.PackageByMacAddressFilter;
 import pipeAndFilter.filters.rawPackageFilter.RawPackageFilter;
 import pipeAndFilter.impl.QueuePipe;
 
 import static org.junit.Assert.*;
-
 public class FilterIOTypeValidatorTest {
 
     private FilterIOTypeValidator filterIOValidator;
@@ -24,13 +24,25 @@ public class FilterIOTypeValidatorTest {
     @Test
     public void ca1(){
 
-
         assertTrue(filterIOValidator.validateTypte(getPackageBuilder(),getRawPackageFilter()));
 
     }
 
+    @Test
+    public void ca2(){
 
-    public RawPackageFilter getRawPackageFilter(){
+        assertFalse(filterIOValidator.validateTypte(getPackageBuilder(), getPackageByMacAddressFilter()));
+
+    }
+
+    private PackageByMacAddressFilter getPackageByMacAddressFilter() {
+        Pipe<Package> inputPackage = new QueuePipe<>();
+        Pipe<Package> outputPackage = new QueuePipe<>();
+
+        return new PackageByMacAddressFilter(inputPackage, outputPackage, null);
+    }
+
+    private RawPackageFilter getRawPackageFilter(){
 
         Pipe<Byte> bytePipe = new QueuePipe<>();
         Pipe<RawPackage> rawPackagePipe = new QueuePipe<>();
@@ -38,7 +50,7 @@ public class FilterIOTypeValidatorTest {
         return new RawPackageFilter(bytePipe, rawPackagePipe);
     }
 
-    public PackageBuilderNormalizer getPackageBuilder(){
+    private PackageBuilderNormalizer getPackageBuilder(){
         Pipe<RawPackage> rawPackagePipe = new QueuePipe<>();
         Pipe<Package> packagePipe = new QueuePipe<>();
 
