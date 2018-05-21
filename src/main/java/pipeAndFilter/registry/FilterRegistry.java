@@ -3,22 +3,29 @@ package pipeAndFilter.registry;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Properties;
 
+import org.junit.runners.Parameterized.Parameter;
+
 import exceptions.NotRegisteredFilter;
+import instantiator.Instantiator;
 import pipeAndFilter.Generator;
 import pipeAndFilter.Pipe;
 import pipeAndFilter.Processable;
 import pipeAndFilter.SimpleFilter;
 import pipeAndFilter.filters.fileReader.PcapFileInputStreamGenerator;
 import pipeAndFilter.impl.QueuePipe;
+import pipeAndFilter.parameters.FilterParameter;
+import pipeAndFilter.parameters.Parametrized;
 
 public class FilterRegistry {
 	
 	private static FilterRegistry instance;
 	private Properties classMapsProps;
+	private Instantiator instantiator;
 	
 	public static FilterRegistry getInstance(String classmap) {
 		if(instance == null)
@@ -28,6 +35,8 @@ public class FilterRegistry {
 	
 	private FilterRegistry(String classMap) {
 		this.classMapsProps = new Properties();
+		this.instantiator = new Instantiator();
+		
 		try {
 			this.classMapsProps.load(new FileReader("config" + File.separator + classMap + ".properties"));
 		} catch (IOException e) {
@@ -39,7 +48,7 @@ public class FilterRegistry {
 
 	public Processable get(String string) {
 		
-		if(string == null || string == "")
+		if(string == null || string.isEmpty())
 			throw new IllegalArgumentException("Invalid string: " + string);
 		
 		String[] descompose = string.split(":");
@@ -61,19 +70,12 @@ public class FilterRegistry {
 		
 	
 		try {
-			Class<?> clazz = Class.forName(classname);
-
-			Constructor<?> constructor = clazz.getConstructor(Pipe.class, String.class);
-			
-			return (Processable) constructor.newInstance(new QueuePipe<>(), arg);
-			
-		}catch(ClassNotFoundException ex) { 
-		
+			return (Processable)instantiator.instantiate(classname, arg);
+		} catch(ClassNotFoundException ex) { 
 			throw new NotRegisteredFilter(classname);
-		}
-		catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
+		}catch ( InstantiationException e1) {
+			e1.printStackTrace();
 		}
 		
 		return null;
@@ -84,24 +86,15 @@ public class FilterRegistry {
 	private Processable internalGet(String classname) {
 
 		try {
-			Class<?> clazz = Class.forName(classname);
+			return (Processable) instantiator.instantiate(classname);
+		} catch (ClassNotFoundException e1) {
 
-			Constructor<?> constructor = clazz.getConstructor(Pipe.class, Pipe.class);
-			
-			return (Processable) constructor.newInstance(new QueuePipe<>(), new QueuePipe<>());
-			
-		} catch(ClassNotFoundException ex) { 
-		
 			throw new NotRegisteredFilter(classname);
-		}catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (InstantiationException e1) {
+			e1.printStackTrace();
 		}
 		
 		return null;
-
-		
-	
 	}
 
 
