@@ -7,6 +7,7 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Properties;
 
+import exceptions.NotRegisteredFilter;
 import pipeAndFilter.Generator;
 import pipeAndFilter.Pipe;
 import pipeAndFilter.Processable;
@@ -38,10 +39,16 @@ public class FilterRegistry {
 
 	public Processable get(String string) {
 		
+		if(string == null || string == "")
+			throw new IllegalArgumentException("Invalid string: " + string);
+		
 		String[] descompose = string.split(":");
 
-		System.out.println(descompose.length);
 		String classname = this.classMapsProps.getProperty(descompose[0]);
+		
+		if(classname == null)
+			throw new NotRegisteredFilter(descompose[0]);
+		
 		if(descompose.length == 1)
 			return internalGet(classname);
 		if(descompose.length == 2)
@@ -60,7 +67,11 @@ public class FilterRegistry {
 			
 			return (Processable) constructor.newInstance(new QueuePipe<>(), arg);
 			
-		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+		}catch(ClassNotFoundException ex) { 
+		
+			throw new NotRegisteredFilter(classname);
+		}
+		catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -79,7 +90,10 @@ public class FilterRegistry {
 			
 			return (Processable) constructor.newInstance(new QueuePipe<>(), new QueuePipe<>());
 			
-		} catch (ClassNotFoundException | NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+		} catch(ClassNotFoundException ex) { 
+		
+			throw new NotRegisteredFilter(classname);
+		}catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}

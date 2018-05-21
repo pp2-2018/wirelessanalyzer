@@ -6,6 +6,7 @@ import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 
+import exceptions.NotRegisteredFilter;
 import pipeAndFilter.filters.PackageBuilderFilter.PackageBuilderNormalizer;
 import pipeAndFilter.filters.fileReader.PcapFileInputStreamGenerator;
 import pipeAndFilter.registry.FilterRegistry;
@@ -32,8 +33,23 @@ public class FilterRegistryTest {
 	public void getFilterTest() {
 	
 		Processable filter = registry.get("packetBuilder");
-		System.out.println(filter);
 		Assert.assertEquals(filter.getClass(), PackageBuilderNormalizer.class);
+		
+	}
+	
+	@Test(expected = NotRegisteredFilter.class)
+	public void notRegisteredFilterTest() {
+	
+		Processable filter = registry.get("notRegisteredFilter");
+		
+		
+	}
+	
+	@Test(expected = IllegalArgumentException.class)
+	public void emptyStringTest() {
+	
+		Processable filter = registry.get("");
+		
 		
 	}
 	
