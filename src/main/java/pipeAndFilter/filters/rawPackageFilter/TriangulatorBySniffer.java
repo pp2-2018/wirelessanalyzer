@@ -52,6 +52,10 @@ public void transform(Pipe<Package> input, Pipe<Coordinates> output) {
     }
 }
 
+public Coordinates triangularDeTres(Queue<Package> cola){
+	return null;
+	
+}
 
 
 public Coordinates triangular(Queue<Package> cola){	
@@ -61,27 +65,62 @@ public Coordinates triangular(Queue<Package> cola){
 		return coord;
 	}
 	
-	Object[] array = cola.toArray();
-	Package packageA = (Package) array[0];
-	Package packageB = (Package) array[1];
+	if(cola.size()==2){
+		
+		Object[] array = cola.toArray();
+		Package packageA = (Package) array[0];
+		Package packageB = (Package) array[1];
 
-	double coordenadaX = getCoordenadaX(packageA, packageB); 
-	double coordenadaY = getCoordenadaY(packageA, packageB);
+		double coordenadaX = getCoordenadaX(packageA, packageB); 
+		double coordenadaY = getCoordenadaY(packageA, packageB);
 
-	return(new Coordinates(coordenadaX, coordenadaY));
-	
+		return(new Coordinates(coordenadaX, coordenadaY));
 	}
+	
+	if(cola.size()==3){
+		
+		Object[] array = cola.toArray();
+		Package packageA = (Package) array[0];
+		Package packageB = (Package) array[1];
+		Package packageC = (Package) array[2];
+		
+		double coordenadaX;
+		double coordenadaY;
+		
+		if(getInterseccionX(packageA, packageB)<= getInterseccionX(packageA, packageC)){
+			coordenadaX = getCoordenadaX(packageA, packageB);
+		}else{
+			coordenadaX = getCoordenadaX(packageA, packageC);
+		}
+		
+		if(getInterseccionY(packageA, packageB)<= getInterseccionY(packageA, packageC)){
+			coordenadaY = getCoordenadaY(packageA, packageB);
+		}else{
+			coordenadaY = getCoordenadaY(packageA, packageC);
+		}
+		return(new Coordinates(coordenadaX, coordenadaY));
+		
+	}
+	return null;
+}
 
 
 
-public double getCoordenadaX(Package packageA, Package packageB){
+public double getInterseccionX(Package packageA, Package packageB){
 	
 	double sumaRangos = packageA.getSniffer().getRangeInMeters() + packageB.getSniffer().getRangeInMeters();
 	double distanciaX = Math.sqrt(Math.pow((configurationMap.getCoordinates(packageB.getSniffer()).getLat()
 			- configurationMap.getCoordinates(packageA.getSniffer()).getLat()), 2));	
 	
 	double interseccionX = (sumaRangos - distanciaX)/2;
+	return interseccionX;
 	
+}
+
+
+public double getCoordenadaX(Package packageA, Package packageB){
+	
+	double interseccionX = getInterseccionX(packageA, packageB);
 	double coordenadaX;
 
 	if(configurationMap.getCoordinates(packageB.getSniffer()).getLat() <= configurationMap.getCoordinates(packageA.getSniffer()).getLat()){
@@ -95,14 +134,21 @@ public double getCoordenadaX(Package packageA, Package packageB){
 
 
 
-public double getCoordenadaY(Package packageA, Package packageB){
+public double getInterseccionY(Package packageA, Package packageB){
 	
 	double sumaRangos = packageA.getSniffer().getRangeInMeters() + packageB.getSniffer().getRangeInMeters();
 	double distanciaY = Math.sqrt(Math.pow((configurationMap.getCoordinates(packageB.getSniffer()).getLng()
 			- configurationMap.getCoordinates(packageA.getSniffer()).getLng()), 2));	
 	
 	double interseccionY = (sumaRangos - distanciaY)/2;
+	return interseccionY;	
+}
 
+
+
+public double getCoordenadaY(Package packageA, Package packageB){
+	
+	double interseccionY = getInterseccionY(packageA, packageB);
 	double coordenadaY;
 
 	if(configurationMap.getCoordinates(packageB.getSniffer()).getLng() <= configurationMap.getCoordinates(packageA.getSniffer()).getLng()){
@@ -113,5 +159,4 @@ public double getCoordenadaY(Package packageA, Package packageB){
 	}
 	return coordenadaY;
 	}
-
 }
