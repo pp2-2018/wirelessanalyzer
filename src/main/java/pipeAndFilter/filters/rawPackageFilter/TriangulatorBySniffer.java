@@ -33,10 +33,13 @@ public void transform(Pipe<Package> input, Pipe<Coordinates> output) {
     	
     	if(cola.isEmpty()){
     		cola.add(paquete);
+    		return;
     	}
-    	
+
     	if(cola.peek().getTimeStamp().equals(paquete.getTimeStamp())){
+    		
     		cola.add(paquete);
+    		return;
     	}
     	
     	if(!cola.peek().getTimeStamp().equals(paquete.getTimeStamp())){
@@ -44,6 +47,7 @@ public void transform(Pipe<Package> input, Pipe<Coordinates> output) {
     		output.accept(triangular(cola));
     		cola.clear();
     		cola.add(paquete);
+    		return;
     	} 
     }
 }
@@ -56,8 +60,10 @@ public Coordinates triangular(Queue<Package> cola){
 		Coordinates coord = configurationMap.getCoordinates(cola.peek().getSniffer());
 		return coord;
 	}
-	Package packageA = cola.poll();
-	Package packageB = cola.poll();
+	
+	Object[] array = cola.toArray();
+	Package packageA = (Package) array[0];
+	Package packageB = (Package) array[1];
 
 	double coordenadaX = getCoordenadaX(packageA, packageB); 
 	double coordenadaY = getCoordenadaY(packageA, packageB);
@@ -106,6 +112,6 @@ public double getCoordenadaY(Package packageA, Package packageB){
 		coordenadaY = configurationMap.getCoordinates(packageA.getSniffer()).getLng() + interseccionY;	
 	}
 	return coordenadaY;
-}
+	}
 
 }

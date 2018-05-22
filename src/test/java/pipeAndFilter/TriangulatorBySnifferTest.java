@@ -34,6 +34,7 @@ public class TriangulatorBySnifferTest {
 
 	    Package packageA;
 	    Package packageB;
+	    Package packageC;
 	    
 	    ConfigurationMap configurationMap;
 	
@@ -62,8 +63,10 @@ public class TriangulatorBySnifferTest {
 
         packageA = new Package(new TimeStamp(LocalDateTime.of(2000, Month.JANUARY, 2, 13, 30, 0)));
         packageB = new Package(new TimeStamp(LocalDateTime.of(2000, Month.JANUARY, 2, 13, 30, 0)));
+        packageC = new Package(new TimeStamp(LocalDateTime.of(2000, Month.JANUARY, 2, 13, 35, 0)));
         packageA.setSniffer(ap01);
         packageB.setSniffer(ap02);
+        packageC.setSniffer(ap01);
         
         ConfigurationManager.save(configurationMap);
 	}
@@ -83,6 +86,28 @@ public class TriangulatorBySnifferTest {
 		Coordinates expected = new Coordinates(3.5, 6.5);
 		
 		Assert.assertEquals(expected , triangulador.triangular(cola));
+	}
+	
+	@Test
+	public void transform(){
+		
+		Pipe<Package> input = new QueuePipe<>();
+	    Pipe<Coordinates> output = new QueuePipe<>();
+		
+		TriangulatorBySniffer triangulator = new TriangulatorBySniffer(input, output);
+		input.accept(packageA);
+		input.accept(packageB);
+		input.accept(packageC);
+
+		
+		while(!input.isEmpty()) {
+			triangulator.process();
+		}
+		
+		Coordinates expected = new Coordinates(3.5, 6.5);
+
+		Assert.assertEquals(expected ,output.retireve());
+		Assert.assertEquals(null ,output.retireve());
 	}
 
 }
