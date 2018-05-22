@@ -3,35 +3,49 @@ package validator;
 import model.Package;
 import model.RawPackage;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import pipeAndFilter.Pipe;
+import pipeAndFilter.SimpleFilter;
 import pipeAndFilter.filters.PackageBuilderFilter.PackageBuilderNormalizer;
+import pipeAndFilter.filters.fileReader.PcapFileInputStreamGenerator;
 import pipeAndFilter.filters.rawPackageFilter.PackageByMacAddressFilter;
 import pipeAndFilter.filters.rawPackageFilter.RawPackageFilter;
 import pipeAndFilter.impl.QueuePipe;
 
-import static org.junit.Assert.*;
-public class FilterIOTypeValidatorTest {
+import java.io.File;
+import java.util.Arrays;
 
-    private FilterIOTypeValidator filterIOValidator;
+import static org.junit.Assert.*;
+public class FilterCompabilityValidatorTest {
+
+    private FilterCompabilityValidator filterIOValidator;
 
     @Before
     public void setUp() throws Exception {
-
-        filterIOValidator = new FilterIOTypeValidator();
+        FilterTypeValidator filterTypeValidator = new FilterTypeValidator(SimpleFilter.class);
+        filterIOValidator = new FilterCompabilityValidator();
     }
 
     @Test
     public void ca1(){
 
-        assertTrue(filterIOValidator.validateTypte(getPackageBuilder(),getRawPackageFilter()));
+        assertTrue(filterIOValidator.validateCompability(getRawPackageFilter(), getPackageBuilder()));
 
     }
 
     @Test
     public void ca2(){
 
-        assertFalse(filterIOValidator.validateTypte(getPackageBuilder(), getPackageByMacAddressFilter()));
+        assertFalse(filterIOValidator.validateCompability(getPackageByMacAddressFilter(),getPackageBuilder()));
+
+    }
+
+    @Test
+    @Ignore
+    public void ca3(){
+
+        assertTrue(filterIOValidator.validateCompability(getPcapStreamGenerator(), getRawPackageFilter()));
 
     }
 
@@ -55,6 +69,13 @@ public class FilterIOTypeValidatorTest {
         Pipe<Package> packagePipe = new QueuePipe<>();
 
         return new PackageBuilderNormalizer(rawPackagePipe, packagePipe);
+
+    }
+
+    private PcapFileInputStreamGenerator getPcapStreamGenerator(){
+
+        return new PcapFileInputStreamGenerator(null,
+                Arrays.asList(new File[]{new File("test-files/wireless.pcap")}));
 
     }
 

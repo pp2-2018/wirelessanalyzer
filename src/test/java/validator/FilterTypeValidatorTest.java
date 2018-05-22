@@ -1,9 +1,7 @@
 package validator;
 
-import org.junit.Before;
 import org.junit.Test;
 import pipeAndFilter.Processable;
-import pipeAndFilter.Sink;
 import pipeAndFilter.filters.fileReader.PcapFileInputStreamGenerator;
 import pipeAndFilter.filters.rawPackageFilter.RawPackageFilter;
 import pipeAndFilter.impl.GeneratorImpl;
@@ -12,9 +10,6 @@ import pipeAndFilter.impl.SinkImpl;
 import pipeAndFilter.sink.snifferDetectedMac.SnifferDetectedMac;
 
 import java.io.File;
-import java.io.StringReader;
-import java.util.List;
-import java.util.logging.Filter;
 
 import static org.junit.Assert.*;
 
