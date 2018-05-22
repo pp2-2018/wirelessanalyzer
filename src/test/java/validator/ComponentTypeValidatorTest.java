@@ -1,9 +1,7 @@
 package validator;
 
-import org.junit.Before;
 import org.junit.Test;
 import pipeAndFilter.Processable;
-import pipeAndFilter.Sink;
 import pipeAndFilter.filters.fileReader.PcapFileInputStreamGenerator;
 import pipeAndFilter.filters.rawPackageFilter.RawPackageFilter;
 import pipeAndFilter.impl.GeneratorImpl;
@@ -12,40 +10,37 @@ import pipeAndFilter.impl.SinkImpl;
 import pipeAndFilter.sink.snifferDetectedMac.SnifferDetectedMac;
 
 import java.io.File;
-import java.io.StringReader;
-import java.util.List;
-import java.util.logging.Filter;
 
 import static org.junit.Assert.*;
 
-public class FilterTypeValidatorTest {
+public class ComponentTypeValidatorTest {
 
-    private FilterTypeValidator filterTypeValidator;
+    private ComponentTypeValidator componentTypeValidator;
 
     @Test
     public void testSink(){
-        filterTypeValidator = new FilterTypeValidator(SinkImpl.class);
+        componentTypeValidator = new ComponentTypeValidator(SinkImpl.class);
         Processable sink = getSink();
 
-        assertTrue(filterTypeValidator.validate(sink));
+        assertTrue(componentTypeValidator.validate(sink));
 
     }
 
     @Test
     public void testFilter(){
-        filterTypeValidator = new FilterTypeValidator(SimpleFilterImpl.class);
+        componentTypeValidator = new ComponentTypeValidator(SimpleFilterImpl.class);
         Processable filter = getFilter();
 
-        assertTrue(filterTypeValidator.validate(filter));
+        assertTrue(componentTypeValidator.validate(filter));
 
     }
 
     @Test
     public void testGenerator(){
-        filterTypeValidator = new FilterTypeValidator(GeneratorImpl.class);
+        componentTypeValidator = new ComponentTypeValidator(GeneratorImpl.class);
         Processable generator = getGenerator();
 
-        assertTrue(filterTypeValidator.validate(generator));
+        assertTrue(componentTypeValidator.validate(generator));
 
     }
 

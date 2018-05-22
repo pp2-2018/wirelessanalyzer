@@ -1,29 +1,32 @@
 package validator;
 
-
-import pipeAndFilter.SimpleFilter;
+import pipeAndFilter.Processable;
 
 import java.lang.reflect.*;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class FilterIOTypeValidator {
+public class FilterCompabilityValidator {
 
-    public boolean validateTypte(SimpleFilter filterInput, SimpleFilter filterOutput) {
+    private ComponentTypeValidator componentTypeValidator;
 
-        //Pregunto por el input de salida de filterOutput
+    public FilterCompabilityValidator(ComponentTypeValidator componentTypeValidator) {
+        this.componentTypeValidator = componentTypeValidator;
+    }
 
+    public boolean validateCompability(Processable componentOutput, Processable componentInput) {
 
-        //Pregunto por el input de entrada de filter Input
-        //Comparo
+        Type output = outputDataType(componentOutput);
+        Type input = inputDataType(componentInput);
 
-        return outputDataType(filterOutput).equals(inputDataType(filterInput));
+        System.out.println("El output es: " + output.getTypeName() + " y el input es: "+ input.getTypeName());
+
+        return output.equals(input);
     }
 
 
-    public Type outputDataType(SimpleFilter filterOutut){
-        List<Parameter> parameters = getParameters(filterOutut);
+    public Type outputDataType(Processable filterOutput){
+        List<Parameter> parameters = getParameters(filterOutput);
 
         /*TODO El criterio de retorno del tipo de parámetro es muy aleatorio. Que pasa si
         el útlimo parámetro no es el output del filter?? Actualmente se está devolviendo el
@@ -31,14 +34,14 @@ public class FilterIOTypeValidator {
         return parameters.get(parameters.size() -1).getParameterizedType();
     }
 
-    public Type inputDataType(SimpleFilter filterInput){
+    public Type inputDataType(Processable filterInput){
         List<Parameter> parameters = getParameters(filterInput);
 
         return parameters.get(0).getParameterizedType();
     }
 
 
-    private List<Parameter> getParameters(SimpleFilter filter) {
+    private List<Parameter> getParameters(Processable filter) {
         Class c = filter.getClass();
 
         //Obtengo los constructores de la clase c
