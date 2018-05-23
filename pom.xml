@@ -47,6 +47,12 @@
                 <artifactId>maven-jar-plugin</artifactId>
                 <version>3.1.0</version>
             </dependency>
+            <dependency>
+                <groupId>com.beust</groupId>
+                <artifactId>jcommander</artifactId>
+                <version>1.72</version>
+            </dependency>
+
 
 
 
@@ -67,7 +73,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>WirelessAnalyzer</mainClass>
+                            <mainClass>commands.WirelessAnalyzer</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
