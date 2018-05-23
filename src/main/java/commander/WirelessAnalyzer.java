@@ -94,6 +94,7 @@ public class WirelessAnalyzer {
                  filtered) {
                 System.err.print(", "+malformedFilter);
             }
+            System.out.println();
             return false;
         }
         return true;
