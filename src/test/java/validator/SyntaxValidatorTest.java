@@ -6,7 +6,7 @@ import org.junit.Test;
 import pipeAndFilter.Pipe;
 
 
-public class SintaxValidatorTest {
+public class SyntaxValidatorTest {
     SyntaxValidator stringSintaxFilter;
     Pipe<String> in;
     Pipe<String> out;
@@ -54,8 +54,18 @@ public class SintaxValidatorTest {
         return ret;
         
     }
-    
 
 
+    @Test
+    public void hasParameter() {
+        Assert.assertTrue(stringSintaxFilter.hasParameter(casoB.split("\\s")[1]));
+        Assert.assertFalse(stringSintaxFilter.hasParameter(casoB.split("\\s")[0]));
 
+    }
+
+    @Test
+    public void extractParameter() {
+        Assert.assertEquals("10/08/2015",stringSintaxFilter.extractParameter(casoB.split("\\s")[1]));
+        Assert.assertEquals("",stringSintaxFilter.extractParameter(casoB.split("\\s")[0]));
+    }
 }

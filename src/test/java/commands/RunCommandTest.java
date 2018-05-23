@@ -15,19 +15,19 @@ public class RunCommandTest extends JCommanderTest {
 
 
     @Test
-    public void testParsesAppName() {
-       String[] args = {"init", "Filtro"};
+    public void testRun() {
+       String[] args = {"run", "Filtro"};
 
         RunCommand subject = new RunCommand();
         JCommander jCommander = buildAndParse(args, subject);
 
-        assertThat(jCommander.getParsedCommand(), equalTo("init"));
+        assertThat(jCommander.getParsedCommand(), equalTo("run"));
         assertThat(subject.getFields().toString(), equalTo("[Filtro]"));
     }
 
     @Test(expected = ParameterException.class)
     public void testParametersException(){
-        String[] args = {"init"};
+        String[] args = {"run"};
         RunCommand subject = new RunCommand();
         JCommander jCommander = buildAndParse(args, subject);
 
