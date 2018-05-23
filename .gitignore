@@ -165,5 +165,7 @@ buildNumber.properties
 
 #custom
 *.json
+*.properties
 # End of https://www.gitignore.io/api/java,maven,intellij+all
+
 

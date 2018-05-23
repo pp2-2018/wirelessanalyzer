@@ -18,12 +18,12 @@ import pipeAndFilter.impl.SimpleFilterImpl;
 public class CaptureToPackageFilter extends SimpleFilterImpl<Capture,Package> {
 
 
-    private MacAddress macAddress;
+
 
 
     public CaptureToPackageFilter(Pipe<Capture> inputPipe, Pipe<Package> outputPipe) {
         super(inputPipe, outputPipe);
-        this.macAddress = macAddress;
+
 
     }
 
