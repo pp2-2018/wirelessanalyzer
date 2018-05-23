@@ -8,28 +8,57 @@ import java.util.List;
 
 public class FilterCompabilityValidator {
 
+    FilterTypeValidator filterTypeValidator;
 
     public FilterCompabilityValidator() {
-
+        this.filterTypeValidator = new FilterTypeValidator();
     }
 
     public boolean validateCompability(Processable filterOutput, Processable filterInput) {
 
-        //Ver de que tipo es el Filter output
-            //si es de tipo SimplFilterImpl -> Si input es generator -> Error.  Si es Filter -> comparar el output del filterOutput con el Input del filterInput.
-            //si es de tipo SinkImpl -> Error
+        //si input es de tipo GeneratorImpl -> Error
+        if(filterTypeValidator.isGenerator(filterInput))
+            throw new IllegalArgumentException("Generator could never be an input Filter");
+
+        //si output es de tipo SinkImpl -> Error
+        if(filterTypeValidator.isSink(filterOutput))
+            throw new IllegalArgumentException("Sink could never be an output Filter");
+
+
+        //si output es de tipo SimplFilterImpl -> Si input es generator -> Error.  Si es Filter -> comparar el output del filterOutput con el Input del filterInput.
+        if(filterTypeValidator.isFilter(filterOutput)){
+            Type filterOutputType = getFilterOutput(filterOutput);
+            System.out.println(filterOutputType);
+            if(filterTypeValidator.isSink(filterInput))
+                return filterOutputType.equals(getSinkInput(filterInput));
+            else
+                return filterOutputType.equals(getFilterInput(filterInput));
+
+        }
+
             //Si es de tipo Generator Impl -> Si es generator, error. Si es Filter ->
+        if(filterTypeValidator.isGenerator(filterOutput)){
+            Type generatorOutputType = getGeneratorOutput(filterOutput);
 
-        Type output = outputDataType(filterOutput);
-        Type input = inputDataType(filterInput);
+            if(filterTypeValidator.isSink(filterInput))
+                return generatorOutputType.equals(getSinkInput(filterInput));
+            else
+                return generatorOutputType.equals(getFilterInput(filterInput));
+        }
 
-        System.out.println("El output es: " + output.getTypeName() + " y el input es: " + input.getTypeName());
-
-        return output.equals(input);
+        throw new IllegalArgumentException();
     }
 
-    public Type outputDataType(Processable filterOutput){
-        List<Parameter> parameters = getParameters(filterOutput);
+    private Type getGeneratorOutput(Processable generator) {
+        return getFilterInput(generator);
+    }
+
+    private Type getSinkInput(Processable sink) {
+        return getFilterOutput(sink);
+    }
+
+    public Type getFilterOutput(Processable filter){
+        List<Parameter> parameters = getParameters(filter);
 
         /*TODO El criterio de retorno del tipo de parámetro es muy aleatorio. Que pasa si
         el útlimo parámetro no es el output del filter?? Actualmente se está devolviendo el
@@ -37,7 +66,7 @@ public class FilterCompabilityValidator {
         return parameters.get(parameters.size() -1).getParameterizedType();
     }
 
-    public Type inputDataType(Processable filterInput){
+    public Type getFilterInput(Processable filterInput){
         List<Parameter> parameters = getParameters(filterInput);
 
         return parameters.get(0).getParameterizedType();
