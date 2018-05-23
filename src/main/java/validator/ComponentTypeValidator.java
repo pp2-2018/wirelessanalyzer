@@ -2,12 +2,12 @@ package validator;
 
 import pipeAndFilter.Processable;
 
-public class FilterTypeValidator {
+public class ComponentTypeValidator {
 
 
     private Class classToCompare;
 
-    public FilterTypeValidator(Class toCompare){
+    public ComponentTypeValidator(Class toCompare){
         this.classToCompare = toCompare;
     }
 

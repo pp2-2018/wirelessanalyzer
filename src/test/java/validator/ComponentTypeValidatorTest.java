@@ -13,34 +13,34 @@ import java.io.File;
 
 import static org.junit.Assert.*;
 
-public class FilterTypeValidatorTest {
+public class ComponentTypeValidatorTest {
 
-    private FilterTypeValidator filterTypeValidator;
+    private ComponentTypeValidator componentTypeValidator;
 
     @Test
     public void testSink(){
-        filterTypeValidator = new FilterTypeValidator(SinkImpl.class);
+        componentTypeValidator = new ComponentTypeValidator(SinkImpl.class);
         Processable sink = getSink();
 
-        assertTrue(filterTypeValidator.validate(sink));
+        assertTrue(componentTypeValidator.validate(sink));
 
     }
 
     @Test
     public void testFilter(){
-        filterTypeValidator = new FilterTypeValidator(SimpleFilterImpl.class);
+        componentTypeValidator = new ComponentTypeValidator(SimpleFilterImpl.class);
         Processable filter = getFilter();
 
-        assertTrue(filterTypeValidator.validate(filter));
+        assertTrue(componentTypeValidator.validate(filter));
 
     }
 
     @Test
     public void testGenerator(){
-        filterTypeValidator = new FilterTypeValidator(GeneratorImpl.class);
+        componentTypeValidator = new ComponentTypeValidator(GeneratorImpl.class);
         Processable generator = getGenerator();
 
-        assertTrue(filterTypeValidator.validate(generator));
+        assertTrue(componentTypeValidator.validate(generator));
 
     }
 
