@@ -29,5 +29,13 @@ public abstract class SimpleFilterImpl<I, O> implements SimpleFilter<I, O>{
         }
         
     }
-    
+
+    public Class getInputType(){
+        return inputPipe.getClass();
+    }
+
+    public Class getOutputType(){
+        return outputPipe.getClass();
+    }
+
 }
