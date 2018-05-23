@@ -388,11 +388,10 @@ public class CaptureServiceTest {
 		ArrayList<Coordinates> coordenadas = new ArrayList<Coordinates>();
 		coordenadas.add(new Coordinates(5,8));
 		
-		System.out.println("coordenadas " + service.getLocalizaciones(historias));
+//		System.out.println("coordenadas " + service.getLocalizaciones(historias));
 		
 		Assert.assertEquals(coordenadas , service.getLocalizaciones(historias));
-		
-		
+
 	}
 	
 }
