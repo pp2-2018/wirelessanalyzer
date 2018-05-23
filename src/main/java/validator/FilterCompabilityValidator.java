@@ -31,7 +31,7 @@ public class FilterCompabilityValidator {
             System.out.println(filterOutputType);
             if(filterTypeValidator.isSink(filterInput))
                 return filterOutputType.equals(getSinkInput(filterInput));
-            else
+            if(filterTypeValidator.isFilter(filterInput))
                 return filterOutputType.equals(getFilterInput(filterInput));
 
         }
@@ -42,11 +42,11 @@ public class FilterCompabilityValidator {
 
             if(filterTypeValidator.isSink(filterInput))
                 return generatorOutputType.equals(getSinkInput(filterInput));
-            else
+            if(filterTypeValidator.isFilter(filterInput))
                 return generatorOutputType.equals(getFilterInput(filterInput));
         }
 
-        throw new IllegalArgumentException();
+        throw new IllegalArgumentException("Invalid type of Filter");
     }
 
     private Type getGeneratorOutput(Processable generator) {
