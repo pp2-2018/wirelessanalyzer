@@ -3,6 +3,7 @@ package instantiator;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Type;
 
 import pipeAndFilter.Pipe;
 import pipeAndFilter.impl.QueuePipe;
@@ -71,7 +72,13 @@ public class Instantiator {
 	}
 	
 	private Object getParameterOf(Constructor<?> constructor, String params) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		Class<?> parameter = constructor.getParameterTypes()[0];
+
+		Class<?>[] constrParams = constructor.getParameterTypes();
+		if(constrParams.length == 0)
+			throw new InstantiationException("Constructor with parameters must have at least one");
+
+
+		Class<?> parameter = constrParams[0];
 		
 		Constructor<?> paramConstructor = parameter.getConstructor(String.class);
 		Object paramInstance = paramConstructor.newInstance(params);

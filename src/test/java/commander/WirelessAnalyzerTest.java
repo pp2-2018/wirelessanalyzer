@@ -19,7 +19,7 @@ public class WirelessAnalyzerTest {
     }
     @Test
     public void run() {
-        String[] parameters = {"run", "test", "filter"};
+        String[] parameters = {"run", "test"};
         WirelessAnalyzer.main(parameters);
         parameters = new String[]{"run", "-help"};
         WirelessAnalyzer.main(parameters);

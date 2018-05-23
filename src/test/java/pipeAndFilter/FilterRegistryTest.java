@@ -24,7 +24,7 @@ public class FilterRegistryTest {
 	
 	@Test
 	public void getGeneratorTest() {
-		Processable filter = registry.get("pcapReader:" + pcapBeacon);
+		Processable filter = registry.get("pcapReader(" + pcapBeacon+")");
 		Assert.assertEquals(filter.getClass(), PcapFileInputStreamGenerator.class);
 		Assert.assertNotEquals(filter.getClass(), String.class);
 	}
