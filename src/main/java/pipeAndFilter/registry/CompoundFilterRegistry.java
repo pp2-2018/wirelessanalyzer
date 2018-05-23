@@ -1,5 +1,7 @@
 package pipeAndFilter.registry;
 
+import exceptions.NotRegisteredFilter;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -83,6 +85,8 @@ public class CompoundFilterRegistry {
             if(string == null || string.isEmpty())
                 throw new IllegalArgumentException("Invalid string: " + string);
             String compoundFilter = this.classMapsProps.getProperty(string);
+            if(compoundFilter==null)
+                throw new NotRegisteredFilter("Compound Filter Not Registered: "+string);
 
 
             return compoundFilter;
