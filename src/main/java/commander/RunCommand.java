@@ -26,6 +26,6 @@ public class RunCommand implements Command {
 
     @Override
     public void run() {
-        throw new UnsupportedOperationException();
+
     }
 }
