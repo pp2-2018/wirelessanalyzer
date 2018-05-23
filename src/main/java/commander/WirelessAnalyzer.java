@@ -1,6 +1,8 @@
 package commander;
 
 import com.beust.jcommander.JCommander;
+
+import pipeAndFilter.registry.CompoundFilterRegistry;
 import validator.SyntaxValidator;
 
 import java.util.List;
@@ -113,6 +115,8 @@ public class WirelessAnalyzer {
 
         public static void main(String[] args) {
             WirelessAnalyzer crudWizardApp = new WirelessAnalyzer();
+            CompoundFilterRegistry r = CompoundFilterRegistry.getInstance();
+            r.getFilterInstance("Leandro");
             try {
                 crudWizardApp.run(args);
             } catch (Exception e) {

@@ -38,11 +38,12 @@ public class PcapFileInputStreamGenerator extends GeneratorImpl<Byte>{
 	}
 	
 	@Parametrized
-	public PcapFileInputStreamGenerator(Pipe<Byte> outputPipe, FileListParameter parameter) {
+	public PcapFileInputStreamGenerator(FileListParameter parameter) {
 		
-		this(outputPipe, parameter.getParameter());
+		this(null, parameter.getParameter());
 		
 	}
+	
 	
 	@Override
 	public void put(Pipe<Byte> output) {

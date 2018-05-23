@@ -51,7 +51,7 @@ public class FilterRegistry {
 		if(string == null || string.isEmpty())
 			throw new IllegalArgumentException("Invalid string: " + string);
 		
-		String[] descompose = string.split(":");
+		String[] descompose = string.replace(")", "").split("[(]");
 
 		String classname = this.classMapsProps.getProperty(descompose[0]);
 		

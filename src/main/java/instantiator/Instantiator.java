@@ -19,11 +19,11 @@ public class Instantiator {
 		try {
 			Class<?> clazz = Class.forName(className);
 	
-			Constructor<?> constructor = getContructorOf(clazz);
+			Constructor<?> constructor = getParametrizedContructorOf(clazz);
 			
-			return constructor.newInstance(new QueuePipe<>(), new QueuePipe<>());
+			return constructor.newInstance();
 		
-		} catch (NoSuchMethodException | SecurityException  | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+		} catch (SecurityException  | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
 		
 			e.printStackTrace();
 		}
@@ -39,7 +39,7 @@ public class Instantiator {
 			
 			Object paramInstance = getParameterOf(constructor, params);
 			
-			return constructor.newInstance(new QueuePipe<>(), paramInstance);
+			return constructor.newInstance(paramInstance);
 		
 		}
 		catch (NoSuchMethodException e) {
@@ -53,12 +53,7 @@ public class Instantiator {
 		return null;
 	}
 	
-	private Constructor<?> getContructorOf(Class<?> clazz) throws NoSuchMethodException, SecurityException{
-
-		return clazz.getConstructor(Pipe.class, Pipe.class);
-	}
-	
-	private Constructor<?> getParametrizedContructorOf(Class clazz) throws InstantiationException{
+	private Constructor<?> getParametrizedContructorOf(Class<?> clazz) throws InstantiationException{
 		Constructor<?> constructor = null;
 		
 		for(Constructor<?> c : clazz.getConstructors()) {

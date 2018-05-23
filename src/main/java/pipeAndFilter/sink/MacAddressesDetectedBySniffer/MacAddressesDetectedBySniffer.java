@@ -71,5 +71,4 @@ public class MacAddressesDetectedBySniffer extends SinkImpl<Capture> implements 
 		//this.observers.add(o);
 		
 	}
-
 }

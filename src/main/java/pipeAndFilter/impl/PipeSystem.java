@@ -21,6 +21,12 @@ public class PipeSystem<T> implements Iterable<Pipe<T>>{
 		this.pipes.add(pipe);
 	}
 	
+	public void addPipes(Pipe<T>[] pipes) {
+		for (Pipe<T> pipe : pipes) {
+			addPipe(pipe);
+		}
+	}
+	
 	public boolean canRetrieveForSomeone() {
 		boolean toRet = false;
 		

@@ -4,6 +4,7 @@ import model.RawPackage;
 import packageBuilder.PackageBuilder;
 import pipeAndFilter.Pipe;
 import pipeAndFilter.impl.SimpleFilterImpl;
+import pipeAndFilter.parameters.Parametrized;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,6 +21,12 @@ public class PackageBuilderNormalizer extends SimpleFilterImpl<RawPackage, Packa
 	
 	public PackageBuilderNormalizer(Pipe<RawPackage> inputPipe, Pipe<Package> outputPipe) {
 		super(inputPipe, outputPipe);
+		this.routes = new HashMap<>();
+	}
+	
+	@Parametrized
+	public PackageBuilderNormalizer() {
+		super(null, null);
 		this.routes = new HashMap<>();
 	}
 

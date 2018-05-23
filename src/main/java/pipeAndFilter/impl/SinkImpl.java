@@ -23,5 +23,10 @@ public abstract class SinkImpl<I> implements Sink<I>{
 		}
 		
 	}
+	
+	@Override
+	public Pipe<?>[] getPipes() {
+		return new Pipe<?>[] { inputPipe };
+	}
 
 }

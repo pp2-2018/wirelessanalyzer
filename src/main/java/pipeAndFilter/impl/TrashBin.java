@@ -1,5 +1,7 @@
 package pipeAndFilter.impl;
 
+import java.util.Arrays;
+
 import pipeAndFilter.Pipe;
 
 public class TrashBin<T> extends SinkImpl<T>{
@@ -19,6 +21,11 @@ public class TrashBin<T> extends SinkImpl<T>{
 		}
 		
 		
+	}
+
+	@Override
+	public Pipe<?>[] getPipes() {
+		return new Pipe<?>[] { inputPipe };
 	}
 
 }
