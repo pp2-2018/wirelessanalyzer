@@ -58,8 +58,10 @@ public class Instantiator {
 		
 		for(Constructor<?> c : clazz.getConstructors()) {
 			Annotation annotation = c.getDeclaredAnnotation(Parametrized.class);
-			if(annotation != null)
+			if(annotation != null) {
 				constructor = c;
+				break;
+			}
 		}
 	
 		if(constructor == null)
@@ -69,7 +71,7 @@ public class Instantiator {
 	}
 	
 	private Object getParameterOf(Constructor<?> constructor, String params) throws NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
-		Class<?> parameter = constructor.getParameterTypes()[1];
+		Class<?> parameter = constructor.getParameterTypes()[0];
 		
 		Constructor<?> paramConstructor = parameter.getConstructor(String.class);
 		Object paramInstance = paramConstructor.newInstance(params);
