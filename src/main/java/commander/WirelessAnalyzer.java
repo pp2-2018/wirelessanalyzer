@@ -1,4 +1,4 @@
-package commands;
+package commander;
 
 import com.beust.jcommander.JCommander;
 import validator.SyntaxValidator;

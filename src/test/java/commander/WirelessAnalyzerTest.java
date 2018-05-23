@@ -1,4 +1,4 @@
-package commands;
+package commander;
 
 import org.junit.Test;
 import pipeAndFilter.registry.CompoundFilterRegistry;

@@ -1,11 +1,10 @@
-package commands;
+package commander;
 
 import com.beust.jcommander.Parameter;
 import com.beust.jcommander.Parameters;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.Executor;
 
 @Parameters(commandNames = {"run"}, commandDescription = "|| Constructs and executes filters ||")
 public class RunCommand implements Command {

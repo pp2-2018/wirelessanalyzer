@@ -73,7 +73,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>commands.WirelessAnalyzer</mainClass>
+                            <mainClass>commander.WirelessAnalyzer</mainClass>
                         </manifest>
                     </archive>
                 </configuration>
