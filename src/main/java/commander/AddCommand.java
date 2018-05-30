@@ -34,6 +34,15 @@ public class AddCommand implements Command{
     public boolean isHelp() {
         return help;
     }
+    @Override
+    public String getCommandName() {
+        return "add";
+    }
+
+    @Override
+    public String getSuccessMessage() {
+        return "Saved " + getFilterName() + ": " + getFields();
+    }
 
     @Override
     public void run() {

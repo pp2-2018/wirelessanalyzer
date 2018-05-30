@@ -21,6 +21,15 @@ public class RunCommand implements Command {
     public List<String> getFields() {
             return fields;
     }
+    @Override
+    public String getCommandName() {
+        return "run";
+    }
+
+    @Override
+    public String getSuccessMessage() {
+        return "Running: " + getFields();
+    }
 
 
     public boolean isHelp() {

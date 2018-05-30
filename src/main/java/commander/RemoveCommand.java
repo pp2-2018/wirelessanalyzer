@@ -28,6 +28,16 @@ public class RemoveCommand implements Command{
     }
 
     @Override
+    public String getCommandName() {
+        return "remove";
+    }
+
+    @Override
+    public String getSuccessMessage() {
+        return "Removed: " + getFields();
+    }
+
+    @Override
     public void run() {
         if(fields.size()>0) {
             fields.forEach(e->CompoundFilterRegistry.getInstance().remove(e));
