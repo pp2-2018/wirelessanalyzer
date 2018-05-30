@@ -79,7 +79,7 @@ public class FilterCompabilityValidator {
         List<Constructor> constructors = Arrays.asList(c.getDeclaredConstructors());
         //Obtengo los parámetros del constructor
         //TODO Qué pasa si el filtro el día de mañana tiene más de un constructor??
-        return Arrays.asList(constructors.get(0).getParameters());
+        return Arrays.asList(constructors.get(constructors.size() - 1).getParameters());
     }
 
 }
