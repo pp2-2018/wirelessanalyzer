@@ -37,6 +37,10 @@ public class PipeSystem<T> implements Iterable<Pipe<T>>{
 		return toRet;
 		
 	}
+	@Override
+	public String toString(){
+		return "Pipe System: "+ this.pipes.toString();
+	}
 
 	@Override
 	public Iterator<Pipe<T>> iterator() {

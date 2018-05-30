@@ -2,12 +2,13 @@ package pipeAndFilter.registry;
 
 import exceptions.NotRegisteredFilter;
 import pipeAndFilter.Processable;
-import pipeAndFilter.impl.FilterSystem;
 
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 public class CompoundFilterRegistry {
@@ -53,6 +54,8 @@ public class CompoundFilterRegistry {
         }
     }
 
+
+
     public void set(String name,String compoundFilters) {
 
         if (name == null || name.isEmpty())
@@ -87,7 +90,7 @@ public class CompoundFilterRegistry {
 
     }
     
-    public String get(String string) {
+    public String internalGet(String string) {
 
         if(string == null || string.isEmpty())
             throw new IllegalArgumentException("Invalid string: " + string);
@@ -98,18 +101,19 @@ public class CompoundFilterRegistry {
 
         return compoundFilter;
     }
+
     
-    public FilterSystem getFilterInstance(String name) {
+    public List<Processable> get(String name) {
     	
-    	String filtersString = get(name);
+    	String filtersString = internalGet(name);
     
-    	FilterSystem toRet = new FilterSystem();
+    	ArrayList<Processable> toRet = new ArrayList<>();
     	
     	String[] filters = filtersString.split(" ");
     	
     	for (String f : filters) {
 			
-    		toRet.addFilter(simpleRegistry.get(f));
+    		toRet.add(simpleRegistry.get(f));
     		
 		}
     	

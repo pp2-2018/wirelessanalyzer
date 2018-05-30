@@ -13,7 +13,7 @@ public class WirelessAnalyzerTest {
     public void add() {
         String[] parameters = {"add", "-name", "test", "filter"};
         WirelessAnalyzer.main(parameters);
-        assertEquals("filter",CompoundFilterRegistry.getInstance().get("test"));
+        assertEquals("filter",CompoundFilterRegistry.getInstance().internalGet("test"));
         parameters = new String[]{"add", "-help"};
         WirelessAnalyzer.main(parameters);
     }
@@ -21,8 +21,7 @@ public class WirelessAnalyzerTest {
     public void run() {
         String[] parameters = {"run", "test"};
         WirelessAnalyzer.main(parameters);
-        parameters = new String[]{"run", "-help"};
-        WirelessAnalyzer.main(parameters);
+
     }
     @Test
     public void errors() {

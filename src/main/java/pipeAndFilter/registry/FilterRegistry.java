@@ -26,10 +26,16 @@ public class FilterRegistry {
 	private static FilterRegistry instance;
 	private Properties classMapsProps;
 	private Instantiator instantiator;
+	private static final String stockName = "classmap";
 	
 	public static FilterRegistry getInstance(String classmap) {
 		if(instance == null)
 			instance = new FilterRegistry(classmap);
+		return instance;
+	}
+	public static FilterRegistry getInstance() {
+		if(instance == null)
+			instance = new FilterRegistry(stockName);
 		return instance;
 	}
 	

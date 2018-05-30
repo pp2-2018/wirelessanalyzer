@@ -26,14 +26,14 @@ public class CompoundFilterRegistryTest {
 	@Test
 	public void getAndSetTest() {
 		registry.set("test","filter");
-		Assert.assertEquals("filter",registry.get("test"));
+		Assert.assertEquals("filter",registry.internalGet("test"));
 	}
 
 	@Test(expected = NotRegisteredFilter.class)
 	public void remove() {
 		registry.set("test","filter");
 		registry.remove("test");
-		registry.get("test");
+		registry.internalGet("test");
 
 	}
 	
@@ -42,7 +42,7 @@ public class CompoundFilterRegistryTest {
 	@Test(expected = NotRegisteredFilter.class)
 	public void notRegisteredFilterTest() {
 	
-		registry.get("notRegisteredFilter");
+		registry.internalGet("notRegisteredFilter");
 		
 		
 	}
@@ -50,7 +50,7 @@ public class CompoundFilterRegistryTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void emptyStringTest() {
 	
-		registry.get("");
+		registry.internalGet("");
 		
 		
 	}
