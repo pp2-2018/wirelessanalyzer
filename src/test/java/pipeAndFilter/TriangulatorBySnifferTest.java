@@ -45,9 +45,9 @@ public class TriangulatorBySnifferTest {
         
         Coordinates coords01 = new Coordinates(2, 5);
         Coordinates coords02 = new Coordinates(5, 8);
-        Coordinates coords03 = new Coordinates(-1, 0);
-        Coordinates coords04 = new Coordinates(3, 0);
-        Coordinates coords05 = new Coordinates(4, 0);
+        Coordinates coords03 = new Coordinates(-1, 1);
+        Coordinates coords04 = new Coordinates(3, 1);
+        Coordinates coords05 = new Coordinates(4, 1);
         
         Device dev01 = new Device(new MacAddress(mac01));
         Device dev02 = new Device(new MacAddress(mac02));
@@ -73,11 +73,11 @@ public class TriangulatorBySnifferTest {
         ap04.setRangeInMeters(3);
         ap05.setRangeInMeters(3);
 
-        packageA = new Package(new TimeStamp(LocalDateTime.of(2000, Month.JANUARY, 2, 13, 30, 0)));
-        packageB = new Package(new TimeStamp(LocalDateTime.of(2000, Month.JANUARY, 2, 13, 30, 0)));
-        packageC = new Package(new TimeStamp(LocalDateTime.of(2000, Month.JANUARY, 2, 13, 35, 0)));
-        packageD = new Package(new TimeStamp(LocalDateTime.of(2000, Month.JANUARY, 2, 13, 35, 0)));
-        packageE = new Package(new TimeStamp(LocalDateTime.of(2000, Month.JANUARY, 2, 13, 35, 0)));
+        packageA = new Package(new TimeStamp(LocalDateTime.of(2000, Month.JANUARY, 2, 13, 30, 00, 00)));
+        packageB = new Package(new TimeStamp(LocalDateTime.of(2000, Month.JANUARY, 2, 13, 30, 00, 03)));
+        packageC = new Package(new TimeStamp(LocalDateTime.of(2000, Month.JANUARY, 2, 13, 35, 00, 00)));
+        packageD = new Package(new TimeStamp(LocalDateTime.of(2000, Month.JANUARY, 2, 13, 35, 00, 00)));
+        packageE = new Package(new TimeStamp(LocalDateTime.of(2000, Month.JANUARY, 2, 13, 35, 00, 00)));
         
         packageA.setSniffer(ap01);
         packageB.setSniffer(ap02);
@@ -125,7 +125,6 @@ public class TriangulatorBySnifferTest {
 		Assert.assertEquals(expected ,output.retireve());
 		Assert.assertEquals(null ,output.retireve());
 	}
-
 	@Test
 	public void transformDeTresPuntos(){
 		
@@ -143,7 +142,7 @@ public class TriangulatorBySnifferTest {
 			triangulator.process();
 		}
 		
-		Coordinates expected = new Coordinates(1.5, 0);
+		Coordinates expected = new Coordinates(1.5, 1);
 
 		Assert.assertEquals(expected ,output.retireve());
 		Assert.assertEquals(null ,output.retireve());

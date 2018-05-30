@@ -1,5 +1,6 @@
 package pipeAndFilter.filters.rawPackageFilter;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -36,14 +37,12 @@ public void transform(Pipe<Package> input, Pipe<Coordinates> output) {
     		return;
     	}
 
-    	if(cola.peek().getTimeStamp().equals(paquete.getTimeStamp())){
-    		
+    	if(estaEnRangoDeTiempo(paquete)){
     		cola.add(paquete);
     		return;
     	}
     	
-    	if(!cola.peek().getTimeStamp().equals(paquete.getTimeStamp())){
-
+    	if(!estaEnRangoDeTiempo(paquete)){
     		output.accept(triangular(cola));
     		cola.clear();
     		cola.add(paquete);
@@ -52,10 +51,18 @@ public void transform(Pipe<Package> input, Pipe<Coordinates> output) {
     }
 }
 
-public Coordinates triangularDeTres(Queue<Package> cola){
-	return null;
+public boolean estaEnRangoDeTiempo(Package p){
 	
+	if(cola.peek().getTimeStamp().equals(p.getTimeStamp())){
+		return true;
+	}
+	if(p.getTimeStamp().toInstant().isAfter(cola.peek().getTimeStamp().toInstant()) &&
+			p.getTimeStamp().toInstant().isBefore(cola.peek().getTimeStamp().toInstant().plusMillis(6))){
+		return true;
+	}
+	return false;
 }
+
 
 
 public Coordinates triangular(Queue<Package> cola){	
@@ -67,39 +74,29 @@ public Coordinates triangular(Queue<Package> cola){
 	
 	if(cola.size()==2){
 		
-		Object[] array = cola.toArray();
-		Package packageA = (Package) array[0];
-		Package packageB = (Package) array[1];
-
-		double coordenadaX = getCoordenadaX(packageA, packageB); 
-		double coordenadaY = getCoordenadaY(packageA, packageB);
+		ArrayList<Package> array = new ArrayList<Package>(cola);
+		double coordenadaX = getCoordenadaX(array.get(0), array.get(1)); 
+		double coordenadaY = getCoordenadaY(array.get(0), array.get(1));
 
 		return(new Coordinates(coordenadaX, coordenadaY));
 	}
 	
 	if(cola.size()==3){
 		
-		Object[] array = cola.toArray();
-		Package packageA = (Package) array[0];
-		Package packageB = (Package) array[1];
-		Package packageC = (Package) array[2];
-		
+		ArrayList<Package> array = new ArrayList<Package>(cola);
 		double coordenadaX;
 		double coordenadaY;
 		
-		if(getInterseccionX(packageA, packageB)<= getInterseccionX(packageA, packageC)){
-			coordenadaX = getCoordenadaX(packageA, packageB);
+		if(getInterseccionX(array.get(0), array.get(1))<= getInterseccionX(array.get(0), array.get(2))){
+			coordenadaX = getCoordenadaX(array.get(0), array.get(1));
 		}else{
-			coordenadaX = getCoordenadaX(packageA, packageC);
-		}
+			coordenadaX = getCoordenadaX(array.get(0), array.get(2));}
 		
-		if(getInterseccionY(packageA, packageB)<= getInterseccionY(packageA, packageC)){
-			coordenadaY = getCoordenadaY(packageA, packageB);
+		if(getInterseccionY(array.get(0), array.get(1))<= getInterseccionY(array.get(0), array.get(2))){
+			coordenadaY = getCoordenadaY(array.get(0), array.get(1));
 		}else{
-			coordenadaY = getCoordenadaY(packageA, packageC);
-		}
+			coordenadaY = getCoordenadaY(array.get(0), array.get(2));}
 		return(new Coordinates(coordenadaX, coordenadaY));
-		
 	}
 	return null;
 }
@@ -116,9 +113,9 @@ public double getInterseccionX(Package packageA, Package packageB){
 		return(0);
 	}
 	double interseccionX = (sumaRangos - distanciaX)/2;
-	return interseccionX;
-	
+	return interseccionX;	
 }
+
 
 
 public double getCoordenadaX(Package packageA, Package packageB){
@@ -129,7 +126,6 @@ public double getCoordenadaX(Package packageA, Package packageB){
 	if(interseccionX == 0){
 		return configurationMap.getCoordinates(packageB.getSniffer()).getLat();
 	}
-
 	if(configurationMap.getCoordinates(packageB.getSniffer()).getLat() <= configurationMap.getCoordinates(packageA.getSniffer()).getLat()){
 		coordenadaX = configurationMap.getCoordinates(packageB.getSniffer()).getLat() + packageB.getSniffer().getRangeInMeters() - interseccionX;	
 	}
