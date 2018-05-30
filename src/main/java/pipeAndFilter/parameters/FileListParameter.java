@@ -4,14 +4,10 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FileListParameter extends FilterParameter<List<File>>{
-
-	public FileListParameter(String paramStr) {
-		super(paramStr);
-	}
+public class FileListParameter implements FilterParameter<List<File>>{
 
 	@Override
-	protected List<File> fromString(String paramStr) {
+	public List<File> fromString(String paramStr) {
 		
 		if(paramStr == null || paramStr.isEmpty())
 			throw new IllegalArgumentException("Illegal string: " + paramStr);

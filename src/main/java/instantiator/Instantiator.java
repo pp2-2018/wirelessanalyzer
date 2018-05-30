@@ -5,6 +5,8 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Type;
 
+import org.mockito.cglib.core.ReflectUtils;
+
 import pipeAndFilter.Pipe;
 import pipeAndFilter.impl.QueuePipe;
 import pipeAndFilter.parameters.Parametrized;
@@ -13,6 +15,8 @@ public class Instantiator {
 
 	public Instantiator() {
 	
+		
+		
 	}
 
 	
