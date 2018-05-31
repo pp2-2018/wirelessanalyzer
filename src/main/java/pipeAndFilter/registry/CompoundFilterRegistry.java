@@ -27,9 +27,7 @@ public class CompoundFilterRegistry {
     }
         
     public static CompoundFilterRegistry getInstance() {
-        if(instance == null)
-            instance = new CompoundFilterRegistry(filename);
-        return instance;
+        return CompoundFilterRegistry.getInstance(filename);
     }
 
     private CompoundFilterRegistry(String  filename) {
@@ -90,7 +88,7 @@ public class CompoundFilterRegistry {
 
     }
     
-    public String internalGet(String string) {
+    public String getFilterString(String string) {
 
         if(string == null || string.isEmpty())
             throw new IllegalArgumentException("Invalid string: " + string);
@@ -105,21 +103,30 @@ public class CompoundFilterRegistry {
     
     public List<Processable> get(String name) {
     	
-    	String filtersString = internalGet(name);
-    
     	ArrayList<Processable> toRet = new ArrayList<>();
     	
-    	String[] filters = filtersString.split(" ");
-    	
-    	for (String f : filters) {
-			
-    		toRet.add(simpleRegistry.get(f));
-    		
+    	try {
+        	String filtersString = getFilterString(name);
+        	
+        	String[] filters = filtersString.split(" ");
+        	
+        	for (String f : filters) {
+    			
+    			toRet.addAll(get(f));
+        		
+    		}
+        	}catch (NotRegisteredFilter e) {
+				try {
+					
+					toRet.add(simpleRegistry.get(name));
+					
+				} catch (NotRegisteredFilter  e2) {
+					throw e2;
+				}
 		}
     	
     	return toRet;
     	
     }
-
-
+    
 }

@@ -6,10 +6,12 @@ import org.junit.Before;
 import org.junit.Test;
 import pipeAndFilter.filters.PackageBuilderFilter.PackageBuilderNormalizer;
 import pipeAndFilter.filters.fileReader.PcapFileInputStreamGenerator;
+import pipeAndFilter.filters.test.TestGenerator;
 import pipeAndFilter.registry.CompoundFilterRegistry;
 import pipeAndFilter.registry.FilterRegistry;
 
 import java.io.File;
+import java.util.List;
 
 public class CompoundFilterRegistryTest {
 
@@ -26,14 +28,27 @@ public class CompoundFilterRegistryTest {
 	@Test
 	public void getAndSetTest() {
 		registry.set("test","filter");
-		Assert.assertEquals("filter",registry.internalGet("test"));
+		Assert.assertEquals("filter",registry.getFilterString("test"));
+	}
+	
+	@Test
+	public void depthTwoFilterTest() {
+	
+		registry.set("compundFilter","test test");
+		registry.set("twoDepth", "test compundFilter");
+		
+		List<Processable> filters = registry.get("twoDepth");
+		
+		Assert.assertEquals(filters.size(), 3);
+		Assert.assertEquals(filters.get(0).getClass(), TestGenerator.class);
+	
 	}
 
 	@Test(expected = NotRegisteredFilter.class)
 	public void remove() {
 		registry.set("test","filter");
 		registry.remove("test");
-		registry.internalGet("test");
+		registry.getFilterString("test");
 
 	}
 	
@@ -42,7 +57,7 @@ public class CompoundFilterRegistryTest {
 	@Test(expected = NotRegisteredFilter.class)
 	public void notRegisteredFilterTest() {
 	
-		registry.internalGet("notRegisteredFilter");
+		registry.getFilterString("notRegisteredFilter");
 		
 		
 	}
@@ -50,7 +65,7 @@ public class CompoundFilterRegistryTest {
 	@Test(expected = IllegalArgumentException.class)
 	public void emptyStringTest() {
 	
-		registry.internalGet("");
+		registry.getFilterString("");
 		
 		
 	}
