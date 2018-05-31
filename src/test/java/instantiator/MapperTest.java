@@ -1,8 +1,11 @@
 package instantiator;
 
 import java.io.File;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -21,7 +24,7 @@ public class MapperTest {
 	@Before
 	public void before() {
 
-		mapper = new ParameterMapper();
+		mapper = new ParameterMapper("pipeAndFilter.parameters");
 		
 	}
 	
@@ -53,10 +56,17 @@ public class MapperTest {
 		
 	}
 	
+	public List<File> type;
+	
 	@Test
-	public void dinamicLoadedClassTest() {
+	public void dinamicLoadedClassTest() throws NoSuchFieldException, SecurityException {
 		
-		//List<File> param = mapper.map("", List<File>.class);
+		Type fileList = getClass().getField("type").getGenericType();
+		
+		List<File> param = mapper.map("test-files" + File.separatorChar + "beacon-frame.pcap", fileList);
+		
+		Assert.assertEquals(1 , param.size());
+		Assert.assertEquals("beacon-frame.pcap", param.get(0).getName());
 		
 	}
 	

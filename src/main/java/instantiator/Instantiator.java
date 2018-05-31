@@ -13,9 +13,12 @@ import pipeAndFilter.parameters.Parametrized;
 
 public class Instantiator {
 
+	private ParameterMapper mapper;
+	
+	
 	public Instantiator() {
 	
-		
+		mapper = new ParameterMapper("pipeAndFilter.parameters");
 		
 	}
 
@@ -84,10 +87,8 @@ public class Instantiator {
 
 		Class<?> parameter = constrParams[0];
 		
-		Constructor<?> paramConstructor = parameter.getConstructor(String.class);
-		Object paramInstance = paramConstructor.newInstance(params);
+		return mapper.map(params, parameter);
 		
-		return paramInstance;
 	}
 	
 }
