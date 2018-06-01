@@ -1,7 +1,10 @@
 package pipeAndFilter.registry;
 
 import exceptions.NotRegisteredFilter;
+import pipeAndFilter.Generator;
 import pipeAndFilter.Processable;
+import pipeAndFilter.Sink;
+import pipeAndFilter.impl.FilterSystem;
 
 import java.io.File;
 import java.io.FileReader;
@@ -100,7 +103,7 @@ public class CompoundFilterRegistry {
         return compoundFilter;
     }
 
-    
+    //Awful code
     public List<Processable> get(String name) {
     	
     	ArrayList<Processable> toRet = new ArrayList<>();
@@ -110,23 +113,24 @@ public class CompoundFilterRegistry {
         	
         	String[] filters = filtersString.split(" ");
         	
-        	for (String f : filters) {
-    			
-    			toRet.addAll(get(f));
+        	for (String f : filters) toRet.addAll(get(f));
         		
-    		}
-        	}catch (NotRegisteredFilter e) {
-				try {
-					
-					toRet.add(simpleRegistry.get(name));
-					
-				} catch (NotRegisteredFilter  e2) {
-					throw e2;
-				}
+        }catch (NotRegisteredFilter e) {
+				toRet.add(findInSimpleRegistry(name));
 		}
     	
     	return toRet;
     	
+    }
+    
+    private Processable findInSimpleRegistry(String name) {
+    	try {
+			
+			return simpleRegistry.get(name);
+			
+		} catch (NotRegisteredFilter  e2) {
+			throw e2;
+		}
     }
     
 }
