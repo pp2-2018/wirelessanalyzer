@@ -195,6 +195,7 @@ public class TriangulatorBySnifferTest {
 		Double interseccionX = 1.5;
 		Double interseccionY = 1.5;
 		
+
 		Assert.assertEquals(interseccionX, (Double)triangulator.getInterseccionX(packageA, packageB));
 		Assert.assertEquals(interseccionY, (Double)triangulator.getInterseccionY(packageA, packageB));
 	
