@@ -32,7 +32,7 @@ public class CompoundFilterRegistryTest {
 		Assert.assertEquals("filter",registry.getFilterString("test"));
 	}
 	
-	@Ignore
+	@Test
 	public void depthTwoFilterTest() {
 	
 		registry.set("compundFilter","test(asd) test(asd)");
