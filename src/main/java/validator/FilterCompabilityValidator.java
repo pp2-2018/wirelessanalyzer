@@ -1,9 +1,12 @@
 package validator;
 
 import pipeAndFilter.Processable;
+import pipeAndFilter.parameters.Parametrized;
 
+import java.lang.annotation.Annotation;
 import java.lang.reflect.*;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
 
 public class FilterCompabilityValidator {
@@ -75,12 +78,41 @@ public class FilterCompabilityValidator {
 
     private List<Parameter> getParameters(Processable filter) {
         Class c = filter.getClass();
-
+        Constructor parametrizedConstructor = null;
+        try {
+			 parametrizedConstructor = getParametrizedContructorOf(c);
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		}
         //Obtengo los constructores de la clase c
-        List<Constructor> constructors = Arrays.asList(c.getDeclaredConstructors());
+        List<Constructor> constructors = new LinkedList<>();
+        Constructor[] listOfConstructors = c.getDeclaredConstructors();
+        
+        for(int i = 0; i < listOfConstructors.length; i++)
+        	constructors.add(listOfConstructors[i]);
+        		
+        //Observo si hay alguno parametrizado y lo saco
+        if (constructors != null)
+        	constructors.remove(parametrizedConstructor);
+        
         //Obtengo los parámetros del constructor
         //TODO Qué pasa si el filtro el día de mañana tiene más de un constructor??
         return Arrays.asList(constructors.get(constructors.size() - 1).getParameters());
     }
+	
+	private Constructor<?> getParametrizedContructorOf(Class<?> clazz) throws InstantiationException{
+		Constructor<?> constructor = null;
+		
+		for(Constructor<?> c : clazz.getConstructors()) {
+			Annotation annotation = c.getDeclaredAnnotation(Parametrized.class);
+			if(annotation != null) {
+				constructor = c;
+				break;
+			}
+		}
+		
+		return constructor;
+	}
+	
 
 }
