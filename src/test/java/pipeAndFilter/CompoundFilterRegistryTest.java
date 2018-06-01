@@ -35,8 +35,8 @@ public class CompoundFilterRegistryTest {
 	@Test
 	public void depthTwoFilterTest() {
 	
-		registry.set("compundFilter","test(asd) test(asd)");
-		registry.set("twoDepth", "test(asd) compundFilter");
+		registry.set("compoundFilter","testGenerator(asd) testGenerator(asd)");
+		registry.set("twoDepth", "testGenerator(asd) compoundFilter");
 		
 		List<Processable> filters = registry.get("twoDepth");
 		

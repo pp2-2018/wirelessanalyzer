@@ -10,15 +10,15 @@ public class SyntaxValidatorTest {
     SyntaxValidator stringSintaxFilter;
     Pipe<String> in;
     Pipe<String> out;
-    String casoA="testGenerator testFilter testSink";
-    String casoB="testGenerator date_Filter(10/08/2015) testSink";
-    String casoC="testGenerator date_Filter(10-08/2015) testSink ";
-    String casoD="testGenerator(variable) date_Filter(10/08/2015) testSink";
+    String casoA="testGenerator(variable) testFilter testSink";
+    String casoB="testGenerator(variable) testFilter testSink";
+    String casoC="testGenerator(variable) testFilter testSink ";
+    String casoD="testGenerator testFilter testSink";
 
-    String casoE="()testGenerator date_Filter(10/08/2015) testSink";
-    String casoF="testGenerator date_Filter() testSink";
-    String casoG="( )testGenerator date_Filter(10/08/2015) testSink";
-    String casoH="testGenerator date_Filter (10/08/2015)testSink";
+    String casoE="()testGenerator testFilter testSink";
+    String casoF="testGenerator testFilter() testSink";
+    String casoG="( )testGenerator testFilter testSink";
+    String casoH="testGenerator( variable) testFilter testSink";
 
 
     @Before
@@ -58,14 +58,14 @@ public class SyntaxValidatorTest {
 
     @Test
     public void hasParameter() {
-        Assert.assertTrue(stringSintaxFilter.hasParameter(casoB.split("\\s")[1]));
-        Assert.assertFalse(stringSintaxFilter.hasParameter(casoB.split("\\s")[0]));
+        Assert.assertTrue(stringSintaxFilter.hasParameter(casoB.split("\\s")[0]));
+        Assert.assertFalse(stringSintaxFilter.hasParameter(casoB.split("\\s")[1]));
 
     }
 
     @Test
     public void extractParameter() {
-        Assert.assertEquals("10/08/2015",stringSintaxFilter.extractParameter(casoB.split("\\s")[1]));
-        Assert.assertEquals("",stringSintaxFilter.extractParameter(casoB.split("\\s")[0]));
+        Assert.assertEquals("variable",stringSintaxFilter.extractParameter(casoB.split("\\s")[0]));
+        Assert.assertEquals("",stringSintaxFilter.extractParameter(casoD.split("\\s")[0]));
     }
 }
