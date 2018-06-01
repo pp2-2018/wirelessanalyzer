@@ -12,10 +12,6 @@ import java.util.function.Function;
 
 public class PrintSinkString extends SinkImpl<String> {
 
-    public PrintSinkString(Pipe<String> inputPipe) {
-        super(inputPipe);
-
-    }
     @Parametrized
     public PrintSinkString() {
         super(null);

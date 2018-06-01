@@ -7,9 +7,6 @@ import pipeAndFilter.parameters.Parametrized;
 public class TestFilter extends SimpleFilterImpl<String,String> {
 
 
-    public TestFilter(Pipe<String> inputPipe, Pipe<String> outputPipe) {
-        super(inputPipe, outputPipe);
-    }
 
     @Parametrized
     public TestFilter() {

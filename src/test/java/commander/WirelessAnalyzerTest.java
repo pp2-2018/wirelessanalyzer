@@ -38,7 +38,12 @@ public class WirelessAnalyzerTest {
     public void errors() {
         String[] parameters = {"help"};
         WirelessAnalyzer.main(parameters);
-
+        String[] parameters2 = {"run","-help"};
+        WirelessAnalyzer.main(parameters2);
+        String[] parameters3 = {"add","-help"};
+        WirelessAnalyzer.main(parameters3);
+        String[] parameters4 = {"remove","-help"};
+        WirelessAnalyzer.main(parameters4);
     }
     
     @Test
