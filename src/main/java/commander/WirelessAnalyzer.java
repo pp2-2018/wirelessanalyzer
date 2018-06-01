@@ -2,9 +2,11 @@ package commander;
 
 import com.beust.jcommander.JCommander;
 import pipeAndFilter.registry.CompoundFilterRegistry;
+import pipeAndFilter.registry.FilterRegistry;
 import validator.SyntaxValidator;
 
 import java.util.List;
+import java.util.Properties;
 import java.util.stream.Collectors;
 
 public class WirelessAnalyzer {
@@ -17,6 +19,8 @@ public class WirelessAnalyzer {
     private void run(String[] args) {
 
         if (args.length > 0 && args[0].equals("help")) {
+            System.out.println("Filters:");
+            FilterRegistry.getInstance().getFilterNames().forEach(System.out::println);
             jCommander.usage();
             return;
         }

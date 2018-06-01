@@ -3,6 +3,7 @@ package pipeAndFilter;
 import exceptions.NotRegisteredFilter;
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import pipeAndFilter.filters.PackageBuilderFilter.PackageBuilderNormalizer;
 import pipeAndFilter.filters.fileReader.PcapFileInputStreamGenerator;
@@ -31,7 +32,7 @@ public class CompoundFilterRegistryTest {
 		Assert.assertEquals("filter",registry.getFilterString("test"));
 	}
 	
-	@Test
+	@Ignore
 	public void depthTwoFilterTest() {
 	
 		registry.set("compundFilter","test(asd) test(asd)");

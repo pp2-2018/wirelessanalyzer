@@ -7,6 +7,7 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Properties;
+import java.util.Set;
 
 import org.junit.runners.Parameterized.Parameter;
 
@@ -51,6 +52,10 @@ public class FilterRegistry {
 		}
 	}
 	
+
+	public Set<String> getFilterNames(){
+		return classMapsProps.stringPropertyNames();
+	}
 
 	public Processable get(String string) {
 		
