@@ -7,6 +7,7 @@ import exceptions.NotRegisteredFilter;
 import pipeAndFilter.Processable;
 import pipeAndFilter.impl.FilterSystem;
 import pipeAndFilter.registry.CompoundFilterRegistry;
+import pipeAndFilter.registry.FilterGlue;
 import pipeAndFilter.registry.FilterRegistry;
 import validator.SyntaxValidator;
 
@@ -44,25 +45,31 @@ public class RunCommand implements Command {
     public void run() {
         CompoundFilterRegistry compoundRegistry = CompoundFilterRegistry.getInstance();
         FilterRegistry registry = FilterRegistry.getInstance();
-        FilterSystem toRet = new FilterSystem();
+        List<Processable> toRet = new ArrayList<Processable>();
         SyntaxValidator syntaxValidator= new SyntaxValidator();
         for (String field:fields
              ) {
             try{
                 Processable filter = registry.get(field);
-                toRet.addFilter(filter);
+                toRet.add(filter);
             }
             catch (NotRegisteredFilter e){
                 if(syntaxValidator.hasParameter(field)) {
                     throw new IllegalArgumentException("Compound Filters cannot receive parameters!");
                 }
+                
+                
                 ArrayList<Processable> processables =(ArrayList<Processable>) compoundRegistry.get(field);
-                toRet.addAllFilters(processables);
-                }
+                toRet.addAll(processables);
+             }
 
             }
             System.out.println(toRet);
-            toRet.run();
+
+            FilterGlue glue = new FilterGlue();
+            FilterSystem system = glue.glue(toRet);
+            
+            system.run();
         }
 
 

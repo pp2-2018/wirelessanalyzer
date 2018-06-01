@@ -19,7 +19,12 @@ public class WirelessAnalyzerTest {
     }
     @Test
     public void run() {
-        String[] parameters = {"run", "test"};
+
+        String[] parameters = {"add", "-name", "filter", "testGenerator(elfiltropiola"
+        		+ ")", "testFilter", "testSink"};
+        WirelessAnalyzer.main(parameters);
+        
+        parameters = new String[] {"run", "filter"};
         WirelessAnalyzer.main(parameters);
 
     }
@@ -29,6 +34,7 @@ public class WirelessAnalyzerTest {
         WirelessAnalyzer.main(parameters);
 
     }
+    
     @Test
     public void syntax(){
         String[] parameters = new String[]{"run", " filter", "filter ()", "filter"};
