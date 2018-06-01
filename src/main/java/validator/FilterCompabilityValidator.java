@@ -50,7 +50,8 @@ public class FilterCompabilityValidator {
     }
 
     private Type getGeneratorOutput(Processable generator) {
-        return getFilterInput(generator);
+    	Type toRet = getFilterInput(generator);
+        return toRet; 
     }
 
     private Type getSinkInput(Processable sink) {
@@ -68,7 +69,7 @@ public class FilterCompabilityValidator {
 
     public Type getFilterInput(Processable filterInput){
         List<Parameter> parameters = getParameters(filterInput);
-
+        System.out.println(parameters);
         return parameters.get(0).getParameterizedType();
     }
 

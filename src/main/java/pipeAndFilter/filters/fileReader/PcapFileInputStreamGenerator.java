@@ -21,16 +21,6 @@ public class PcapFileInputStreamGenerator extends GeneratorImpl<Byte>{
 	private int index;
 	private PcapFileInputStream fileReader;
 	
-	public PcapFileInputStreamGenerator(Pipe<Byte> outputPipe, List<File> files) {
-		super(outputPipe);
-		
-		this.files = files;
-		index = 0;
-		
-		createInputStream();
-		
-	}
-	
 	@Parametrized
 	public PcapFileInputStreamGenerator(File file) {
 		this(null, file);
@@ -40,6 +30,16 @@ public class PcapFileInputStreamGenerator extends GeneratorImpl<Byte>{
 		
 		this(outputPipe, Arrays.asList( new File[] {file}));
 		
+	}
+
+	public PcapFileInputStreamGenerator(Pipe<Byte> outputPipe, List<File> files) {
+		super(outputPipe);
+
+		this.files = files;
+		index = 0;
+
+		createInputStream();
+
 	}
 
 	
