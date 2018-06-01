@@ -10,15 +10,15 @@ public class SyntaxValidatorTest {
     SyntaxValidator stringSintaxFilter;
     Pipe<String> in;
     Pipe<String> out;
-    String casoA="testGenerator testFilter Filter3";
-    String casoB="testGenerator date_Filter(10/08/2015) Filter3";
-    String casoC="testGenerator date_Filter(10-08/2015) Filter3 ";
-    String casoD="testGenerator(variable) date_Filter(10/08/2015) Filter3";
+    String casoA="testGenerator testFilter testSink";
+    String casoB="testGenerator date_Filter(10/08/2015) testSink";
+    String casoC="testGenerator date_Filter(10-08/2015) testSink ";
+    String casoD="testGenerator(variable) date_Filter(10/08/2015) testSink";
 
-    String casoE="()testGenerator date_Filter(10/08/2015) Filter3";
-    String casoF="testGenerator date_Filter() Filter3";
-    String casoG="( )testGenerator date_Filter(10/08/2015) Filter3";
-    String casoH="testGenerator date_Filter (10/08/2015)Filter3";
+    String casoE="()testGenerator date_Filter(10/08/2015) testSink";
+    String casoF="testGenerator date_Filter() testSink";
+    String casoG="( )testGenerator date_Filter(10/08/2015) testSink";
+    String casoH="testGenerator date_Filter (10/08/2015)testSink";
 
 
     @Before
