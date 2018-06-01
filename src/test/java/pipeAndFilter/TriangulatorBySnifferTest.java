@@ -7,6 +7,7 @@ import java.util.Queue;
 
 import org.junit.Assert;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import model.Coordinates;
@@ -89,7 +90,6 @@ public class TriangulatorBySnifferTest {
 	}
 	
 	
-	
 	@Test
 	public void triangularTest() {
 		
@@ -106,7 +106,6 @@ public class TriangulatorBySnifferTest {
 		
 		Assert.assertEquals(expected , triangulador.triangular(cola));
 	}
-	
 	
 	@Test
 	public void transform(){
@@ -126,12 +125,10 @@ public class TriangulatorBySnifferTest {
 		
 		Coordinates expected1 = new Coordinates(3.5, 6.5);
 		Coordinates expected2 = new Coordinates(-1, 1);
-
 		Assert.assertEquals(expected1 ,output.retireve());
 		Assert.assertEquals(expected2 ,output.retireve());
 		Assert.assertEquals(null ,output.retireve());
 	}
-	
 	
 	@Test
 	public void transformDeTresPuntos(){
@@ -157,7 +154,6 @@ public class TriangulatorBySnifferTest {
 		Assert.assertEquals(expected2 ,output.retireve());
 		Assert.assertEquals(null ,output.retireve());
 	}
-	
 	
 	
 	@Test

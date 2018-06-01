@@ -44,8 +44,7 @@ public void transform(Pipe<Package> input, Pipe<Coordinates> output) {
     		return;
     	}
     	
-    	if(cola.size()==3){									//caso 2: el paquete se encuentra en el rango de tiempo de la cola y esta no esta llena
-    		cola.add(paquete);
+    	if(cola.size()==3){									//caso 3: la cola está llena
     		output.accept(triangular(cola));
     		cola.clear();
     		cola.add(paquete);
@@ -56,7 +55,8 @@ public void transform(Pipe<Package> input, Pipe<Coordinates> output) {
     		return;
     	}
 
-    	if(estaEnRangoDeTiempo(paquete) && cola.size()<3){	//caso 3: la cola está llena
+    	if(estaEnRangoDeTiempo(paquete) && cola.size()<3){	//caso 2: el paquete se encuentra en el rango de tiempo de la cola y esta no esta llena
+    		cola.add(paquete);
     		if(input.isEmpty()){
     			output.accept(triangular(cola));
         		cola.clear();
