@@ -40,17 +40,7 @@ public class CompoundFilterRegistry {
         try {
             this.classMapsProps.load(new FileReader("config" + File.separator +  filename + ".properties"));
         } catch (IOException e) {
-            try{
-                File properties = new File("config" + File.separator +  filename + ".properties");
-                if(!properties.exists()){
-                    boolean newFile=properties.createNewFile();
-                    if(!newFile){
-                        throw new IOException("Error Creating Properties File");
-                    }
-                }
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
+           e.printStackTrace();
 
         }
     }

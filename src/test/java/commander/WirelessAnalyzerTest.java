@@ -11,9 +11,9 @@ public class WirelessAnalyzerTest {
 
     @Test
     public void add() {
-        String[] parameters = {"add", "-name", "test", "filter"};
+        String[] parameters = {"add", "-name", "test", "testGenerator(thisisatest)","testFilter","testSink"};
         WirelessAnalyzer.main(parameters);
-        assertEquals("filter",CompoundFilterRegistry.getInstance().getFilterString("test"));
+        assertEquals("testGenerator(thisisatest) testFilter testSink",CompoundFilterRegistry.getInstance("test").getFilterString("test"));
 
     }
     @Test
@@ -26,6 +26,14 @@ public class WirelessAnalyzerTest {
         WirelessAnalyzer.main(parameters);
 
     }
+    @Test
+    public void runCompoundFilter() {
+        add();
+        String[] parameters = new String[] {"run", "filter"};
+        WirelessAnalyzer.main(parameters);
+
+    }
+
     @Test
     public void errors() {
         String[] parameters = {"help"};
@@ -47,7 +55,7 @@ public class WirelessAnalyzerTest {
         CompoundFilterRegistry.getInstance("test").set("filterName","FilterA FilterB FilterC");
         parameters = new String[]{"remove", "filterName"};
         WirelessAnalyzer.main(parameters);
-        CompoundFilterRegistry.getInstance().get("filterName");
+        CompoundFilterRegistry.getInstance("test").get("filterName");
 
     }
 }
