@@ -14,7 +14,7 @@ import java.util.function.Function;
 import org.reflections.Reflections;
 
 import exceptions.NotRegisteredClassException;
-import pipeAndFilter.parameters.FileListParameter;
+import pipeAndFilter.parameters.FileParameter;
 import pipeAndFilter.parameters.FilterParameter;
 
 
@@ -28,6 +28,7 @@ public class ParameterMapper {
 	
 		dictionary.put(Integer.class, s -> Integer.parseInt(s));
 		dictionary.put(Boolean.class, s -> Boolean.parseBoolean(s));
+		dictionary.put(String.class, s -> s);
 		
 		fillDicctionary(packageUri);
 		
@@ -63,22 +64,7 @@ public class ParameterMapper {
 			throw new NotRegisteredClassException(type);
 		
 		return (T) dictionary.get(type).apply(stringParam);
-		
 	}
-	
-	/*
-	@SuppressWarnings("unchecked")
-	public <T, P> T map(String stringParam, Class<T> clazz, Class<P> generic)  {
-		
-		String name = clazz.getName() + "<" + generic.getName() +">";
-		
-		if(!dictionary.containsKey(name))
-			throw new NotRegisteredClassException(clazz);
-		
-		return (T) dictionary.get(name).apply(stringParam);
-		
-	}*/
-	
 	
 	
 }

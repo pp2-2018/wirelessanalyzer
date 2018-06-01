@@ -15,7 +15,7 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 import exceptions.NotRegisteredClassException;
-import pipeAndFilter.parameters.FileListParameter;
+import pipeAndFilter.parameters.FileParameter;
 
 public class MapperTest {
 	
@@ -56,17 +56,16 @@ public class MapperTest {
 		
 	}
 	
-	public List<File> type;
+	public File type;
 	
 	@Test
 	public void dinamicLoadedClassTest() throws NoSuchFieldException, SecurityException {
 		
 		Type fileList = getClass().getField("type").getGenericType();
 		
-		List<File> param = mapper.map("test-files" + File.separatorChar + "beacon-frame.pcap", fileList);
+		File param = mapper.map("test-files" + File.separatorChar + "beacon-frame.pcap", fileList);
 		
-		Assert.assertEquals(1 , param.size());
-		Assert.assertEquals("beacon-frame.pcap", param.get(0).getName());
+		Assert.assertEquals("beacon-frame.pcap", param.getName());
 		
 	}
 	

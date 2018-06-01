@@ -12,7 +12,7 @@ import exceptions.CannotReadFileException;
 import fileReader.PcapFileInputStream;
 import pipeAndFilter.Pipe;
 import pipeAndFilter.impl.GeneratorImpl;
-import pipeAndFilter.parameters.FileListParameter;
+import pipeAndFilter.parameters.FileParameter;
 import pipeAndFilter.parameters.Parametrized;
 
 public class PcapFileInputStreamGenerator extends GeneratorImpl<Byte>{
@@ -29,6 +29,11 @@ public class PcapFileInputStreamGenerator extends GeneratorImpl<Byte>{
 		
 		createInputStream();
 		
+	}
+	
+	@Parametrized
+	public PcapFileInputStreamGenerator(File file) {
+		this(null, file);
 	}
 	
 	public PcapFileInputStreamGenerator(Pipe<Byte> outputPipe, File file) {

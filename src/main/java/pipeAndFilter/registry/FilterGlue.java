@@ -1,6 +1,7 @@
 package pipeAndFilter.registry;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Type;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -108,7 +109,6 @@ public class FilterGlue {
           }
         }
       }
-
     
     //TODO deberia ir esto acá?
     private boolean isGenerator(Processable p) {
