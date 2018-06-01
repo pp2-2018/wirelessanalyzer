@@ -5,8 +5,6 @@ import java.time.Month;
 import java.time.ZoneOffset;
 import java.util.*;
 
-
-import negocio.AnalyticsObserver;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;

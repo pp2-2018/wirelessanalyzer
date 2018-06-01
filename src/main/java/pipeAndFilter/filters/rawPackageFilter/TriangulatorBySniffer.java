@@ -29,27 +29,57 @@ public class TriangulatorBySniffer extends SimpleFilterImpl<Package,Coordinates>
 @Override
 public void transform(Pipe<Package> input, Pipe<Coordinates> output) {
 	
+	
+	
 	Package paquete = input.retireve();
-    if (paquete != null){
+
+    if (paquete != null){									//caso 1: la cola está vacía
     	
     	if(cola.isEmpty()){
     		cola.add(paquete);
-    		return;
-    	}
-
-    	if(estaEnRangoDeTiempo(paquete)){
-    		cola.add(paquete);
+    		if(input.isEmpty()){
+    			output.accept(triangular(cola));
+        		cola.clear();
+    		}
     		return;
     	}
     	
-    	if(!estaEnRangoDeTiempo(paquete)){
+    	if(cola.size()==3){									//caso 3: la cola está llena
     		output.accept(triangular(cola));
     		cola.clear();
     		cola.add(paquete);
+    		if(input.isEmpty()){
+    			output.accept(triangular(cola));
+        		cola.clear();
+    		}
+    		return;
+    	}
+
+    	if(estaEnRangoDeTiempo(paquete) && cola.size()<3){	//caso 2: el paquete se encuentra en el rango de tiempo de la cola y esta no esta llena
+    		cola.add(paquete);
+    		if(input.isEmpty()){
+    			output.accept(triangular(cola));
+        		cola.clear();
+    		}
+    		return;
+    	}
+    	
+    	
+    	
+    	if(!estaEnRangoDeTiempo(paquete)){					//caso 3: el paquete no se encuentra en el rango de tiempo de la cola
+    		output.accept(triangular(cola));
+    		cola.clear();
+    		cola.add(paquete);
+    		if(input.isEmpty()){
+    			output.accept(triangular(cola));
+        		cola.clear();
+    		}
     		return;
     	} 
     }
 }
+
+
 
 public boolean estaEnRangoDeTiempo(Package p){
 	
@@ -65,7 +95,7 @@ public boolean estaEnRangoDeTiempo(Package p){
 
 
 
-public Coordinates triangular(Queue<Package> cola){	
+public Coordinates triangular(Queue<Package> cola){					//por convencion, el maximo soportado para triangulacion es 3
 	
 	if(cola.size()==1){
 		Coordinates coord = configurationMap.getCoordinates(cola.peek().getSniffer());
@@ -93,12 +123,14 @@ public Coordinates triangular(Queue<Package> cola){
 			coordenadaX = getCoordenadaX(array.get(0), array.get(2));}
 		
 		if(getInterseccionY(array.get(0), array.get(1))<= getInterseccionY(array.get(0), array.get(2))){
-			coordenadaY = getCoordenadaY(array.get(0), array.get(1));
+		coordenadaY = getCoordenadaY(array.get(0), array.get(1));
 		}else{
 			coordenadaY = getCoordenadaY(array.get(0), array.get(2));}
 		return(new Coordinates(coordenadaX, coordenadaY));
 	}
-	return null;
+	else{
+		throw new RuntimeException("Triangulación de a más de tres elementos no soportada");
+	}
 }
 
 

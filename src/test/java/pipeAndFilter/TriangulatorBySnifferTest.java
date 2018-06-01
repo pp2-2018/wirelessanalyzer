@@ -7,7 +7,6 @@ import java.util.Queue;
 
 import org.junit.Assert;
 import org.junit.Before;
-import org.junit.Ignore;
 import org.junit.Test;
 
 import model.Coordinates;
@@ -88,13 +87,16 @@ public class TriangulatorBySnifferTest {
         ConfigurationManager.save(configurationMap);
      
 	}
+	
+	
+	
 	@Test
 	public void triangularTest() {
 		
-		Pipe<Package> pipe1 = new QueuePipe<>();
-        Pipe<Coordinates> pipe2 = new QueuePipe<>();
+		Pipe<Package> input = new QueuePipe<>();
+        Pipe<Coordinates> output = new QueuePipe<>();
 		
-		TriangulatorBySniffer triangulador = new TriangulatorBySniffer(pipe1, pipe2);
+		TriangulatorBySniffer triangulador = new TriangulatorBySniffer(input, output);
 		
 		Queue<Package> cola = new LinkedList<Package>();
 		cola.add(packageA);
@@ -104,6 +106,8 @@ public class TriangulatorBySnifferTest {
 		
 		Assert.assertEquals(expected , triangulador.triangular(cola));
 	}
+	
+	
 	@Test
 	public void transform(){
 		
@@ -113,18 +117,22 @@ public class TriangulatorBySnifferTest {
 		TriangulatorBySniffer triangulator = new TriangulatorBySniffer(input, output);
 		input.accept(packageA);
 		input.accept(packageB);
-		input.accept(packageC);
+		input.accept(packageC); 
 
 		
 		while(!input.isEmpty()) {
 			triangulator.process();
 		}
 		
-		Coordinates expected = new Coordinates(3.5, 6.5);
+		Coordinates expected1 = new Coordinates(3.5, 6.5);
+		Coordinates expected2 = new Coordinates(-1, 1);
 
-		Assert.assertEquals(expected ,output.retireve());
+		Assert.assertEquals(expected1 ,output.retireve());
+		Assert.assertEquals(expected2 ,output.retireve());
 		Assert.assertEquals(null ,output.retireve());
 	}
+	
+	
 	@Test
 	public void transformDeTresPuntos(){
 		
@@ -142,10 +150,56 @@ public class TriangulatorBySnifferTest {
 			triangulator.process();
 		}
 		
-		Coordinates expected = new Coordinates(1.5, 1);
+		Coordinates expected1 = new Coordinates(1.5, 1);
+		Coordinates expected2 = new Coordinates(2, 5);
 
-		Assert.assertEquals(expected ,output.retireve());
+		Assert.assertEquals(expected1 ,output.retireve());
+		Assert.assertEquals(expected2 ,output.retireve());
 		Assert.assertEquals(null ,output.retireve());
 	}
+	
+	
+	
+	@Test
+	public void TriangulatorMethods(){
+		
+		Pipe<Package> input = new QueuePipe<>();
+	    Pipe<Coordinates> output = new QueuePipe<>();
+		
+		TriangulatorBySniffer triangulator = new TriangulatorBySniffer(input, output);
+		input.accept(packageA);
+		input.accept(packageB);
+		input.accept(packageE);
+
+		triangulator.process();
+		Assert.assertTrue(triangulator.estaEnRangoDeTiempo(packageB));
+		Assert.assertFalse(triangulator.estaEnRangoDeTiempo(packageE));
+		triangulator.process();
+		triangulator.process();
+		triangulator.process();
+		triangulator.process();
+		
+		Coordinates expected = new Coordinates(3.5, 6.5);
+		Coordinates expected2 = new Coordinates(4, 1);
+	
+		Assert.assertEquals(expected , output.retireve());
+		Assert.assertEquals(expected2 , output.retireve());
+		Assert.assertEquals(null , output.retireve());
+		
+		Double expectedX = 3.5;
+		Double expectedY = 6.5;
+		
+		Assert.assertEquals(expectedX, (Double)triangulator.getCoordenadaX(packageA, packageB));
+		Assert.assertEquals(expectedY, (Double)triangulator.getCoordenadaY(packageA, packageB));
+		
+		Double interseccionX = 1.5;
+		Double interseccionY = 1.5;
+		
+		Assert.assertEquals(interseccionX, (Double)triangulator.getInterseccionX(packageA, packageB));
+		Assert.assertEquals(interseccionY, (Double)triangulator.getInterseccionY(packageA, packageB));
+	
+
+	}
+	
 
 }
