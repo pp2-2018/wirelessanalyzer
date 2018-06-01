@@ -1,5 +1,6 @@
 package model;
 
+import java.sql.Time;
 import java.time.*;
 
 import org.junit.Assert;
@@ -32,6 +33,7 @@ public class TimeFrameTest {
     	
     	unMsAntes = LocalDateTime.of(2014, Month.JANUARY, 1, 10, 10, 29);
     	unMsDespues = LocalDateTime.of(2015, Month.JANUARY, 1, 10, 11, 35);
+    	timeFrame.hashCode();
     	
     }
 
@@ -47,6 +49,7 @@ public class TimeFrameTest {
 
 		Assert.assertTrue(timeFrame.contains(inicio));
 		Assert.assertTrue(timeFrame.contains(fin));
+
 		
 	}
 

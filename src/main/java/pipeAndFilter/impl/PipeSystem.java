@@ -21,6 +21,12 @@ public class PipeSystem<T> implements Iterable<Pipe<T>>{
 		this.pipes.add(pipe);
 	}
 	
+	public void addPipes(Pipe<T>[] pipes) {
+		for (Pipe<T> pipe : pipes) {
+			addPipe(pipe);
+		}
+	}
+	
 	public boolean canRetrieveForSomeone() {
 		boolean toRet = false;
 		
@@ -30,6 +36,10 @@ public class PipeSystem<T> implements Iterable<Pipe<T>>{
 		
 		return toRet;
 		
+	}
+	@Override
+	public String toString(){
+		return "Pipe System: "+ this.pipes.toString();
 	}
 
 	@Override

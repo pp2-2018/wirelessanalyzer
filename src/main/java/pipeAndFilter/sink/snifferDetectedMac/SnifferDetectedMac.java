@@ -12,6 +12,7 @@ import negocio.iface.Obserbable;
 import negocio.iface.Observer;
 import pipeAndFilter.Pipe;
 import pipeAndFilter.impl.SinkImpl;
+import pipeAndFilter.parameters.Parametrized;
 
 public class SnifferDetectedMac extends SinkImpl<Capture> implements Obserbable<negocio.iface.AnalyticsObserver>{
 
@@ -27,6 +28,11 @@ public class SnifferDetectedMac extends SinkImpl<Capture> implements Obserbable<
 		this.macAddress = macAddress;
 		this.sniffer = new ArrayList<Sniffer>();
 		this.observers = new ArrayList<>();
+	}
+	
+	@Parametrized
+	public SnifferDetectedMac(MacAddress macAddress) {
+		this(null, macAddress);
 	}
 
 	@Override

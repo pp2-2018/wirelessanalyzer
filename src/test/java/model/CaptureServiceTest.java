@@ -5,8 +5,6 @@ import java.time.Month;
 import java.time.ZoneOffset;
 import java.util.*;
 
-
-import negocio.AnalyticsObserver;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -216,11 +214,16 @@ public class CaptureServiceTest {
 		historico.add(h1);
 		historico.add(h3);
 		
-//		System.out.println("historico de test " + historico );
-//		System.out.println("metodo " + capturas.getRegistroDeCapturas(addra, new TimeFrame(start, end)));
-		
+//		System.out.println("expected" + historico );
+//		System.out.println("result" + capturas.getRegistroDeCapturas(addra, new TimeFrame(start, end)));
 		
 		Assert.assertEquals(historico, capturas.getRegistroDeCapturas(addra, new TimeFrame(start, end)));
+		
+		ArrayList<HistoriaMacAddress> historicoVacio = new ArrayList<HistoriaMacAddress>();
+		Assert.assertEquals(historicoVacio, capturas.getRegistroDeCapturas(addrd, new TimeFrame(start, end)));
+		
+//		System.out.println("expected" + historicoVacio );
+//		System.out.println("result" + capturas.getRegistroDeCapturas(addrd, new TimeFrame(start, end)));
 	}
 	
 	
@@ -248,15 +251,15 @@ public class CaptureServiceTest {
 		
 		List<MacAddress> arrayb = Arrays.asList(addra, addrc, addre);
 		Assert.assertTrue(capturasTest.getMacAddressesDetectedBy(b).equals(arrayb));
-//		System.out.println("Access Point B: " + capturasTest.getMacAddressesDetectedBy(b));
+//		System.out.println("Access Point 1/B: " + capturasTest.getMacAddressesDetectedBy(b));
 		
 		List<MacAddress> arrayD = Arrays.asList(addrd);
 		Assert.assertTrue(capturasTest.getMacAddressesDetectedBy(d).equals(arrayD));
-//		System.out.println("Access Point D: " + capturasTest.getMacAddressesDetectedBy(d));
+//		System.out.println("Access Point 2/D: " + capturasTest.getMacAddressesDetectedBy(d));
 		
 		ArrayList<MacAddress> arrayA = new ArrayList<MacAddress>();
 		Assert.assertTrue(capturasTest.getMacAddressesDetectedBy(a).equals(arrayA));
-//		System.out.println("Access Point A: " + capturasTest.getMacAddressesDetectedBy(a));
+//		System.out.println("Access Point 3/A: " + capturasTest.getMacAddressesDetectedBy(a));
 	
 	}
 	
@@ -350,6 +353,42 @@ public class CaptureServiceTest {
 		ArrayList<Sniffer> sniffersThatDetected2 = new ArrayList<Sniffer>(service.getSniffersThatDetectedThisOnTimeFrame(addra,timeframe2));
 
 		Assert.assertNotEquals(sniffersThatDetected2,Collections.singletonList(a));
+	
+	}
+	
+	@Test
+	public void getLocalizaciones(){
+		
+		byte d4[] = {  0x4d, 0xa, 0x57, 0x4c, 0x4c, 0x05 };	
+    	MacAddress m4 = new MacAddress(d4);
+    	Device dev4 = new Device(m4);
+    	Sniffer snifferA = new Sniffer(dev4, 00000);
+    	snifferA.setCoord(new Coordinates(2, 5));
+    	snifferA.setRangeInMeters(3);
+
+    	byte d5[] = {  0x4d, 0xa, 0x57, 0x4c, 0x4c, 0x06 };	
+    	MacAddress m5 = new MacAddress(d5);
+    	Device dev5 = new Device(m5);
+    	Sniffer snifferB = new Sniffer(dev5, 00000);
+    	snifferB.setCoord(new Coordinates( 8, 11));
+    	snifferB.setRangeInMeters(3);
+		
+		HistoriaMacAddress historia = new HistoriaMacAddress();
+		historia.setFechaHora(LocalDateTime.of(2000, Month.JANUARY, 2, 13, 30, 0));
+		historia.addSniffer(snifferA);
+		historia.addSniffer(snifferB);
+		
+		ArrayList<HistoriaMacAddress> historias = new ArrayList<HistoriaMacAddress>();
+		historias.add(historia);
+		
+		//5,8
+		CaptureService service = new CaptureService(capturas3);
+		ArrayList<Coordinates> coordenadas = new ArrayList<Coordinates>();
+		coordenadas.add(new Coordinates(5,8));
+		
+//		System.out.println("coordenadas " + service.getLocalizaciones(historias));
+		
+		Assert.assertEquals(coordenadas , service.getLocalizaciones(historias));
 
 	}
 	

@@ -12,11 +12,11 @@ import model.TimeStamp;
 import packageBuilder.PackageBuilder;
 import pipeAndFilter.Pipe;
 import pipeAndFilter.impl.SimpleFilterImpl;
+import pipeAndFilter.parameters.Parametrized;
 
 public class PackageByTimeFrameFilter extends SimpleFilterImpl<Package,Package> {
 
     private TimeFrame timeFrame;
-
 
     public PackageByTimeFrameFilter(Pipe<Package> inputPipe, Pipe<Package> outputPipe, TimeFrame timeFrame) {
         super(inputPipe, outputPipe);

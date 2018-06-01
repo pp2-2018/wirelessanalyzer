@@ -10,6 +10,7 @@ import negocio.iface.TestObserver;
 import pipeAndFilter.Pipe;
 import pipeAndFilter.Sink;
 import pipeAndFilter.impl.SinkImpl;
+import pipeAndFilter.parameters.Parametrized;
 
 public class TestSink<T> extends SinkImpl<T> implements Obserbable<TestObserver>{
 
@@ -51,5 +52,6 @@ public class TestSink<T> extends SinkImpl<T> implements Obserbable<TestObserver>
         }
 
     }
+    
 
 }

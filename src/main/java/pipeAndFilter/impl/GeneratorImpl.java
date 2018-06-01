@@ -23,4 +23,10 @@ public abstract class GeneratorImpl<O> implements Generator<O>{
         }
 		
 	}
+	
+
+	@Override
+	public Pipe<?>[] getPipes() {
+		return new Pipe<?>[] { outputPipe };
+	}
 }

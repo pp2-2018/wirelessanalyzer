@@ -3,8 +3,8 @@ package model;
 import java.util.Objects;
 
 public class Coordinates {
-    double lat;
-    double lng;
+    double lat;	//horizontal
+    double lng; //vertical
     public Coordinates(double lat, double lng){
         this.lat=lat;
         this.lng=lng;

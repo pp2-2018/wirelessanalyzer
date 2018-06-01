@@ -5,6 +5,8 @@ public interface Processable {
 	
 	void process();
 	
+	Pipe<?>[] getPipes();
+	
 	
 }
 

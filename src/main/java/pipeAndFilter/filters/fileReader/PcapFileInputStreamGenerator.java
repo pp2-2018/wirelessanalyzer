@@ -12,6 +12,8 @@ import exceptions.CannotReadFileException;
 import fileReader.PcapFileInputStream;
 import pipeAndFilter.Pipe;
 import pipeAndFilter.impl.GeneratorImpl;
+import pipeAndFilter.parameters.FileParameter;
+import pipeAndFilter.parameters.Parametrized;
 
 public class PcapFileInputStreamGenerator extends GeneratorImpl<Byte>{
 
@@ -19,14 +21,9 @@ public class PcapFileInputStreamGenerator extends GeneratorImpl<Byte>{
 	private int index;
 	private PcapFileInputStream fileReader;
 	
-	public PcapFileInputStreamGenerator(Pipe<Byte> outputPipe, List<File> files) {
-		super(outputPipe);
-		
-		this.files = files;
-		index = 0;
-		
-		createInputStream();
-		
+	@Parametrized
+	public PcapFileInputStreamGenerator(File file) {
+		this(null, file);
 	}
 	
 	public PcapFileInputStreamGenerator(Pipe<Byte> outputPipe, File file) {
@@ -34,6 +31,17 @@ public class PcapFileInputStreamGenerator extends GeneratorImpl<Byte>{
 		this(outputPipe, Arrays.asList( new File[] {file}));
 		
 	}
+
+	public PcapFileInputStreamGenerator(Pipe<Byte> outputPipe, List<File> files) {
+		super(outputPipe);
+
+		this.files = files;
+		index = 0;
+
+		createInputStream();
+
+	}
+
 	
 	@Override
 	public void put(Pipe<Byte> output) {

@@ -30,4 +30,9 @@ public abstract class SimpleFilterImpl<I, O> implements SimpleFilter<I, O>{
         
     }
     
+	@Override
+	public Pipe<?>[] getPipes() {
+		return new Pipe<?>[] { inputPipe, outputPipe };
+	}
+    
 }
