@@ -53,7 +53,7 @@ public class Instantiator {
 		catch (NoSuchMethodException e) {
 			throw new InstantiationException(className + " constructor must have a FilterParameter type parameter");
 		}
-		catch ( SecurityException | IllegalAccessException | IllegalArgumentException | InvocationTargetException e) {
+		catch ( SecurityException | IllegalAccessException | InvocationTargetException e) {
 			
 			e.printStackTrace();
 		}
